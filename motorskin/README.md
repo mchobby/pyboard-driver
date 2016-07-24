@@ -1,6 +1,6 @@
 Motor-Skin 
 ==========
-![Motor-Skin](https://github.com/mchobby/pyboard-driver/blob/master/motorskin/MOTOR-SKIN-V1.0-04.JPG "Motor-skin")
+![Motor-Skin](https://github.com/mchobby/pyboard-driver/blob/master/motorskin/images/MOTOR-SKIN-V1.0-04.JPG "Motor-skin")
 
 Chers amis Francophone, une version Frnaçaise de ce fichier est disponible dans readme-fr.md
 
