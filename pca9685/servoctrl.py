@@ -38,5 +38,9 @@ class ServoCtrl( PCA9685 ):
         duty = min(self.max_duty, max(self.min_duty, int(duty)))
         self.duty(index, duty)
 
-    def release(self, index):
-        self.duty(index, 0)
+    def release(self, index=None ):
+        if index==None:
+            for i in range( 16 ):
+                self.duty(i, 0)
+        else:
+            self.duty(index, 0)
