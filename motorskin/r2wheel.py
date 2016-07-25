@@ -50,14 +50,12 @@ class Robot2Wheel( MotorSkin ):
           :param fix_rotate: set this True when the robot turn left instead of turning right as requested
           :param derivative_fix: use +3 to speedup right motor when forward() does bend the path to the right. 
                                  use -3 to slow down the right motor when forward() bend the path to the left."""
-        mot1 = ( MotorSkin.MOT1_PINS[1], MotorSkin.MOT1_PINS[0] ) if reverse_mot1 else MotorSkin.MOT1_PINS
-        mot2 = ( MotorSkin.MOT2_PINS[1], MotorSkin.MOT2_PINS[0] ) if reverse_mot2 else MotorSkin.MOT2_PINS
         if not(fix_rotate):
-            super( MotorSkin, self ).__init__( mot1, MotorSkin.MOT1_PWM, mot2, MotorSkin.MOT2_PWM, derivative_fix )
+            super( Robot2Wheel, self ).__init__( reverse_mot1, reverse_mot2, fix_rotate, derivative_fix )
         else:
             # Robot is apparently rotating the wrong way... this is because
             # motor1 has been wired in place of the motor 2.
-            super( MotorSkin, self ).__init__( mot2, MotorSkin.MOT2_PWM, mot1, MotorSkin.MOT1_PWM, derivative_fix )
+            super( Robot2Wheel, self ).__init__( reverse_mot1, reverse_mot2, fix_rotate, derivative_fix )
         self._state = Robot2Wheel.HALTED
 	
     @property 

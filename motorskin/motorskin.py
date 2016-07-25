@@ -57,11 +57,11 @@ class MotorSkin( DualHBridge ):
         mot1 = ( self.MOT1_PINS[1], self.MOT1_PINS[0] ) if reverse_mot1 else self.MOT1_PINS
         mot2 = ( self.MOT2_PINS[1], self.MOT2_PINS[0] )  if reverse_mot2 else self.MOT2_PINS
         if not fix_rotate:
-            DualHBridge.__init__( self, mot1, self.MOT1_PWM, mot2, self.MOT2_PWM, derivative_fix )
+            super( MotorSkin, self ).__init__( mot1, self.MOT1_PWM, mot2, self.MOT2_PWM, derivative_fix )
         else:
             # Robot is apparently rotating the wrong way... this is because
             # motor1 has been wired in place of the motor 2.
-            DualHBridge.__init__( self, mot2, self.MOT2_PWM, mot1, self.MOT1_PWM, derivative_fix )
+            super( MotorSkin, self).__init__( mot2, self.MOT2_PWM, mot1, self.MOT1_PWM, derivative_fix )
 
         self.ultrason = Ultrasonic( self.TRIGGER_PIN, self.ECHO_PIN )
 
