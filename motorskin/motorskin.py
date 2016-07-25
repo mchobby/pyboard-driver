@@ -28,6 +28,7 @@
 ##
 import pyb
 from hbridge import DualHBridge
+from ultrasonic import Ultrasonic
 
 class MotorSkin( DualHBridge ):
     """ Specifics for 2 bidirectional motor driving (with speed control via PWM) """
@@ -37,6 +38,11 @@ class MotorSkin( DualHBridge ):
 
     MOT2_PINS = ( pyb.Pin.board.X7, pyb.Pin.board.X8 )
     MOT2_PWM = {'pin' : pyb.Pin.board.X4, 'timer' : 5, 'channel' : 4 }  
+
+    (TRIGGER_PIN,ECHO_PIN) = (pyb.Pin.board.Y5, pyb.Pin.board.Y6)
+
+    ultrason = None
+    _switches = []
     
     def __init__( self, reverse_mot1 = False, reverse_mot2 = False, fix_rotate = False, derivative_fix = 0 ):
         """ Initialize the DualHBridge L293D. Allows you to reverse/tune the 
@@ -56,3 +62,21 @@ class MotorSkin( DualHBridge ):
             # Robot is apparently rotating the wrong way... this is because
             # motor1 has been wired in place of the motor 2.
             DualHBridge.__init__( self, mot2, self.MOT2_PWM, mot1, self.MOT1_PWM, derivative_fix )
+
+        self.ultrason = Ultrasonic( self.TRIGGER_PIN, self.ECHO_PIN )
+
+        for pin in ('X18','X19','X20','X21'):
+            self._switches.append( pyb.Pin( pin, pyb.Pin.IN, pull=pyb.Pin.PULL_UP) )
+
+
+    def distance( self ):
+      """ Read distance in cm from Ultrasonic sensor """
+      return self.ultrason.distance_in_cm()
+
+    def button_pin( self, button_nr ):
+      """ Return Pin for a user button 1 to 4 (SW1..SW4) """
+      return self._switches[ button_nr-1 ]
+
+    def button_pressed( self, button_nr ):
+      """ Check if a user button is pressed """
+      return self._switches[ button_nr-1 ].value() == 0

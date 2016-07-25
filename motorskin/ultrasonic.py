@@ -4,6 +4,7 @@
 #
 # Copyright 2014 - Sergio Conde Gómez <skgsergio@gmail.com>
 # Improved by Mithru Vigneshwara
+# Improved by Meurisse Dominique (timeout handling instead of infinite loop)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -43,9 +44,11 @@ class Ultrasonic:
     def distance_in_inches(self):
         return (self.distance_in_cm() * 0.3937)
 
-    def distance_in_cm(self):
+    def distance_in_cm(self, timeout_value = 10000, timeout_us=330000):
+        """ Return value in cm. Otherwise timeout_value in case of sensor timeout (0.33s = 100m = 10000cm) instead of infinite looping"""
         start = 0
         end = 0
+        watch = 0 # Check if we are not over a timeout
 
         # Create a microseconds counter.
         micros = pyb.Timer(2, prescaler=83, period=0x3fffffff)
@@ -56,12 +59,21 @@ class Ultrasonic:
         pyb.udelay(10)
         self.trigger.low()
 
+        
+        watch = micros.counter()
+
         # Wait 'till whe pulse starts.
         while self.echo.value() == 0:
+            if micros.counter()-watch > timeout_us:
+                return timeout_value 
             start = micros.counter()
+
+        watch = micros.counter()
 
         # Wait 'till the pulse is gone.
         while self.echo.value() == 1:
+            if micros.counter()-watch > timeout_us:
+                return timeout_value             
             end = micros.counter()
 
         # Deinit the microseconds counter
