@@ -1,4 +1,5 @@
-##
+## Robot2Wheel Explorer 
+#
 # Commande d'une plateforme robotique 2 roues avec le motor-skin et un détecteur UltraSon HC-SR04.
 #    Tourne sur la droite quand il détecte un objet à moins de 20 cm. Sinon avance en ligne droite.
 # Presser le bouton "SW1" pour démarrer / arrêter le robot. La LED bleue s'allume pendant que le programme est actif.
@@ -12,8 +13,9 @@
 #   http://shop.mchobby.be/product.php?id_product=561
 #   http://shop.mchobby.be/product.php?id_product=570
 # 
-# Voir Tutoriel - See our french tutorial
-#   XXXX TODO XXXXX
+# Voir Tutoriel - See our french and english tutorial
+#   https://wiki.mchobby.be/index.php?title=Hack-MotorSkin
+#   https://wiki.mchobby.be/index.php?title=Hack-ENG-MotorSkin (coming soon)
 #
 # Copyright 2016 - Dominique Meurisse for MC Hobby SPRL <info (at) mchobby (dot) be>
 #

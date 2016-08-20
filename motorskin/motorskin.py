@@ -6,8 +6,9 @@
 #   http://shop.mchobby.be/product.php?id_product=561
 #   http://shop.mchobby.be/product.php?id_product=570
 # 
-# Voir Tutoriel - See our french tutorial
-#   TODO - coming soon
+# Voir Tutoriel - See our french and english tutorial
+#   https://wiki.mchobby.be/index.php?title=Hack-MotorSkin
+#   https://wiki.mchobby.be/index.php?title=Hack-ENG-MotorSkin (coming soon)
 #
 # Copyright 2016 - Dominique Meurisse for MC Hobby SPRL <info (at) mchobby (dot) be>
 #
