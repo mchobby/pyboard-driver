@@ -63,7 +63,7 @@ class Robot2Wheel( MotorSkin ):
     def state( self ):
         return self._state
 
-    def turn( self, direction, speed=100 ):
+    def turn( self, direction, speed=100, speed2=None ):
         if not( direction in self.DIRECTIONS ):
             raise ValueError( 'invalid direction' )
         if direction == self.RIGHT_ROTATE:
@@ -73,11 +73,19 @@ class Robot2Wheel( MotorSkin ):
             self.motor1.backward( speed )
             self.motor2.forward( speed )
         elif direction == self.RIGHT_BEND:
-            self.motor1.forward( 100 )
-            self.motor2.forward( 100-speed ) 
+            if speed2 == None:
+                self.motor1.forward( 100 )
+                self.motor2.forward( 100-speed )
+            else:
+                self.motor1.forward( speed )
+                self.motor2.forward( speed2 ) 
         elif direction == self.LEFT_BEND:
-            self.motor1.forward( 100-speed )
-            self.motor2.forward( 100 )
+            if speed2==None:
+                self.motor1.forward( 100-speed )
+                self.motor2.forward( 100 )
+            else:
+                self.motor1.forward( speed2 )
+                self.motor2.forward( speed )
         self._state = direction
 
     def right( self, speed=100 ):

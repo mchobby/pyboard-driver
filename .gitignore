@@ -1,0 +1,6 @@
+# ignore gimp files
+*.xcf 
+
+# Ignorer les fichier python compilé
+*.pyc
+
