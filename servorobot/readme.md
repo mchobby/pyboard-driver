@@ -1,7 +1,6 @@
 # Description 
 ## Doggy 
-![Doggy Project](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Doggy Project")
-
+![Doggy Project](https://github.com/mchobby/pyboard-driver/blob/master/servorobot/images/DOGGY/Doggy-Intro.png "Doggy Project")
 
 ENG: Doggy is a Robot built with 4 paws of 2 servo each. This project fully documented on the mchobby wiki.
 
