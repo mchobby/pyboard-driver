@@ -23,7 +23,7 @@ d.prepare('LEFT')
 delay( 2000 )
 
 # ENG: Turn left (wrist angle=90) in one step of 90° (default value)
-# FR: Tourne à gauche (angle poignet=90) un 1 étapes de 90° (valeur par défaut)
+# FR: Tourne à gauche (angle poignet=90) en 1 étapes de 90° (valeur par défaut)
 d.move( 'LEFT' )
 
 delay( 2000 )
@@ -37,8 +37,8 @@ delay( 2000 )
 
 # ENG: Changing shoulder movement angles to turn on the left of 160 degree (in total) and the Wrist angle set to 75 degree. 
 # ENG: All parameters fits to Left.step()
-# FR: Changer les angles des mouvements des epaules pour touner à gauche de 160 degree (en total) et l'angle des poignet fixé à 5 degrees
-# FR: Tous les paramètres correspondent a Left.step()
+# FR: Changer les angles des mouvements des epaules pour tourner à gauche de 160 degree (en total) et l'angle des poignet fixé à 5 degrees
+# FR: Tous les paramètres correspondent a Left.do()
 d.reset()
 d.prepare('LEFT', wdegree=75 )
 d.move( 'LEFT', sdegree=160, wdegree=75 )
@@ -52,7 +52,7 @@ delay( 2000 )
 d.reset()
 mov_obj = d.movement('LEFT')
 mov_obj.prepare( wdegree=65 )            
-mov_obj.step( sdegree=60, wdegree=65, prepare=True, repeat=3 ) # repeat 3 times the turn left
+mov_obj.do( sdegree=60, wdegree=65, prepare=True, repeat=3 ) # repeat 3 times the turn left
 
 # ENG: Reducing the range of movement from 60 degree (the default) to 30 degree & make a turn left of 75 degree
 # FR: Réduire l'amplitude du mouvement de 60 degrés (valeur par défaut) à 30 degrées & faire une rotation à gauche de 75 degrée

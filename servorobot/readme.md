@@ -2,9 +2,9 @@
 ## Doggy 
 ![Doggy Project](https://github.com/mchobby/pyboard-driver/blob/master/servorobot/images/DOGGY/Doggy-Intro.png "Doggy Project")
 
-ENG: Doggy is a Robot built with 4 paws of 2 servo each. This project fully documented on the mchobby wiki.
+ENG: Doggy is a Robot built with 4 paws of 2 servo each. [This project fully documented on the mchobby wiki](https://wiki.mchobby.be/index.php?title=Hack-micropython-ServoRobot) (in french]
 
-FR: Doggy est un Robot constitué de 4 pattes ayant 2 servo chacune. Ce projet est completement documenté sur le wiki de MCHobby
+FR: Doggy est un Robot constitué de 4 pattes ayant 2 servo chacune. [Ce projet est completement documenté sur le wiki de MCHobby](https://wiki.mchobby.be/index.php?title=Hack-micropython-ServoRobot)
 
 ## Shopping List / Liste d'achat
 * [MicroPython PyBoard](https://shop.mchobby.be/micro-python/570-micropython-pyboard-3232100005709.html)
@@ -20,6 +20,14 @@ FR: [Les instructions de montage de Doggy sont disponibles sur notre wiki...](ht
 ENG: [The pyboard and PWM driver wiring is available on our wiki](https://wiki.mchobby.be/index.php?title=Hack-micropython-ServoRobot-Brancher)
 
 FR: [Les raccordements de la PyBoard et du contrôleur PWM est disponible sur notre wiki](https://wiki.mchobby.be/index.php?title=Hack-micropython-ServoRobot-Brancher)
+
+## Using / Utiliser
+ENG: After the installation process (see here under), you can inspect the various samples available in this GitHub.
+
+FR: Une fois l'installation terminée (voyez [les notes d'installation sur notre wiki](https://wiki.mchobby.be/index.php?title=Hack-micropython-ServoRobot-servorobot-installer) ), vous pourrez consulter les exemples dans les sources et [la documentation de ces exemples sur GitHub](https://wiki.mchobby.be/index.php?title=Hack-micropython-ServoRobot-Tester)
+
+![Anatomie de Doggy](https://github.com/mchobby/pyboard-driver/blob/master/servorobot/images/DOGGY/DOGGY-4PAW-8SERVOS-ASMBETA-05c.jpg "Anatomie de Doggy")
+
 # Install / Installation
 
 ## MicroPython 1.8+ 

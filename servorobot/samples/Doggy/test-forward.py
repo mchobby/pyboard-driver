@@ -37,9 +37,9 @@ d.move( 'FORWARD', repeat=40, prepare=True)
 delay( 2000 )
 
 # ENG: Changing shoulder movement angles (min & max) as the Wrist angle (to 75degree). Set the step_angle to 2 degree instead of 5
-# ENG: All parameters fits to Forward.step()
+# ENG: All parameters fits to Forward.do()
 # FR: Changer les angles des mouvements des epaules (shoulder min & max) ainsi que l'angle du poignet (a 75 degrés). Chaque pas fait un déplacement de 2 degres
-# FR: Tous les paramètres correspondent a Forward.step()
+# FR: Tous les paramètres correspondent a Forward.do()
 d.reset()
 d.prepare('FORWARD', sdegree_min=0, sdegree_max=85, wdegree=75 )
 for i in range( 150 ):
@@ -55,4 +55,4 @@ d.reset()
 mov_obj = d.movement('FORWARD')
 mov_obj.prepare( wdegree=65 )
 for i in range( 50 ):                                                       
-    mov_obj.step( wdegree=65, step_angle=10 ) 
+    mov_obj.do( wdegree=65, step_angle=10 ) 
