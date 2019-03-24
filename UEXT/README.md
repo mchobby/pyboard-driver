@@ -44,6 +44,11 @@ spi = SPI(2) # MOSI=Y8, MISO=Y7, SCK=Y6, SS=Y5
 from pyb import UART
 ser = UART( 1, 9600 ) # RX=X10, TX=X9, 9600 baud
 ```
+# Où trouver des pilotes MicroPython pour cartes UEXT
+
+Tous nos pilotes MicroPython sont stockés sur le GitHub [pyboard-driver](https://github.com/mchobby/pyboard-driver) ou le GitHub [esp8266-upy](https://github.com/mchobby/esp8266-upy). Les pilotes MicroPython fonctionnant sur ESP8266 fonctionnerons aussi avec des Pyboard :-) 
+
+Les pilotes MicroPython pour les cartes exposants un connecteur UEXT sont stockes dans des répertoires commencant avec "__mod__" (ex: modvga, modrgb, modwii, etc).
 
 # Liste d'achat
 * [Carte prototypage Pyboard](https://shop.mchobby.be/fr/micropython/598-plaque-de-prototypage-pour-pyboard-3232100005983.html)

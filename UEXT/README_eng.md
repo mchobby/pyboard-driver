@@ -46,6 +46,12 @@ from pyb import UART
 ser = UART( 1, 9600 ) # RX=X10, TX=X9, 9600 baud
 ```
 
+# Where to find MicroPython drivers for UEXT boards
+
+All our MicroPython drivers are stored on [pyboard-driver](https://github.com/mchobby/pyboard-driver) github or [esp8266-upy](https://github.com/mchobby/esp8266-upy) github. MicroPython drivers running on ESP8266 will also work with Pyboard :-) 
+
+The MicroPython drivers for boards exposing UEXT connector are stored under foldername starting with "__mod__" (eg: modvga, modrgb, modwii, etc).
+
 # Where to buy
 * [Pyboard prototyping board](https://shop.mchobby.be/fr/micropython/598-plaque-de-prototypage-pour-pyboard-3232100005983.html)
 * [UEXT male connector](https://shop.mchobby.be/fr/uext/1524-connecteur-idc-case-header-2x5-254mm-3232100015425.html) qui est un connecteur IDC 2x5 broches
