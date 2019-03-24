@@ -50,7 +50,7 @@ Plus d'info: <a href="https://shop.mchobby.be/fr/breakout/89-adafruit-controleur
       </td>
   </tr>
 
-  <tr><td><strong>Autres pilotes</strong></td>
+  <tr><td><strong>Autres pilotes<br />(esp8266-upy)</strong></td>
       <td>Le <a href="https://github.com/mchobby/esp8266-upy">github esp8266-upy</a> contient de nombreux autres pilotes MicroPython.
 
 Puisqu'ils fonctionnent sur ESP8266 (ayant moins de ressources), ces pilotes fonctionnerons également avec des cartes Pyboard!
