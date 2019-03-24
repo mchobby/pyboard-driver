@@ -10,6 +10,8 @@ De la sorte, il est plus facile de réaliser des tests et du prototypage avec de
 - Voir la (gamme d'extension UEXT)[https://shop.mchobby.be/fr/138-uext] chez MCHobby
 - Voir la (vaste gamme UEXT)[https://www.olimex.com/Products/Modules/] chez Olimex.
 
+J'ai fini par faire une carte de prototypage pour poursuivre les essais du [module MOD-VGA (carte Gameduino 3.3V) exposant une interface UEXT](https://shop.mchobby.be/fr/uext/1431-mod-vga-carte-type-gameduino-en-33v-3232100014312-olimex.html) avec ma Pyboard. 
+
 # Brochage 
 
 Voici le brochage proposé:
@@ -46,5 +48,6 @@ ser = UART( 1, 9600 ) # RX=X10, TX=X9, 9600 baud
 # Liste d'achat
 * [Carte prototypage Pyboard](https://shop.mchobby.be/fr/micropython/598-plaque-de-prototypage-pour-pyboard-3232100005983.html)
 * [Connecteur UEXT mâle](https://shop.mchobby.be/fr/uext/1524-connecteur-idc-case-header-2x5-254mm-3232100015425.html) qui est un connecteur IDC 2x5 broches
-* Extension UEXT: (gamme UEXT chez MCHobby)[https://shop.mchobby.be/fr/138-uext] (vaste gamme UEXT chez Olimex)[https://www.olimex.com/Products/Modules/] chez Olimex.
-* (https://shop.mchobby.be/fr/56-micropython)[Cartes MicroPython Pyboard]
+* Extension UEXT: [gamme UEXT chez MCHobby](https://shop.mchobby.be/fr/138-uext) [vaste gamme UEXT chez Olimex](https://www.olimex.com/Products/Modules/) chez Olimex.
+* [Cartes MicroPython Pyboard](https://shop.mchobby.be/fr/56-micropython)
+
