@@ -20,24 +20,30 @@ Les codes et exemples sont également utilisés sur le [wiki documentaire Pyboar
   <tr><td><strong>UEXT</strong></td>
       <td>Proposition de brochage et connectique UEXT pour la carte Pyboard.<br /><br />
 Plus d'info: <a href="https://www.olimex.com/Products/Modules/">gamme UEXT @ Olimex</a><br />
-Plus d'info: <a href="https://shop.mchobby.be/fr/138-uext">gamme UEXT @ MCHobby</a> 
+Plus d'info: <a href="https://shop.mchobby.be/fr/138-uext">gamme UEXT @ MCHobby</a>
       </td>
   </tr>
   <tr><td>Servo Robot</td>
       <td>Utiliser un controleur PWM pca9685 pour réaliser un robot quadripède (à servo-moteurs).
       </td>
   </tr>
-  
+
 </tbody>
 </table>
 
-# Bibliothèques disponibles 
+# Bibliothèques disponibles
 
 <table>
 <thead>
   <th>Répertoire</th><th>Senseur / Description</th>
 </thead>
-<tbody>
+	<tbody>
+	<tr><td>MOD-VGA<br />GameDuino</td>
+			<td>Shield GameDuino 3.3V avec sortie VGA, sortie Son entrée clavier et __connecteur UEXT__ (pour la communication avec Pyboard). Permet de faire des affichages de texte en VGA.</a><br /><br />
+	Plus d'info: <a href="https://shop.mchobby.be/fr/uext/1431-mod-vga-carte-type-gameduino-en-33v-3232100014312-olimex.html">MOD-VGA</a>
+			</td>
+	</tr>
+
   <tr><td>MotorSkin<br />L293D</td>
       <td>Contrôleur pour deux moteurs continu basé sur un L293D. Provient du projet <a href="https://wiki.mchobby.be/index.php?title=Hack-MotorSkin">Pyboard à roulette documenté sur le Wiki de MCHobby.</a><br /><br />
 Plus d'info: <a href="https://shop.mchobby.be/fr/micropython/918-pyboard-motor-skin-3232100009189.html">MotorSkin</a>

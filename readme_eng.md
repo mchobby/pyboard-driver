@@ -20,24 +20,30 @@ The code and sample here are also used in the [MCHobby's French documentation Wi
   <tr><td><strong>UEXT</strong></td>
       <td>UEXT pinout and wiring proposal for the Pyboard.<br /><br />
 More info: <a href="https://www.olimex.com/Products/Modules/">UEXT product line @ Olimex</a><br />
-More info: <a href="https://shop.mchobby.be/fr/138-uext">UEXT product line @ MCHobby</a> 
+More info: <a href="https://shop.mchobby.be/fr/138-uext">UEXT product line @ MCHobby</a>
       </td>
   </tr>
   <tr><td>Servo Robot</td>
       <td>Use a pca9685 PWM driver to create quadruped robot (with servo motors).
       </td>
   </tr>
-  
+
 </tbody>
 </table>
 
-# Available drivers 
+# Available drivers
 
 <table>
 <thead>
   <th>Folder</th><th>Sensor / Description</th>
 </thead>
 <tbody>
+	<tr><td>MOD-VGA<br />GameDuino</td>
+			<td>3.3V GameDuino shield with VGA output, sound output, keyboard input and  __UEXT connector__ (to communicate with the Pyboard). Allows to display texte within the VGA mode.</a><br /><br />
+	More information: <a href="https://shop.mchobby.be/fr/uext/1431-mod-vga-carte-type-gameduino-en-33v-3232100014312-olimex.html">MOD-VGA</a>
+			</td>
+	</tr>
+
   <tr><td>MotorSkin<br />L293D</td>
       <td>A DC motor controler (for 2 motors) based on the L293D. Comes from the project <a href="https://wiki.mchobby.be/index.php?title=Hack-ENG-MotorSkin">Pyboard à roulette documenté sur le Wiki de MCHobby.</a> (<a href="https://wiki.mchobby.be/index.php?title=Hack-MotorSkin">French version</a>)<br /><br />
 More information: <a href="https://shop.mchobby.be/fr/micropython/918-pyboard-motor-skin-3232100009189.html">MotorSkin</a>
