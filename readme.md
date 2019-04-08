@@ -13,7 +13,7 @@ Les codes et exemples sont également utilisés sur le [wiki documentaire Pyboar
   <th>Répertoire</th><th>Senseur / Description</th>
 </thead>
 <tbody>
-  <tr><td><strong>Fritzing</strong></td>
+  <tr><td><strong>ressource/Fritzing</strong></td>
       <td>Fichiers Fritzing pour la carte Pyboard.<br />
       </td>
   </tr>

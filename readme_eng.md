@@ -13,7 +13,7 @@ The code and sample here are also used in the [MCHobby's French documentation Wi
   <th>Folder</th><th>Sensor / Description</th>
 </thead>
 <tbody>
-  <tr><td><strong>Fritzing</strong></td>
+  <tr><td><strong>ressource/Fritzing</strong></td>
       <td>Fritzing file of the Pyboard.<br />
       </td>
   </tr>
