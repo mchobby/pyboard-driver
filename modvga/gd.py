@@ -148,7 +148,7 @@ class Gameduino():
 		self.ssel.value( 1 )
 		sleep_ms( 1 ) # 1 Ms between SPI transaction seems right
 		self.ssel.value( 0 )
-		self.spi.send( ustruct.pack( '>H', addr) ) # Convert address in MSB and LSB
+		self.spi.write( ustruct.pack( '>H', addr) ) # Convert address in MSB and LSB
 
 	def __wstart( self, addr ):
 		""" Start a WRITE SPI transation @ addr """
@@ -168,7 +168,7 @@ class Gameduino():
 		""" read one byte @ addr """
 		# Status: Certified!
 		self.__start( addr )
-		v = self.spi.recv( 1 ) # return b'A'
+		v = self.spi.read( 1 ) # return b'A'
 		self.__end()
 		return v[0]
 
@@ -176,14 +176,14 @@ class Gameduino():
 		""" write one byte @ addr. Value 0..254 """
 		# Status: Certified!
 		self.__wstart( addr )
-		self.spi.send( bytes([byte_value]) )
+		self.spi.write( bytes([byte_value]) )
 		self.__end()
 
 	def rd16( self, addr ):
 		""" read a word (16 bits) @ addr """
 		# Status: Certified!
 		self.__start( addr )
-		_bytes = self.spi.recv( 2 ) # read 2 bytes
+		_bytes = self.spi.read( 2 ) # read 2 bytes
 		self.__end()
 		return ustruct.unpack( '>H', _bytes )[0] # was initialy '<H' ?
 
@@ -191,7 +191,7 @@ class Gameduino():
 		""" write a word (2 bytes) @ addr. Value 0..32768."""
 		# Status: Certified!
 		self.__wstart( addr )
-		self.spi.send( ustruct.pack('<H',word_value) )
+		self.spi.write( ustruct.pack('<H',word_value) )
 		self.__end()
 
 	def fill( self, addr, byte_value, count ):
@@ -204,14 +204,24 @@ class Gameduino():
 		# Slower but memory efficient
 		data = bytes([byte_value])
 		while count > 0:
-			self.spi.send( data )
+			self.spi.write( data )
 			count -= 1
 
 		self.__end()
 
 	def copy( self, addr, src, count ):
-		""" Copy the source content @ addr """
-		raise Exception( "Not implemented" )
+		""" Copy the ressource from arduino header (.h) to addr """
+		raise Exception( "use copybin() instead" )
+
+	def copybin( self, f, addr ):
+		""" copy the content of a binary (.bin) file to addr.
+			remarks: replace the arduino's copy method. """
+		self.__wstart( addr )
+		r = f.read( 256 )
+		while r:
+			self.spi.write( r )
+			r = f.read( 256 )
+
 
 	def microcode( self, src, count ):
 		""" ? what the hell is microcode is doing ? """
@@ -221,6 +231,22 @@ class Gameduino():
 		""" Set a RGB value for a palette index """
 		# print("setpal@%s:rgb=%s" % (RAM_PAL + (pal << 1), rgb) )
 		self.wr16(RAM_PAL + (pal << 1), rgb)
+
+	def sprite( self, spr, x, y, image, palette, rot=0, jk=0  ):
+		""" int spr, int x, int y, byte image, byte palette, byte rot, byte jk """
+		# Status: experimental
+		self.__wstart( RAM_SPR + (spr << 2) )
+		# SPI.transfer(lowByte(x)); LowByte(x) -->  x & 255, HighByte(x) --> (x & 65280)>>8
+		# SPI.transfer((palette << 4) | (rot << 1) | (highByte(x) & 1));
+		# SPI.transfer(lowByte(y));
+		# SPI.transfer((jk << 7) | (image << 1) | (highByte(y) & 1));
+		_data = [0,0,0,0]
+		_data[0] = x & 255
+		_data[1] = (palette << 4) | (rot << 1) | (((x & 65280)>>8) & 1)
+		_data[2] = y & 255
+		_data[3] = (jk << 7) | (image << 1) | (((y & 65280)>>8) & 1)
+		self.spi.write( bytes(_data) )
+		self.__end()
 
 	def uncompress( self, addr, src ):
 		""" Uncompress data from source and store it @ addr """
@@ -279,13 +305,13 @@ class Gameduino():
 		:param a_str: String to display (will be convert to ASCII)"""
 		# Status: Certified
 		self.__wstart( 0x0000 + (y << 6) + x )
-		self.spi.send( bytes([ord(ch) for ch in a_str]) )
+		self.spi.write( bytes([ord(ch) for ch in a_str]) )
 
 	def xhide( self ):
 		""" Hide sprite @ memory address (move it out of the display area) """
 		# Status: Certified!
 		#self.spi.send( ustruct.pack('>H', 400) )
 		#self.spi.send( ustruct.pack('>H', 400) )
-		self.spi.send( bytes([1, 144]) ) # Sprite.Y @ 400
-		self.spi.send( bytes([1, 144]) ) # Sprite.X @ 400
+		self.spi.write( bytes([1, 144]) ) # Sprite.Y @ 400
+		self.spi.write( bytes([1, 144]) ) # Sprite.X @ 400
 		self.spr += 1

@@ -13,6 +13,8 @@ allows all of our boards with a UEXT to connect to MOD-VGA and audio output.
 # Warning
 A big chunck of GameDuino library is available in `gd.py` file but only few sample are ported to MicroPython.
 
+Some tools have been created to help porting GameDuino ressources to MicroPython. See the file [TOOLS_eng.md for more informations](TOOLS_eng.md)
+
 This MicroPython port is oriented/focused toward text display. The aim is to create a VGA REPL terminal to play with MicroPython Pyboard on a VGA monitors.
 
 Other features/examples may come later depending on free time and personnal interest.

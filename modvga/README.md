@@ -11,6 +11,8 @@ Quelques modification on été apportées pour ajouter une sortie Audio, un clav
 # ATTENTION
 Une bonne partie de la bibliothèque GameDuino est disponible dans le fichier `gd.py` mais seuls quelques exemples ont étés portés sous MicroPython.
 
+Quelques outils ont étés créés pour simplifier le portage de ressources GameDuino sous MicroPython. Voyez le fichier [TOOLS.md pour plus d'informations](TOOLS.md)
+
 Ce port MicroPython est orienté vers l'affichage de texte. Le but étant de créer un terminal REPL VGA pour utiliser une carte MicroPython Pyboard sur un moniteur VGA.
 
 Les autres fonctionnalités/exemples seront portés en fonction du temps disponible et intérêts personnels.

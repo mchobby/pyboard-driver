@@ -2,7 +2,7 @@
  Gameduino MicroPython examples (Pyboard) for Olimex MOD-VGA board.
  Wired using the UEXT pinout proposal @ https://github.com/mchobby/pyboard-driver/tree/master/UEXT
 
- BASIC GAMEDUINO LIB INITIALIZATION
+ spr256.py is the porting of sprites256.ino
 
  based on porting of Arduino's GameDuino Library
 
@@ -32,6 +32,11 @@ THE SOFTWARE.
 
 from machine import Pin, SPI
 from gd import *
+import os
+import urandom # on recent MicroPython Firmware v1.10+
+
+# change current directory (where the bin files are stored)
+os.chdir( '/sd' )
 
 # Initialize the SPI Bus (on ESP8266-EVB)
 # Software SPI
@@ -42,19 +47,71 @@ spi.init( baudrate=2000000, phase=0, polarity=0 )
 # We must manage the SS signal ourself
 ss = Pin( Pin.board.Y5, Pin.OUT )
 
+# Structure definition
+class Sprite:
+	x = 0 # int
+	y = 0 # int
+	vx = 0 # char. X speed (with sign)
+	vy = 0 # char. Y speed (with sign)
+
+sprites = []
+for i in range( 256 ):
+	sprites.append( Sprite() )
+
+def plot( gd ):
+	""" plot the sprites in gameduino """
+	for i in range(256):
+		# spr, x, y, image, palette, rot, jk
+		gd.sprite(i, sprites[i].x >> 4, sprites[i].y >> 4, i % 47, 0, 0)
+
+LWALL = (0 << 4)   # Left Wall
+RWALL = (384 << 4) # Right Wall
+TWALL = (0 << 4)   # Top Wall
+BWALL = (284 << 4) # Bottom Wall
+
+def move():
+	""" Move the 256 sprites on the screen between WALLs """
+	for sprite in sprites: #  for (i = 256, ps = sprites; i--; ps++) {
+		if sprite.x <= LWALL:
+			sprite.x = LWALL
+			sprite.vx = -1 * sprite.vx
+		if sprite.x >= RWALL:
+			sprite.x = RWALL
+			sprite.vx = -1 * sprite.vx
+		if sprite.y <= TWALL:
+			sprite.y = TWALL
+			sprite.vy = -1 * sprite.vy
+		if sprite.y >= BWALL:
+			sprite.y = BWALL
+			sprite.vy = -1 * sprite.vy
+
+		sprite.x += sprite.vx;
+		sprite.y += sprite.vy;
 
 # Gameduino Lib
 gd = Gameduino( spi, ss )
 gd.begin()
-gd.ascii()
 
-gd.putstr( 5 ,  0, "  *** DEMOs ***" )
-gd.putstr( 5 ,  1, "04_demo/ascii/ascii.py" )
+with open( 'sprites256_pic.bin', 'rb' ) as f:
+	gd.copybin( f, RAM_PIC )
+with open( 'sprites256_chr.bin', 'rb' ) as f:
+	gd.copybin( f, RAM_CHR )
+with open( 'sprites256_pal.bin', 'rb' ) as f:
+	gd.copybin( f, RAM_PAL )
+with open( 'pickups2_img.bin', 'rb' ) as f:
+	gd.copybin( f, RAM_SPRIMG )
+with open( 'pickups2_pal.bin', 'rb' ) as f:
+	gd.copybin( f, RAM_SPRPAL )
 
-# Drawing from the 4th ligne because of a bug
-gd.putstr( 0,4, 'Gameduino MicroPython driver')
-gd.putstr( 0,5, 'Allow to write strings on screen.')
-gd.putstr( 0,6, 'Word wraps only happens at the end of buffer' )
-gd.putstr( 0,7, 'buffer which is larger than the screen.')
-gd.putstr( 0,9, '1234567890'*8)
+# randomize the sprites position
+for sprite in sprites:
+	sprite.x = urandom.randrange( 0, 400 << 4 )
+	sprite.y = urandom.randrange( 0, 300 << 4 )
+	sprite.vx = urandom.randrange( -16, 16 )
+	sprite.vy = urandom.randrange( -16, 16 )
+
+while True:
+	plot(gd)
+	move()
+
 print( 'That''s all folks')

@@ -35,7 +35,7 @@ from gd import Gameduino, RAM_CHR, RAM_PAL
 
 # Initialize the SPI Bus (on Pyboard)
 spi = SPI(2) # MOSI=Y8, MISO=Y7, SCK=Y6, SS=Y5
-spi.init( SPI.MASTER, baudrate=2000000, phase=0, polarity=0 )
+spi.init( baudrate=2000000, phase=0, polarity=0 )
 # We must manage the SS signal ourself
 sel = Pin( Pin.board.Y5, Pin.OUT )
 
