@@ -1,6 +1,7 @@
 [This file also exists here en ENGLISH](README_eng.md)
 
 * ascii : permet d'afficher du texte (font 8x8 pixels) sur un écran 36 lignes x 47 colonnes.
+* ascii-fast : idem ascii mais avec un initialisation nettement plus rapide
 * cp437 : permet d'afficher du texte (font 16x8 pixels, hauteur x largeur) sur un écran 18 lignes x 47 colonnes.
 
 # Exemples ASCII
@@ -62,6 +63,25 @@ Voici une partie du résultat affiché dans la session REPL.
 4924 : 0b....11111111....
 4926 : 0b................
 ```
+
+# Exemple ASCII-FAST
+
+Le script `ascii-fast/asciif.py` utilise la technique des fichiers .bin (expliquée dans la démo "sprite256") pour recharger l'état de RAM_CHR, RAM_PAL, RAM_PIC avec une préconfiguration ascii. Cette approche est __beaucoup plus rapide et nettement plus économe__ en ressource que l'appel de `gd.ascii()`.
+
+Cette version exploite 3 fichiers binaires sur la Pyboard (nommés chr.bin, ram_pal.bin, ram_pic.bin).
+
+## Comment ai-je créés les fichiers bin?
+
+C'est très simple:
+1. J'ai retiré toutes les appels à `putstr()` dans l'exemple `ascii.py` puis je l'ai exécuté sur la Pyboard.
+2. Résultat du point précédent, j'ai donc un écran noir mais avec la RAM Gameduino correctement initialisée pour faire des appels `putstr()`.
+3. J'ai alors utilisé `ramtoh.py` (voir /00_basic/) pour faire un dump des sections de RAM Gameduino correspondant à RAM_CHR, RAM_PAL, RAM_PIC. J'ai donc ces états dans la session REPL (affiché avec le format .h file d'Arduino)
+4. J'ai copié le code généré dans un vrai fichier .h qhe j'ai nommé ascii-fast.h (encodé en UTF-8)
+5. Pour finir, j'ai compilé le fichier d'entête (.h) sur mon PC avec l'utilitaire  `htobin.py` (aussi dans /00_basic/) our extraire les fichiers .bin du fichier d'entête.
+
+Voila!
+
+Note: il serait bien entendu possible d'extraire directement la RAM Gameduino dans des fichiers écrits directement sur la Pyboard... mais il est plus intéressant d'utiliser le format intermédiaire .h de Gameduino puisque celui-ci est très répandu dans les projet Arduino Gameduino.  
 
 # Exemples CodePage
 

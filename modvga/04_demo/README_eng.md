@@ -1,6 +1,7 @@
 [Ce fichier existe également en FRANCAIS ici](README.md)
 
 * ascii : allows to draw text (8x8 pixels font) on a 36 lines x 47 columns screen.
+* ascii-fast : idem ascii but with quite faster initialisation
 * cp437 : allows to draw text (16x8 pixels font, heigth x width) on a 18 lines x 47 columns screen.
 
 # ASCII samples
@@ -61,6 +62,26 @@ Here is a part of the output displayed in the REPL session.
 4924 : 0b....11111111....
 4926 : 0b................
 ```
+
+# ASCII-FAST sample
+
+The `ascii-fast/asciif.py` use the .bin file technics (explained in "sprite256" demo) to reload the state of RAM_CHR, RAM_PAL, RAM_PIC with the preloaded
+ascii setup. This approach is quite faster consume less memory than calling `gd.ascii()` .
+
+This version only need the 3 binary files on the Pyboard (namely chr.bin, ram_pal.bin, ram_pic.bin).
+
+## How did I created the bin files?
+
+Quite simple:
+1. I removed all the putstr() call from the ascii.py example and then I ran it.
+2. At this stage the screen is black with all the RAM stuff properly initialized.
+3. I used the `ramtoh.py` (in the /00_basic/) to dump the RAM_CHR, RAM_PAL, RAM_PIC state to REPL session (as header file format)
+4. I copied the generated header to a real file (namely ascii-fast.h , UTF-8)
+5. Finally I did compiled the header file with the `htobin.py` utility (also in the /00_basic/) to extract the bin files.
+
+Voila!
+
+Note: It may be possible to extract directly the RAM to a local bin file on the pyboard... but it is best to see and/or manipulate the content of the RAM as needed.  
 
 # CodePage samples
 

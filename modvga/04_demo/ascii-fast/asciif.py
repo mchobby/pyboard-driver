@@ -2,7 +2,7 @@
  Gameduino MicroPython examples (Pyboard) for Olimex MOD-VGA board.
  Wired using the UEXT pinout proposal @ https://github.com/mchobby/pyboard-driver/tree/master/UEXT
 
- ASCII - write ASCII text with GAMEDUINO
+ ASCII FAST - write ASCII text after fast GAMEDUINO initialisation
 
  based on porting of Arduino's GameDuino Library
 
@@ -32,6 +32,7 @@ THE SOFTWARE.
 
 from machine import Pin, SPI
 from gd import *
+import os
 
 # Initialize the SPI Bus (on ESP8266-EVB)
 # Software SPI
@@ -46,10 +47,20 @@ ss = Pin( Pin.board.Y5, Pin.OUT )
 # Gameduino Lib
 gd = Gameduino( spi, ss )
 gd.begin()
-gd.ascii()
+
+# Replace initialization with faster method realoading Gameduino RAM state from
+# binary files.
+#   gd.ascii()
+os.chdir('/sd')
+with open( 'ram_pic.bin', 'rb' ) as f:
+	gd.copybin( f, RAM_PIC )
+with open( 'ram_chr.bin', 'rb' ) as f:
+	gd.copybin( f, RAM_CHR )
+with open( 'ram_pal.bin', 'rb' ) as f:
+	gd.copybin( f, RAM_PAL )
 
 gd.putstr( 5 ,  0, "  *** DEMOs ***" )
-gd.putstr( 5 ,  1, "04_demo/ascii/ascii.py" )
+gd.putstr( 5 ,  1, "04_demo/ascii-fast/asciif.py" )
 
 # Drawing from the 4th ligne because of a bug
 gd.putstr( 0,4, 'Gameduino MicroPython driver')

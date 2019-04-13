@@ -75,3 +75,11 @@ with open( 'sprites256_pic.bin', 'rb' ) as f:
 	# Copier le continu du fichier en commencant à l'adresse RAM_PIC (0x0000)
 	gd.copybin( f, RAM_PIC )
 ```
+
+# ramtoh.py (Gameduino -> .h)
+
+Ce script MicroPython permet d'extraire le contenu (l'état) de la RAM_CHR, RAM_PAL, RAM_PIC de Gameduino sous forme de fichier d'entête (.h) affiché directement dans la session REPL.
+
+Ce script peut être très intéressant pour obtenir une image binaire pré-initialisé (.bin) de la RAM Gameduino (certaines sections) qu'il ne restera plus qu'à recharger.
+
+A noter que pour cela, il sera nécessaire d'utiliser `htobin.py` pour extraire les fichiers .bin du fichier d'entête généré à l'aide de `ramtoh.py`
