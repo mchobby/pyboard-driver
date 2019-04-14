@@ -40,7 +40,7 @@ import urandom # on recent MicroPython Firmware v1.10+
 #    spi = SPI(-1, baudrate=4000000, polarity=1, phase=0, sck=Pin(14), mosi=Pin(13), miso=Pin(12))
 # Hardware SPI
 spi = SPI(2) # MOSI=Y8, MISO=Y7, SCK=Y6, SS=Y5
-spi.init( baudrate=2000000, phase=0, polarity=0 )
+spi.init( baudrate=20000000, phase=0, polarity=0 ) # raise @ 20 Mhz
 # We must manage the SS signal ourself
 ss = Pin( Pin.board.Y5, Pin.OUT )
 

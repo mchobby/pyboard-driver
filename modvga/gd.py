@@ -4,7 +4,7 @@ Gameduino / MOD-VGA board library for MicroPython.
 Based on the GameDuino library @ http://excamera.com/sphinx/gameduino/
 See also the Memory Mapping poster reference @ https://excamera.com/files/gameduino/synth/doc/gen/poster.pdf
 """
-from time import sleep_ms
+from time import sleep_ms, sleep_us
 import ustruct
 __version__ = '0.0.1' #Python version
 
@@ -187,7 +187,8 @@ class Gameduino():
 		""" Start a SPI transaction @ addr """
 		# Start new transaction
 		self.ssel.value( 1 )
-		sleep_ms( 1 ) # 1 Ms between SPI transaction seems right
+		#sleep_ms( 1 ) # 1 Ms between SPI transaction seems right
+		sleep_us( 10 )
 		self.ssel.value( 0 )
 		self.spi.write( ustruct.pack( '>H', addr) ) # Convert address in MSB and LSB
 
