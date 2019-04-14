@@ -90,6 +90,8 @@ Le script `ball/ball.py` utilise la technique de chargement des fichiers .bin (p
 
 ![Resultat du script ball.py](ball.jpg)
 
+Voir aussi [la vidéo sur YouTube](https://youtu.be/J0ZjHtXvZoI)
+
 # Exemples CodePage
 
 ## cp437/cp437.py

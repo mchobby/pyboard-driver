@@ -90,6 +90,8 @@ The `ball/ball.py` use the .bin files loading technics (for 3 files) to load the
 
 ![Results of ball.py script](ball.jpg)
 
+See also [the YouTube vidéo](https://youtu.be/J0ZjHtXvZoI)
+
 # CodePage samples
 
 ## cp437/cp437.py
