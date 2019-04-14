@@ -95,6 +95,47 @@ class GDFlashBits():
 		#print( 'getn(%s): %s' % (_bit_count, r) )
 		return r
 
+class GDFileBits():
+	"""
+	Class used to read bit-by-bit the 'GameDuino data bits' compressed
+	in a continuous BINARY FILE bit stream
+	"""
+	def __init__( self ):
+		self.f    = None # Source file
+		self.data = None # A byte read from the source
+		self.index= 0 # Index in the source
+		self.mask = 0x01
+
+	def begin( self, f ):
+		""" f is the source of data, a binary .bin file. """
+		self.f     = f
+		self.data  = self.f.read( 1 )[0] # read one byte
+		self.mask  = 0x01
+
+	def get1( self ):
+		""" Get/Extract next bit from the source """
+		r = ((self.data & self.mask) != 0)
+		r = 1 if r else 0 # Convert True/False to 1/0
+		self.mask <<= 1
+		if self.mask > 128: # mask is over the 8th bit
+			self.mask  = 0x01
+			# read next byte (ahead in advance)
+			self.data = self.f.read(1)
+			if self.data: # But this may be null is we reach the end-of-file
+				self.data = self.data[0]
+		#print( 'get1: %s' % (1 if r else 0) )
+		return r
+
+	def getn( self, bit_count ):
+		""" Get/Extract Nth bits from the source. Can return up to 16bit (unsigned short, 0..65535) """
+		r = 0x00
+		while bit_count > 0:
+			r <<= 1
+			r = r | self.get1()
+			bit_count -= 1
+		#print( 'getn(%s): %s' % (_bit_count, r) )
+		return r
+
 class Gameduino():
 	"""
 	Class to control Gameduino / MOD-VGA board.
@@ -102,7 +143,7 @@ class Gameduino():
 	Based on the GameDuino library @ http://excamera.com/sphinx/gameduino/
 	"""
 	# Static GameDuino FlashBits reader
-	GDFBF = GDFlashBits()
+	# GDFBF = GDFlashBits() # should be created on purpose (GDFlashBits or GDFileBits)
 
 	def __init__( self, spi_bus, ssel_pin ):
 		""" SPI bus @ 2000000 max for better stability """
@@ -252,34 +293,36 @@ class Gameduino():
 	def uncompress( self, addr, src ):
 		""" Uncompress data from source and store it @ addr """
 		# Status: Certified!
-		Gameduino.GDFBF.begin( src )
-		b_off = Gameduino.GDFBF.getn( 4 ) # number of bits to store the data Offset : 4bits
-		b_len = Gameduino.GDFBF.getn( 4 ) # number of bits to store the data Length : 4bits
-		minlen= Gameduino.GDFBF.getn( 2 ) # Minimum Length (to append to stored data length) : 2bits
-		items = Gameduino.GDFBF.getn( 16 )# Number of items
-		# print( 'b_off : %s' % b_off )
-		# print( 'b_len : %s' % b_len )
-		# print( 'minlen: %s' % minlen )
-		# print( 'Items : %s' % items )
-		# print( 'addr  : %s' % addr )
-		while items > 0:
-			if Gameduino.GDFBF.get1() == 0: # if first bit=0  => 8bits stored
-				v = Gameduino.GDFBF.getn(8)
-				self.wr( addr, v )
-				# Normal Write operation
-				addr += 1
-			else: # if first bit=1 ==> compressed storage
-				# Offset is negative because we will duplicate existing PREVIOUS data
-				offset = -1*Gameduino.GDFBF.getn(b_off) - 1
-				l      = Gameduino.GDFBF.getn(b_len) + minlen
-				# print( 'COPY offset = %s, len = %s' % (offset,l) )
-				while l>0 :
-					v = self.rd(addr + offset)
-					self.wr(addr, v) # offset is negative!!!
-					# copy operation
+		_class = GDFlashBits if type(src) is bytes else GDFileBits
+		gdfbf = _class()
+		try:
+			gdfbf.begin( src )
+			b_off = gdfbf.getn( 4 ) # number of bits to store the data Offset : 4bits
+			b_len = gdfbf.getn( 4 ) # number of bits to store the data Length : 4bits
+			minlen= gdfbf.getn( 2 ) # Minimum Length (to append to stored data length) : 2bits
+			items = gdfbf.getn( 16 )# Number of items
+
+			while items > 0:
+				if gdfbf.get1() == 0: # if first bit=0  => 8bits stored
+					v = gdfbf.getn(8)
+					self.wr( addr, v )
+					# Normal Write operation
 					addr += 1
-					l    -= 1
-			items -= 1
+				else: # if first bit=1 ==> compressed storage
+					# Offset is negative because we will duplicate existing PREVIOUS data
+					offset = -1*gdfbf.getn(b_off) - 1
+					l      = gdfbf.getn(b_len) + minlen
+					# print( 'COPY offset = %s, len = %s' % (offset,l) )
+					while l>0 :
+						v = self.rd(addr + offset)
+						self.wr(addr, v) # offset is negative!!!
+						# copy operation
+						addr += 1
+						l    -= 1
+				items -= 1
+		finally:
+			del( gdfbf )
+
 
 	def ascii( self , font_color = rgb(255,255,255), fill_char = 32 ):
 		""" Initialize a list of ASCII of characters """
@@ -307,6 +350,27 @@ class Gameduino():
 		# Status: Certified
 		self.__wstart( 0x0000 + (y << 6) + x )
 		self.spi.write( bytes([ord(ch) for ch in a_str]) )
+
+	def xsprite( self, ox, oy, x, y, image, palette, rot, jk=0):
+		""" Send sprite data onto SPI bus (bus must already been open in current transaction """
+		# int ox, int oy, char x, char y, byte image, byte palette, byte rot, byte jk
+		# Status: Certified!
+		if rot & 2 :
+			x = -16-x
+		if rot & 4 :
+			y = -16-y
+		if rot & 1 :
+			x,y = y,x # swap values
+
+		ox += x
+		oy += y
+		_data = []
+		_data.append( ox & 255 ) # SPI.transfer(lowByte(ox));
+		_data.append( (palette << 4) | (rot << 1) | ((ox & 65280)>>8) & 1)  # SPI.transfer((palette << 4) | (rot << 1) | (highByte(ox) & 1));
+		_data.append( oy & 255 ) # SPI.transfer(lowByte(oy));
+		_data.append( (jk << 7) | (image << 1) | (((oy & 65280)>>8) & 1) ) # SPI.transfer((jk << 7) | (image << 1) | (highByte(oy) & 1));
+		self.spi.write( bytes(_data) )
+		self.spr += 1
 
 	def xhide( self ):
 		""" Hide sprite @ memory address (move it out of the display area) """

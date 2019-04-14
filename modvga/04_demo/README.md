@@ -2,6 +2,7 @@
 
 * ascii : permet d'afficher du texte (font 8x8 pixels) sur un écran 36 lignes x 47 colonnes.
 * ascii-fast : idem ascii mais avec un initialisation nettement plus rapide
+* ball : balle 3D rebondissant sur les bords du moniteur
 * cp437 : permet d'afficher du texte (font 16x8 pixels, hauteur x largeur) sur un écran 18 lignes x 47 colonnes.
 
 # Exemples ASCII
@@ -82,6 +83,12 @@ C'est très simple:
 Voila!
 
 Note: il serait bien entendu possible d'extraire directement la RAM Gameduino dans des fichiers écrits directement sur la Pyboard... mais il est plus intéressant d'utiliser le format intermédiaire .h de Gameduino puisque celui-ci est très répandu dans les projet Arduino Gameduino.  
+
+# Exemple Ball
+
+Le script `ball/ball.py` utilise la technique de chargement des fichiers .bin (pour 3 fichiers) pour charger l'arrière plan. Les sprites de la balle sont compressés dans le fichier `ball.bin` qui est directement décompressé avec la classe `GDFileBits`. La fonction `uncompress()` de Gameduino peut détecter la différence entre un fichier .bin et une ressource bytes() et sélectionne automatiquement la classe de décompression appropriée  (`GDFlashBits` ou `GDFileBits`).
+
+![Resultat du script ball.py](ball.jpg)
 
 # Exemples CodePage
 

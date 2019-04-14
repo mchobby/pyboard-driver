@@ -2,6 +2,7 @@
 
 * ascii : allows to draw text (8x8 pixels font) on a 36 lines x 47 columns screen.
 * ascii-fast : idem ascii but with quite faster initialisation
+* ball : a 3D bouncing ball (bouncing on the monitor wall)
 * cp437 : allows to draw text (16x8 pixels font, heigth x width) on a 18 lines x 47 columns screen.
 
 # ASCII samples
@@ -82,6 +83,12 @@ Quite simple:
 Voila!
 
 Note: It may be possible to extract directly the RAM to a local bin file on the pyboard... but it is best to see and/or manipulate the content of the RAM as needed.  
+
+# Ball sample
+
+The `ball/ball.py` use the .bin files loading technics (for 3 files) to load the background. The ball sprites are compressed in the `ball.bin` which is uncompressed directly from file with the `GDFileBits` class. The `uncompress()` Gameduino's function can detect the difference between the .bin file and bytes() ressource and automagically selects the appropriate decompression `GDFlashBits` or `GDFileBits` class.
+
+![Results of ball.py script](ball.jpg)
 
 # CodePage samples
 
