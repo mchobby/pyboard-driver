@@ -177,4 +177,4 @@ while True:
 
 
 # Finally
-f_pic.close()
+print( "That's all folks" )
