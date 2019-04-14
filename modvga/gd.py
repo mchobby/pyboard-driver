@@ -213,15 +213,19 @@ class Gameduino():
 		""" Copy the ressource from arduino header (.h) to addr """
 		raise Exception( "use copybin() instead" )
 
-	def copybin( self, f, addr ):
-		""" copy the content of a binary (.bin) file to addr.
+	def copybin( self, f, addr, len = None ):
+		""" copy the content of a binary (.bin) file to addr for the whole file of a given length.
 			remarks: replace the arduino's copy method. """
+		assert len==None or len <= 256
+
+		chunck = 256 if len==None else len
 		self.__wstart( addr )
-		r = f.read( 256 )
+		r = f.read( chunck )
 		while r:
 			self.spi.write( r )
-			r = f.read( 256 )
-
+			if len:
+				return
+			r = f.read( chunck )
 
 	def microcode( self, src, count ):
 		""" ? what the hell is microcode is doing ? """
@@ -315,3 +319,10 @@ class Gameduino():
 		self.spi.write( bytes([1, 144]) ) # Sprite.Y @ 400
 		self.spi.write( bytes([1, 144]) ) # Sprite.X @ 400
 		self.spr += 1
+
+	def waitvblank( self ):
+		""" Wait for the VLANK to go from 0 to 1: this is the start of the vertical blanking interval. """
+		while self.rd(VBLANK) == 1:
+			pass
+		while self.rd(VBLANK) == 0:
+			pass

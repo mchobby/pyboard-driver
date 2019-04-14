@@ -1,7 +1,19 @@
 [Ce fichier existe également en FRANCAIS](README.md)
 
 * sprite256 : defines, display and moves 256 sprites on the screen.
-* ...
+* scroll : use the platfomer_x.bin ressource to create a scrolling game landscape.
+
+# scroll example
+
+The `scroll.py` example use the 3 plateforme_x.bin files stored on the `/sd` Pyboard's folder.
+Those files are compiled with the `htobin.py` tool and avoids the GameDuino header files (.h) to be encoded as a Python script.
+
+![scroll.py instant capture](scroll.jpg)
+
+See also [the video (YouTube)](https://youtu.be/Ac-5eExTfJo)
+
+## Create the .bin files
+See the details of the sprite256 example !
 
 # sprite256 example
 
