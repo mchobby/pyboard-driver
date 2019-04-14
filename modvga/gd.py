@@ -216,6 +216,7 @@ class Gameduino():
 	def copybin( self, f, addr, len = None ):
 		""" copy the content of a binary (.bin) file to addr for the whole file of a given length.
 			remarks: replace the arduino's copy method. """
+		# Status: Certified!
 		assert len==None or len <= 256
 
 		chunck = 256 if len==None else len
@@ -233,17 +234,13 @@ class Gameduino():
 
 	def setpal( self, pal, rgb):
 		""" Set a RGB value for a palette index """
-		# print("setpal@%s:rgb=%s" % (RAM_PAL + (pal << 1), rgb) )
+		# Status: Certified!
 		self.wr16(RAM_PAL + (pal << 1), rgb)
 
 	def sprite( self, spr, x, y, image, palette, rot=0, jk=0  ):
 		""" int spr, int x, int y, byte image, byte palette, byte rot, byte jk """
-		# Status: experimental
+		# Status: certified
 		self.__wstart( RAM_SPR + (spr << 2) )
-		# SPI.transfer(lowByte(x)); LowByte(x) -->  x & 255, HighByte(x) --> (x & 65280)>>8
-		# SPI.transfer((palette << 4) | (rot << 1) | (highByte(x) & 1));
-		# SPI.transfer(lowByte(y));
-		# SPI.transfer((jk << 7) | (image << 1) | (highByte(y) & 1));
 		_data = [0,0,0,0]
 		_data[0] = x & 255
 		_data[1] = (palette << 4) | (rot << 1) | (((x & 65280)>>8) & 1)
@@ -314,14 +311,13 @@ class Gameduino():
 	def xhide( self ):
 		""" Hide sprite @ memory address (move it out of the display area) """
 		# Status: Certified!
-		#self.spi.send( ustruct.pack('>H', 400) )
-		#self.spi.send( ustruct.pack('>H', 400) )
 		self.spi.write( bytes([1, 144]) ) # Sprite.Y @ 400
 		self.spi.write( bytes([1, 144]) ) # Sprite.X @ 400
 		self.spr += 1
 
 	def waitvblank( self ):
 		""" Wait for the VLANK to go from 0 to 1: this is the start of the vertical blanking interval. """
+		# Status: seems OK
 		while self.rd(VBLANK) == 1:
 			pass
 		while self.rd(VBLANK) == 0:
