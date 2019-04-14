@@ -2,6 +2,7 @@
 
 * sprite256 : defines, display and moves 256 sprites on the screen.
 * scroll : use the platfomer_x.bin ressource to create a scrolling game landscape.
+* palette : demo about color palette (alpha)
 
 # scroll example
 
@@ -54,3 +55,9 @@ Start a REPL session and key-in the following instruction.
 ```
 import spr256
 ```
+
+# Palette sample
+
+The `pal.py` example also uses the `ascii()` Gameduino function.
+
+![Result of pal.py](pal.jpg)
