@@ -23,6 +23,11 @@ More info: <a href="https://www.olimex.com/Products/Modules/">UEXT product line 
 More info: <a href="https://shop.mchobby.be/fr/138-uext">UEXT product line @ MCHobby</a>
       </td>
   </tr>
+	<tr><td><strong>NCD</strong></td>
+      <td>NCD pinout and wiring proposal for the Pyboard.<br /><br />
+More info: <a href="https://ncd.io/">NCD sensor boards @ National Control Device</a>
+      </td>
+  </tr>
   <tr><td>Servo Robot</td>
       <td>Use a pca9685 PWM driver to create quadruped robot (with servo motors).
       </td>
