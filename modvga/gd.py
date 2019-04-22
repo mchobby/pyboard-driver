@@ -256,11 +256,21 @@ class Gameduino():
 		raise Exception( "use copybin() instead" )
 
 	def copybin( self, f, addr, len = None ):
-		""" copy the content of a binary (.bin) file to addr for the whole file of a given length.
+		""" copy the content of a binary (.bin) file to addr for the whole file (of a part of it.
+			:params f: an open FileIO reference to binary file -OR- the filename to open
+			:params addr: the address (and following) where the file content should be copied.
+			:params len: the len to copy (or whole file if None)
+			
 			remarks: replace the arduino's copy method. """
 		# Status: Certified!
 		assert len==None or len <= 256
+		# if f is a filename string (instead of a FileIO) --> open it
+		if type( f ) is str:
+			with open( f, 'rb') as _fbin:
+				self.copybin( _fbin, addr, len )
+			return
 
+		# Default behavior --> working on file
 		chunck = 256 if len==None else len
 		self.__wstart( addr )
 		r = f.read( chunck )
