@@ -92,6 +92,15 @@ Le script `ball/ball.py` utilise la technique de chargement des fichiers .bin (p
 
 Voir aussi [la vidéo sur YouTube](https://youtu.be/J0ZjHtXvZoI)
 
+# Exemple échiquier
+
+Le script `chessboard/chess.py` simule une partie de jeu d'échec avec mouvement des pièces sur l'échiquier.
+Ce script utilise également la technique des fichiers .bin pour charger les différentes ressources pour afficher les différents éléments.
+
+A noter que le fichier `Wood32_pic.bin` est maintenu ouvert et utilisé par la fonction `square()` pour dessiner l'arrière plan du damier en bois (en redessinant la même texture à différents endroits).
+
+![Resultat du script chess.py](chess.jpg)
+
 # Exemples CodePage
 
 ## cp437/cp437.py

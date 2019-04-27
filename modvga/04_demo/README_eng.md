@@ -92,6 +92,16 @@ The `ball/ball.py` use the .bin files loading technics (for 3 files) to load the
 
 See also [the YouTube vidéo](https://youtu.be/J0ZjHtXvZoI)
 
+# Chessboard sample
+
+The `chessboard/chess.py` script simulate a chessboard gameplay and moves pieces on the chessboard.
+This script also use the .bin file technic to load the various ressources and display the items.
+
+Please, note that the `Wood32_pic.bin` file is maintained open and used bu the `square()` function to draw the wood squares (brown and white) on the screen by drawing the texture at various place on the screen.
+
+![Result of the chess.py script](chess.jpg)
+
+
 # CodePage samples
 
 ## cp437/cp437.py
