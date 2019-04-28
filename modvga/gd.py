@@ -214,11 +214,18 @@ class Gameduino():
 		self.__end()
 		return v[0]
 
+	def readn( self, addr, c ):
+		""" read c bytes from addr. Returns a bytes object """
+		self.__start(addr)
+		v = self.spi.read( c ) # read c bytes
+		self.__end()
+		return v
+
 	def wr( self, addr, byte_value ):
-		""" write one byte @ addr. Value 0..254 """
+		""" write one byte @ addr. Value 0..255 """
 		# Status: Certified!
 		self.__wstart( addr )
-		self.spi.write( bytes([byte_value]) )
+		self.spi.write( bytes([byte_value % 256]) ) # ensure that value stays in appropriate range
 		self.__end()
 
 	def rd16( self, addr ):
@@ -260,7 +267,7 @@ class Gameduino():
 			:params f: an open FileIO reference to binary file -OR- the filename to open
 			:params addr: the address (and following) where the file content should be copied.
 			:params len: the len to copy (or whole file if None)
-			
+
 			remarks: replace the arduino's copy method. """
 		# Status: Certified!
 		assert len==None or len <= 256
