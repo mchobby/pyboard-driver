@@ -267,7 +267,7 @@ class Gameduino():
 		   be loaded loaded with copybin() loading the Byte(s) from binary file to target Gameduino RAM address (addr).
 
 		However, it is still possible to copy Byte(s) from MicroPython script ressource to Gameduino address. """
-		# Status: experimental
+		# Status: Confirmed (for list)
 		assert type( src ) is list or type( src ) is bytes, "list() of byte or bytes() required!"
 		self.__wstart( addr )
 		for item in src:
@@ -302,7 +302,7 @@ class Gameduino():
 
 	def microcode( self, src ):
 		""" send microcode instructions to co-processor """
-		# Status: Experimental
+		# Status: Confirmed
 		self.wr( J1_RESET, 1 )    # Stop co-coprocessor
 		self.copy( J1_CODE, src ) # Copy microcode instruction to GameDuino RAM
 		self.wr( J1_RESET, 0 )    # Start co-coprocessor
