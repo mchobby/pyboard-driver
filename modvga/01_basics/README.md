@@ -6,7 +6,7 @@
 * palette : demo sur les palettes de couleurs (alpha)
 
 # Exemple scroll
-Cet example fait defiller un paysage généré aléatoirement par le script.
+Cet exemple fait défiler un paysage généré aléatoirement par le script.
 
 ![capture de scroll.py](scroll.jpg)
 
