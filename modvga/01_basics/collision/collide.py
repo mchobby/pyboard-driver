@@ -53,8 +53,6 @@ gd.begin()
 
 os.chdir( '/sd' )
 
-f_woodpic = open( 'Wood32_pic.bin', 'rb' )
-
 NBALLS = 80
 
 coll = list( 0 for i in range(NBALLS) ) # each entry is a byte
