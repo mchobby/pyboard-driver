@@ -258,9 +258,22 @@ class Gameduino():
 
 		self.__end()
 
-	def copy( self, addr, src, count ):
-		""" Copy the ressource from arduino header (.h) to addr """
-		raise Exception( "use copybin() instead" )
+	def copy( self, addr, src ):
+		""" Copy the Byte(s) ressource from a source (src) to the target address.
+		    ALWAYS CONSIDER copybin() FIRST!!!
+
+		In original Arduino this was bytes stored in FLASH memory transfered from Arduino Flash to GameDuino RAM address (addr).
+		Under micropython, large ressource are stored as binary (.bin) files on the file system and should
+		   be loaded loaded with copybin() loading the Byte(s) from binary file to target Gameduino RAM address (addr).
+
+		However, it is still possible to copy Byte(s) from MicroPython script ressource to Gameduino address. """
+		# Status: experimental
+		assert type( src ) is list or type( src ) is bytes, "list() of byte or bytes() required!"
+		self.__wstart( addr )
+		for item in src:
+			data = bytes([item])
+			self.spi.write( data )
+		self.__end()
 
 	def copybin( self, f, addr, len = None ):
 		""" copy the content of a binary (.bin) file to addr for the whole file (of a part of it.
@@ -287,9 +300,12 @@ class Gameduino():
 				return
 			r = f.read( chunck )
 
-	def microcode( self, src, count ):
-		""" ? what the hell is microcode is doing ? """
-		raise Exception( "Not Implemented" )
+	def microcode( self, src ):
+		""" send microcode instructions to co-processor """
+		# Status: Experimental
+		self.wr( J1_RESET, 1 )    # Stop co-coprocessor
+		self.copy( J1_CODE, src ) # Copy microcode instruction to GameDuino RAM
+		self.wr( J1_RESET, 0 )    # Start co-coprocessor
 
 	def setpal( self, pal, rgb):
 		""" Set a RGB value for a palette index """
