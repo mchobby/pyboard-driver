@@ -29,3 +29,30 @@ Démarrez une session REPL puis saisissez
 ```
 import snow
 ```
+
+# Exemple Wireframe
+
+Cet exemple affiche une animation wireframe sur l'écran (rotation de 29 vaisseau
+	spaciaux). Il utilise du micro-code sur le coprocesseur pour accélérer
+	l'affichage WireFrame.
+
+Ce script n'inclus pas les ressources à l'intérieur du script Python mais, à
+la place, LES CHARGES DIRECTEMENT DEPUIS LES FICHIERS .h parsé à la volée!  
+
+![capture d'écran de wiref.py](wireframe.jpg)
+
+## Tester le script
+
+Pour utiliser cet exemple, il est nécessaire de copier les fichiers suivant sur la Pyboard parce qu'ils seront tous chargés!
+* __wiref.py__ : Le script principal utilisé pour tester la fonctionnalité Wirefame.
+* __dg.py__ : la bibliothèque gameduino
+* __gdtls.py__ : la bibliothèque outil pour gameduino (contient la classe __HLoader__ utilisé pour __parser des fichiers .h__ au vol)
+* __eliteships.h__ : la liste des vaisseau spaciaux, definition des vertices et edges.
+* __eraser.h__ : microcode de l'effacage d'écran.
+* __wireframe.h__ : microcode wireframe chargé avec gd.microcode()
+
+Démarrez  the REPL session et saisir la commande:
+
+```
+import wiref
+```

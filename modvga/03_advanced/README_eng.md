@@ -30,3 +30,29 @@ Start the REPL session then key-in this command
 ```
 import snow
 ```
+
+# Wireframe example
+
+This example will display wirefame animation on screen (rotating of 29 space
+ ships). It use micro-code on co-processor to accelerate wireframe display.
+
+This script did not include the ressource inside the python script INSTEAD IT
+LOADS AND PARSE C HEADER files on the fly!  
+
+![wiref.py screen capture](wireframe.jpg)
+
+## Test the script
+
+This example will required the following files to be loaded on the Pyboard
+* __wiref.py__ : the main script used to test the wirefame feature
+* __dg.py__ : the gameduino library
+* __gdtls.py__ : gameduino tools library (containing the __HLoader__ class used to __parse .h file__ on the fly)
+* __eliteships.h__ : the list of ships, vertices and edges definition.
+* __eraser.h__ : screen eraser microcode.
+* __wireframe.h__ : wireframe microcode loaded with gd.microcode()
+
+Start the REPL session then key-in this command
+
+```
+import wiref
+```
