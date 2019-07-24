@@ -16,7 +16,7 @@ J'ai fini par faire une carte de prototypage pour poursuivre les essais du [modu
 
 Voici le brochage proposé:
 
-![UEXT Pyboard PinOut](UEXT-Pyboard-v0.1.jpg)
+![UEXT Pyboard PinOut](UEXT-Pyboard-v0.2.jpg)
 
 ## Pourquoi cet agencement?
 Cette déconnectique découle du projet UPPY qui prévoit également d'autres interfaces de connexions (ce brochage a été pensé avec soin ;-) ).

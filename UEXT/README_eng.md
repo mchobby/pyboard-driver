@@ -16,7 +16,7 @@ Finally, I did a prototyping board to ease the connection whith my Pyboard while
 
 Here is the proposed pinout between the PyBoard and UEXT:
 
-![UEXT Pyboard PinOut](UEXT-Pyboard-v0.1.jpg)
+![UEXT Pyboard PinOut](UEXT-Pyboard-v0.2.jpg)
 
 ## Why this wiring?
 This wiring proposal comes from the wider UPPY project which will cover more interfaces (this pinout have selected with care ;-) ).
