@@ -39,6 +39,10 @@ Plus d'info: <a href="https://shop.mchobby.be/fr/87-feather-adafruit">Feather pr
 Plus d'info: <a href="https://www.adafruit.com/category/943">Feather products @ Adafruit Industries</a>
       </td>
   </tr>
+	<tr><td><strong>UPPY<strong></td>
+      <td>Universal Prototyping Pyboard.<br /><br />An universal board to make prototyping with MicroPython Pyboard.
+      </td>
+  </tr>
   <tr><td>Servo Robot</td>
       <td>Use a pca9685 PWM driver to create quadruped robot (with servo motors).
       </td>

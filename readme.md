@@ -33,10 +33,14 @@ Plus d'info: <a href="https://ncd.io/">gamme NCD @ National Control Device</a>
 Plus d'info: <a href="https://www.sparkfun.com/qwiic">gamme QWIIC @ SparkFun</a>
       </td>
   </tr>
-  <tr><td>FEATHERWING</td>
+  <tr><td><strong>FEATHERWING<strong></td>
       <td>Proposition de brochage et connectique FeatherWing pour la carte Pyboard.<br /><br />
 Plus d'info: <a href="https://shop.mchobby.be/fr/87-feather-adafruit">gamme Feather @ MCHobby</a><br />
 Plus d'info: <a href="https://www.adafruit.com/category/943">gamme Feather @ Adafruit Industries</a>
+      </td>
+  </tr>
+	<tr><td><strong>UPPY<strong></td>
+      <td>Universal Prototyping Pyboard.<br /><br />Carte de prototypage universelle pour MicroPython PyBoard.
       </td>
   </tr>
   <tr><td>Servo Robot</td>
