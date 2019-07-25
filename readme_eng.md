@@ -28,6 +28,17 @@ More info: <a href="https://shop.mchobby.be/fr/138-uext">UEXT product line @ MCH
 More info: <a href="https://ncd.io/">NCD sensor boards @ National Control Device</a>
       </td>
   </tr>
+	<tr><td><strong>QWIIC</strong></td>
+      <td>Wiring proposal for QWIIC connector on the Pyboard.<br /><br />
+More info: <a href="https://www.sparkfun.com/qwiic">QWIIC products @ SparkFun</a>
+      </td>
+  </tr>
+  <tr><td>FEATHERWING</td>
+      <td>Wiring proposal for the FeatherWing boards on the Pyboard.<br /><br />
+Plus d'info: <a href="https://shop.mchobby.be/fr/87-feather-adafruit">Feather products @ MCHobby</a><br />
+Plus d'info: <a href="https://www.adafruit.com/category/943">Feather products @ Adafruit Industries</a>
+      </td>
+  </tr>
   <tr><td>Servo Robot</td>
       <td>Use a pca9685 PWM driver to create quadruped robot (with servo motors).
       </td>

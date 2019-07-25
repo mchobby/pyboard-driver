@@ -28,6 +28,17 @@ Plus d'info: <a href="https://shop.mchobby.be/fr/138-uext">gamme UEXT @ MCHobby<
 Plus d'info: <a href="https://ncd.io/">gamme NCD @ National Control Device</a>
       </td>
   </tr>
+	<tr><td><strong>QWIIC</strong></td>
+      <td>Proposition de brochage et connectique QWIIC pour la carte Pyboard.<br /><br />
+Plus d'info: <a href="https://www.sparkfun.com/qwiic">gamme QWIIC @ SparkFun</a>
+      </td>
+  </tr>
+  <tr><td>FEATHERWING</td>
+      <td>Proposition de brochage et connectique FeatherWing pour la carte Pyboard.<br /><br />
+Plus d'info: <a href="https://shop.mchobby.be/fr/87-feather-adafruit">gamme Feather @ MCHobby</a><br />
+Plus d'info: <a href="https://www.adafruit.com/category/943">gamme Feather @ Adafruit Industries</a>
+      </td>
+  </tr>
   <tr><td>Servo Robot</td>
       <td>Utiliser un controleur PWM pca9685 pour réaliser un robot quadripède (à servo-moteurs).
       </td>
