@@ -59,7 +59,7 @@ Tous nos pilotes MicroPython sont stockés sur le GitHub [pyboard-driver](https:
 
 Les pilotes MicroPython pour les cartes exposants un facteur de forme FeatherWing sont stockes dans des répertoires commençant avec "__feather-__" (ex: feather-motor, etc).
 
-* GitHub __esp8266-upy__ propose une liste des pilotes pour [interface FeatherWing](https://github.com/mchobby/esp8266-upy/blob/master/docs/indexes/drv_by_intf_FEATHERWING.md).
+* GitHub __esp8266-upy__ propose une liste des pilotes pour [interface FeatherWing sur __esp8266-upy__](https://github.com/mchobby/esp8266-upy/blob/master/docs/indexes/drv_by_intf_FEATHERWING.md).
 
 # Liste d'achat
 * [Carte prototypage Pyboard](https://shop.mchobby.be/fr/micropython/598-plaque-de-prototypage-pour-pyboard-3232100005983.html)
