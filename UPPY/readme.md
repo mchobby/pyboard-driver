@@ -14,4 +14,4 @@ Pour l'instant, le projet couvre les interfaces suivantes:
 
 # Pin mapping
 
-Le pin mapping est décrit dans le document [docs/Pin-Mapping-table.pdf](blob/master/UPPY/docs/Pin-Mapping-table.pdf)
+Le pin mapping est décrit dans le document [docs/Pin-Mapping-table.pdf](../docs/Pin-Mapping-table.pdf)
