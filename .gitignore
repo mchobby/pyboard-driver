@@ -1,6 +1,10 @@
-# ignore gimp files
-*.xcf 
+# ignore gimp / Fritzing files
+*.xcf
+*.fzz
 
 # Ignorer les fichier python compilé
 *.pyc
+
+# Livre office source document
+*.ods
 
