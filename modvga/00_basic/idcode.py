@@ -37,17 +37,16 @@ spi = SPI(2) # MOSI=Y8, MISO=Y7, SCK=Y6, SS=Y5
 spi.init( baudrate=5000000, phase=0, polarity=0 )
 # We must manage the SS signal ourself
 ss = Pin( Pin.board.Y5, Pin.OUT )
+ss.value( 1 )
+sleep_ms( 10 ) # Wait 10ms before new transaction!
 
 # Start a new SPI transaction
-ss.value( 1 )
-sleep_ms( 10 )
 ss.value( 0 )
 
 print( "Read IDCode from GameDuino (0x6d expected)" )
-spi.send( bytes([0x28,0x00]) )
+spi.write( bytes([0x28,0x00]) )
 
-buf = bytearray(1)
-spi.recv( buf ) # read 1 byte
+buf = spi.read( 1 ) # read 1 byte
 
 print( "Response:" )
 print( buf ) # bytes
