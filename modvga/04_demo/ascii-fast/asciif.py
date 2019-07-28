@@ -31,6 +31,7 @@ THE SOFTWARE.
 """
 
 from machine import Pin, SPI
+from time import sleep_ms
 from gd import *
 import os
 
@@ -42,7 +43,8 @@ spi = SPI(2) # MOSI=Y8, MISO=Y7, SCK=Y6, SS=Y5
 spi.init( baudrate=2000000, phase=0, polarity=0 )
 # We must manage the SS signal ourself
 ss = Pin( Pin.board.Y5, Pin.OUT )
-
+ss.value(1)
+sleep_ms( 10 )
 
 # Gameduino Lib
 gd = Gameduino( spi, ss )
