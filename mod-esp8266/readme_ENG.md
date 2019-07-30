@@ -27,7 +27,7 @@ You may learn more about this connector and its __wiring to the Pyboard__ with [
 # test
 
 ## PassThrough
-This example will forward all serial data coming from ESP8266 Serial Port to USB VCP (Virtual Com Port). Made it back and forward.
+This example will forward all serial data coming from ESP8266 Serial Port to USB VCP (Virtual Com Port). Making it working back and forward.
 
 This script be great to test the AT Commands on the ESP8266 module.
 
