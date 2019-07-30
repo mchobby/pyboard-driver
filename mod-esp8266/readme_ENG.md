@@ -14,8 +14,15 @@ The Olimex's MOD-WIFI-ESP8266 is preconfigured with AT Command firmware allowing
 
 # wiring
 
-BLABLABLA
+The easiest way to wire the MOD-WIFI-ESP8266 module is to plug it onto an UEXT connector.
 
+The MOD-WIFI-ESP8266 use the following connexions:
+* 3.3V and GND
+* RX and TX
+
+You may learn more about this connector and its __wiring to the Pyboard__ with [UEXT connector for Pyboard](https://github.com/mchobby/pyboard-driver/tree/master/UEXT).
+
+![UEXT connector on Pyboard](https://raw.githubusercontent.com/mchobby/pyboard-driver/master/UEXT/UEXT-Breakout-LowRes.jpg)
 
 # test
 
