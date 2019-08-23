@@ -1,6 +1,7 @@
 # ignore gimp / Fritzing files
 *.xcf
 *.fzz
+*.svg
 
 # Ignorer les fichier python compilé
 *.pyc
