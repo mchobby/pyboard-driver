@@ -10,7 +10,7 @@ Voici une proposition de raccordement (et brochage) pour brancher un connecteur 
 
 ([Adafruit Industries](https://www.adafruit.com/category/943)) a créé un écosystème complet autour du facteur de forme Feather. Feather c'est des cartes microcontroler et des cartes d'extensions nommées __FeatherWing__. Feather exploite une connectique unique ou les fonctionnalités (bus I2C, SPI, UART, entrée analogique, alimentations) sont toujours au même endroit sur la carte Feather!
 
-Cette standardisation est un grand avantage car il devient possible de réaliser un prototype d'interface permettant à la Pyboard d'être compatible avec les extensions Feather. Feather exploite une __logique 5V__.
+Cette standardisation est un grand avantage car il devient possible de réaliser un prototype d'interface permettant à la Pyboard d'être compatible avec les extensions Feather. Feather exploite une __logique 3V__.
 
 ![Quelques extensions FeatherWing](docs/_static/Featherwing-sample.jpg)
 
@@ -23,9 +23,7 @@ Pour connecter une extension FeatherWing sur votre Pyboard, vous aurez besoin de
 
 Le raccordement proposé ci-dessous couvre toutes les broches du FeatherWing!. __Le mapping est compatible avec UEXT, NCD, QWIIC déjà proposés sur ce dépôt__. Il se base sur les fonctionnalités offertes par le Feather M0 ( [voir le brochage du Feather M0 ici](docs/_static/arduino_feather_M0_Express_Pinout_v1.2-1.png) )
 
-![Connecteur FeatherWing](doc/feather/arduino_feather_M0_Express_Pinout_v1.2-1.pngncd_conn.png)
-
-NCD dispose déjà de nombreuses cartes adaptateur [disponibles ici](https://store.ncd.io/shop/?fwp_product_type=adapters) mais nous pouvons également créer nos propres branchement vers d'autres cartes de développement (comme suggéré ci-dessous).
+![Connecteur FeatherWing](doc/feather/arduino_feather_M0_Express_Pinout_v1.2-1.png)
 
 # brochage
 Le brochage proposé provient du projet UPPY (_Universal Prototyping Pyboard_) visant à offrir un maximum de connectivité à votre carte Pyboard.
