@@ -33,6 +33,54 @@ This script be great to test the AT Commands on the ESP8266 module.
 
 Just run the `passthrough.py` script and press USR button to cancel the the execution.
 
+Here a REPL Session with a commented example of passthrough
+
+```
+MicroPython v1.10-278-g673e154df on 2019-04-13; PYBv1.1 with STM32F405RG
+Type "help()" for more information.
+>>>
+>>> import passthrough
+Activating UART<->USB passthrough...
+  debug        = False
+  enforce_crlf = True
+press USR button while sending a byte to EXIT
+Ready!
+# Test the simpliest command ever!
+AT
+
+OK
+
+# Passer en mode station
+AT+CWMODE=3
+
+OK
+
+# Scan des réseaux
+AT+CWLAP
++CWLAP:(3,"ATCG103",-71,"40:f2:01:88:1e:0a",6,75,0)
+
+OK
+
+# Connect the network ATCG103
+AT+CWJAP="ATCG103","password"
+WIFI CONNECTED
+WIFI GOT IP
+
+OK
+
+# Which network is connected?
+AT+CWJAP?
++CWJAP:"ATCG103","40:f2:01:88:1e:0a",6,-83
+
+OK
+
+# Quit WiFi Access Point
+AT+CWQAP
+
+OK
+WIFI DISCONNECT
+```
+
 # Ressources
 * [ESP8266 - AT Command Reference @ Room-15](https://room-15.github.io/blog/2015/03/26/esp8266-at-command-reference/)
 * [ESP8266 Resources (with documentation)](https://www.espressif.com/en/products/hardware/esp8266ex/resources)
