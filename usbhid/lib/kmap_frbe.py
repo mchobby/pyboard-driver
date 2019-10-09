@@ -82,6 +82,7 @@ kmap[']'] = (0x30,ALT_GR)
 kmap['\r'] = (0x28, PLAIN) # return key
 
 # Row 3
+kmap['\t'] = (0x39,PLAIN) # tab key
 kmap['q'] = (0x04,PLAIN)
 kmap['Q'] = (0x04,SHIFT)
 kmap['s'] = (0x16,PLAIN)
