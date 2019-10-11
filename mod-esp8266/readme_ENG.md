@@ -24,6 +24,10 @@ You may learn more about this connector and its __wiring to the Pyboard__ with [
 
 ![UEXT connector on Pyboard](https://raw.githubusercontent.com/mchobby/pyboard-driver/master/UEXT/UEXT-Breakout-LowRes.jpg)
 
+# library
+
+The library `pywifi.py` from TONYLABS.COM (chinese source) allows the Pyboard to use the ESP8266's "AT Command" mode to perform HTTP request over the WiFi connexion.
+
 # test
 
 ## PassThrough
@@ -81,10 +85,14 @@ OK
 WIFI DISCONNECT
 ```
 
+## pywifi_test.py
+
+That script test the main features of the `pywifi.py` library. This example is very instructive.
+
 # Ressources
 * [ESP8266 - AT Command Reference @ Room-15](https://room-15.github.io/blog/2015/03/26/esp8266-at-command-reference/)
 * [ESP8266 Resources (with documentation)](https://www.espressif.com/en/products/hardware/esp8266ex/resources)
 
-# Where to buy
+# Shopping list
 * [MOD-WIFI-ESP8266 @ MC Hobby](https://shop.mchobby.be/product.php?id_product=666)
 * [MOD-WIFI-ESP8266 @ Olimex](https://www.olimex.com/Products/IoT/ESP8266/MOD-WIFI-ESP8266/open-source-hardware)
