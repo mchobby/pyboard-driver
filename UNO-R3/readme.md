@@ -15,7 +15,11 @@ Voici une proposition de raccordement (et brochage) pour brancher un shield Ardu
 
 TO DO - TO DO - TO DO - TO DO - TO DO - TO DO - TO DO - TO DO -
 
-Logique 3V et logique 5V sur Arduino UNI
+# Logique 3.3V
+
+Bien que la Pyboard soit globalement (__mais pas complètement__) tolérante 5V, il est important de considérer cet adaptateur UNO R3 comme fonctionnant en logique 3V.
+
+Cet adapteur indique donc un niveau logique de 3.3V sur la broche IOREF afin que les shields que vous y brancherez soient averti du niveau logique à employer.
 
 # Connecteur UNO R3
 Pour connecter an shield Arduino sur votre Pyboard, vous aurez besoin de savoir quel bus (SPI, I2C, GPIO) cette extension exploite. Dans la plupart des cas, c'est le bus I2C (avec 3.3V et la masse) ou le bus SPI (ex TFT).

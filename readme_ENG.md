@@ -181,6 +181,14 @@ Explore it by:
 </ul>
       </td>
   </tr>
+  <tr><td><a href="../../tree/master/usbhid">usbhid</a></td>
+      <td><strong>Components</strong> : <br />
+      <strong>Interfaces</strong> : <br />
+<small>Examples to use the Pyboard as HID peripheral (mouse, keyboard)</small><br/><br />
+      <strong>Tested with</strong> : PYBOARD<br />
+      <strong>Manufacturer</strong> : <br />
+      </td>
+  </tr>
 </tbody>
 </table>
 

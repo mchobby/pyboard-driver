@@ -174,5 +174,14 @@
 			"ressources"    : [ ],
 			"descr"	: {"FR" : "(ALPHA version) Arduino UNO R3 compatible interface for Pyboard",
 								 "ENG": "(ALPHA version) Create a 4 paws servo-motor walking robot with a PCA9685 PWM controler." }
+		},
+		{	"folder"        : "usbhid",
+			"components"    : [],
+			"interfaces"    : [],
+			"manufacturers" : [],
+			"plateforms"    : ["PYBOARD"],
+			"ressources"    : [ ],
+			"descr"	: {"FR" : "Exemples expliquant comment utiliser la Pyboard comme périphérique HID (clavier, souris)",
+								 "ENG": "Examples to use the Pyboard as HID peripheral (mouse, keyboard)" }
 		}
 ]

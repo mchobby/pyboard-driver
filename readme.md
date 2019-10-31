@@ -188,6 +188,14 @@ Explorer par:
 </ul>
       </td>
   </tr>
+  <tr><td><a href="../../tree/master/usbhid">usbhid</a></td>
+      <td><strong>Composants</strong> : <br />
+      <strong>Interfaces</strong> : <br />
+<small>Exemples expliquant comment utiliser la Pyboard comme périphérique HID (clavier, souris)</small><br/><br />
+      <strong>Testé avec</strong> : PYBOARD<br />
+      <strong>Fabricant</strong> : <br />
+      </td>
+  </tr>
 </tbody>
 </table>
 
