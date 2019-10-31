@@ -1,0 +1,11 @@
+{ "PYBOARD" :
+			{ "descr" : { "FR" : "MicroPython Pyboard",
+				            "ENG" : "MicroPython Pyboard" },
+			  "url" : "https:\/\/shop.mchobby.be\/fr\/56-micropython"
+			},
+	"PYBD" :
+				{ "descr" : { "FR" : "MicroPython Pyboard-D",
+					            "ENG" : "MicroPython Pyboard-D" },
+				  "url" : "https:\/\/shop.mchobby.be\/fr\/56-micropython"
+				}
+}

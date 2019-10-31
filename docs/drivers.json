@@ -1,0 +1,178 @@
+[
+    {	"folder"        : "ads1015-ads1115",
+			"components"    : ["ADS1015","ADS1115","ADA1085"],
+			"interfaces"    : ["I2C"],
+			"manufacturers" : ["ADAFRUIT"],
+			"plateforms"    : ["PYBOARD"],
+			"ressources"    : [ { "label" :  "ADS1115 breakout",
+												    "url"   : "https:\/\/shop.mchobby.be\/breakout\/362-ads1115-convertisseur-adc-16bits-i2c-3232100003620-adafruit.html" }
+												],
+			"descr"	: {"FR" : "Convertisseur ADC (Analogique vers Digital) 4 canaux pour réaliser des lectures analogiques et lectures différentielles.<br \/>L'ADS1115 dispose d'un amplificateur interne programmable, ce qui permet de lire des tensions très faibles.",
+								 "ENG": "ADC converter (Analog to Digital) 4 channel allowing analog reading and differential reading.<br \/>L'ADS1115 have a internal amplifier (programmable) that can be used to read very small voltage."
+								}
+		},
+		{	"folder"        : "ressource",
+			"components"    : [],
+			"interfaces"    : [],
+			"manufacturers" : [],
+			"plateforms"    : ["PYBOARD","PYBD"],
+			"ressources"    : [],
+			"descr"	: {"FR" : "*** RESSOURCES *** Fritzing, brochage et schémas pour la Pyboard et Pyboard-D (PYBD).",
+								 "ENG": "*** RESSOURCES *** Fritzing, Pinouts and schematic for Pyboard and Pyboard-D (PYBD)."
+								}
+		},
+		{	"folder"        : "UEXT",
+			"components"    : [],
+			"interfaces"    : ["UEXT"],
+			"manufacturers" : ["OLIMEX"],
+			"plateforms"    : ["PYBOARD"],
+			"ressources"    : [ { "label" :  "UEXT breakout @ MCHobby",
+												    "url"   : "https:\/\/shop.mchobby.be\/fr\/138-uext" },
+													{ "label" :  "UEXT breakout @ Olimex Ltd",
+												    "url"   : "https:\/\/www.olimex.com\/Products\/Modules\/" }
+												],
+			"descr"	: {"FR" : "Brancher un port UEXT sur une Pyboard.",
+								 "ENG": "Wiring an UEXT connector to Pyboard."
+								}
+		},
+		{	"folder"        : "NCD",
+			"components"    : [],
+			"interfaces"    : ["NCD"],
+			"manufacturers" : ["NCD"],
+			"plateforms"    : ["PYBOARD"],
+			"ressources"    : [ { "label" :  "UEXT breakout @ National Control Device",
+												    "url"   : "https:\/\/ncd.io\/" }
+												],
+			"descr"	: {"FR" : "Brancher un connecteur NCD sur une Pyboard.",
+								 "ENG": "Wiring an NCD connector to Pyboard."
+								}
+		},
+		{	"folder"        : "QWIIC",
+			"components"    : [],
+			"interfaces"    : ["QWIIC","STEMMA"],
+			"manufacturers" : ["SPARKFUN","ADAFRUIT"],
+			"plateforms"    : ["PYBOARD"],
+			"ressources"    : [ { "label" :  "QWIIC breakout @ SparkFun",
+												    "url"   : "https:\/\/www.sparkfun.com\/qwiic" },
+													{ "label" :  "STEMMA breakout (Qwiic compatible) @ Adafruit",
+														"url"   : "https:\/\/www.adafruit.com\/category\/1005" }
+												],
+			"descr"	: {"FR" : "Brancher un connecteur QWIIC ou STEMMA sur une Pyboard.",
+								 "ENG": "Wiring a QWIIC or STEMMA connector to Pyboard."
+								}
+		},
+		{	"folder"        : "FEATHERWING",
+			"components"    : [],
+			"interfaces"    : ["FEATHERWING"],
+			"manufacturers" : ["ADAFRUIT"],
+			"plateforms"    : ["PYBOARD"],
+			"ressources"    : [ { "label" :  "Feather board @ MCHobby",
+														"url"   : "https:\/\/shop.mchobby.be\/fr\/87-feather-adafruit" },
+													{ "label" :  "Feather boards @ Adafruit",
+														"url"   : "https:\/\/www.adafruit.com\/category\/943" }
+												],
+			"descr"	: {"FR" : "Interface Feather pour Pyboard permettant de piloter des FeatherWings.",
+								 "ENG": "Feather Interface for Pyboard allowing to control FeatherWings." }
+		},
+		{	"folder"        : "UPPY",
+			"components"    : [],
+			"interfaces"    : ["FEATHERWING","NCD","STEMMA","QWIIC","UEXT"],
+			"manufacturers" : ["ADAFRUIT","OLIMEX","SPARKFUN","NCD"],
+			"plateforms"    : ["PYBOARD","PYBD"],
+			"ressources"    : [ ],
+			"descr"	: {"FR" : "UPPY (alpha) : Interface de Prototypage Universelle pour Pyboard.",
+								 "ENG": "UPPY (alpha) : Universal Prototyping interface for Pyboard." }
+		},
+		{	"folder"        : "servorobot",
+			"components"    : ["PCA9685"],
+			"interfaces"    : [],
+			"manufacturers" : ["ADAFRUIT"],
+			"plateforms"    : ["PYBOARD"],
+			"ressources"    : [ ],
+			"descr"	: {"FR" : "Créer un robot marcheur à base de micro servo moteur et d'une Pyboard.",
+								 "ENG": "Create Pyboard's based walking robot with micro Servo Robot and PWM Driver." }
+		},
+		{	"folder"        : "modvga",
+			"components"    : ["MOD-VGA"],
+			"interfaces"    : ["UEXT"],
+			"manufacturers" : ["OLIMEX"],
+			"plateforms"    : ["PYBOARD"],
+			"ressources"    : [ { "label" : "MOD-VGA : carte type Gameduino en 3.3V @ MCHobby",
+														"url"   : "https:\/\/shop.mchobby.be\/fr\/uext\/1431-mod-vga-carte-type-gameduino-en-33v-3232100014312-olimex.html" },
+													{ "label" : "Arduino-compatible Gameduino-based extension shield @ Olimex",
+														"url"   : "https:\/\/www.olimex.com\/Products\/Modules\/Video\/MOD-VGA\/" }
+												],
+			"descr"	: {"FR" : "Contrôler un adaptateur VGA type GameDuino via une interface UEXT.",
+								 "ENG": "Contrôle an Gameduino based VGA adapter through a UEXT connector." }
+		},
+		{	"folder"        : "eth",
+			"components"    : ["ETHERNET-FEATHERWING","WIZNET-W5500"],
+			"interfaces"    : ["SPI"],
+			"manufacturers" : ["ADAFRUIT"],
+			"plateforms"    : ["PYBOARD"],
+			"ressources"    : [ { "label" : "Ethernet FeatherWing @ MCHobby",
+														"url"   : "https:\/\/shop.mchobby.be\/fr\/feather-adafruit\/957-feather-ethernet-wing-3232100009578-adafruit.html" },
+													{ "label" : "Adafruit Ethernet FeatherWing @ Adafruit",
+														"url"   : "https:\/\/www.adafruit.com\/product\/3201" }
+												],
+			"descr"	: {"FR" : "Utiliser une connexion Ethernet filaire avec un contrôleur Wiznet W5500.",
+								 "ENG": "Use a Wired Ethernet connection with a Wiznet W5500 Ethernet controler." }
+		},
+		{	"folder"        : "mma7660",
+			"components"    : ["MMA7660"],
+			"interfaces"    : ["I2C"],
+			"manufacturers" : [],
+			"plateforms"    : ["PYBOARD"],
+			"ressources"    : [ { "label" : "Pyboard Originale (avec acceleromètre MMA7660) @ MCHobby",
+														"url"   : "https:\/\/shop.mchobby.be\/fr\/micropython\/570-micropython-pyboard-3232100005709.html" },
+													{ "label" : "Original Pyboard (with MMA7660 accelerometer) @ MicroPython.org",
+														"url"   : "https:\/\/store.micropython.org\/product\/PYBv1.1H" }
+												],
+			"descr"	: {"FR" : "Utiliser l'accéléromètre MMA7660 présent sur la Pyboard originale.",
+								 "ENG": "Use the MMA7660 accelerometer available on the Pyboard original." }
+		},
+		{	"folder"        : "mod-esp8266",
+			"components"    : ["MOD-ESP8266"],
+			"interfaces"    : ["UART"],
+			"manufacturers" : ["OLIMEX"],
+			"plateforms"    : ["PYBOARD"],
+			"ressources"    : [ { "label" : "Module WiFi ESP8266 - connecteur UEXT @ MCHobby",
+														"url"   : "https:\/\/shop.mchobby.be\/fr\/esp8266-esp32-wifi-iot\/666-module-wifi-esp8266-uext-3232100006669-olimex.html" },
+													{ "label" : "MOD-WIFI-ESP826 @ Olimex.com",
+														"url"   : "https:\/\/www.olimex.com\/Products\/IoT\/ESP8266\/MOD-WIFI-ESP8266\/" }
+												],
+			"descr"	: {"FR" : "Utiliser un ESP8266 en commande AT pour obtenir une connexion WiFi on the Pyboard.",
+								 "ENG": "Use an ESP8266 under AT command to grab a WiFi connexion on the Pyboard." }
+		},
+		{	"folder"        : "motorskin",
+			"components"    : ["L293D","HC-SR04"],
+			"interfaces"    : ["GPIO"],
+			"manufacturers" : ["MCHOBBY"],
+			"plateforms"    : ["PYBOARD"],
+			"ressources"    : [ { "label" : "PyBoard Motor Skin KIT @ MCHobby",
+														"url"   : "https:\/\/shop.mchobby.be\/fr\/micropython\/918-pyboard-motor-skin-3232100009189.html" }
+												],
+			"descr"	: {"FR" : "Carte d'extension moteur pour MicroPython PyBoard + capteur de distance ultrason.",
+								 "ENG": "Motor skin for MicroPython PyBoard + ultrasonic distance sensor." }
+		},
+		{	"folder"        : "servorobot",
+			"components"    : ["PCA9685"],
+			"interfaces"    : ["I2C"],
+			"manufacturers" : [],
+			"plateforms"    : ["PYBOARD"],
+			"ressources"    : [ { "label" : "AllBot Patte 2 Servo @ MCHobby",
+														"url"   : "https:\/\/shop.mchobby.be\/fr\/moteur\/913-allbot-patte-2-servo-vr012-3232100009134-velleman.html" }
+												],
+			"descr"	: {"FR" : "Créer un robot à 4 pattes avec des servo-moteurs et un contrôleur PWM PCA9685.",
+								 "ENG": "Create a 4 paws servo-motor walking robot with a PCA9685 PWM controler." }
+		},
+		{	"folder"        : "UNO-R3",
+			"components"    : [],
+			"interfaces"    : ["UNO-R3"],
+			"manufacturers" : [],
+			"plateforms"    : ["PYBOARD"],
+			"ressources"    : [ ],
+			"descr"	: {"FR" : "(ALPHA version) Arduino UNO R3 compatible interface for Pyboard",
+								 "ENG": "(ALPHA version) Create a 4 paws servo-motor walking robot with a PCA9685 PWM controler." }
+		}
+]
