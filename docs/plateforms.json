@@ -7,5 +7,10 @@
 				{ "descr" : { "FR" : "MicroPython Pyboard-D",
 					            "ENG" : "MicroPython Pyboard-D" },
 				  "url" : "https:\/\/shop.mchobby.be\/fr\/56-micropython"
-				}
+				},
+	"PYB405" :
+			{ "descr" : { "FR" : "MicroPython NadHat PYB405",
+				            "ENG" : "MicroPython NadHat PYB405" },
+			  "url" : "https:\/\/shop.mchobby.be\/fr\/56-micropython"
+			}
 }

@@ -1,7 +1,8 @@
-{ "ADAFRUIT" : { "name" : "Adafruit Industries", "url" : "https:\/\/www.adafruit.com\/" },
-  "OLIMEX"   : { "name" : "Olimex Ltd"         , "url" : "https:\/\/www.olimex.com\/"},
-  "NCD"      : { "name" : "National Control Device", "url" : "https:\/\/ncd.io\/"},
-  "SPARKFUN" : { "name" : "SparkFun ", "url" : "https:\/\/www.sparkfun.com\/"},
-	"MCHOBBY"  : { "name" : "MC Hobby", "url" : "https:\/\/shop.mchobby.be\/"},
+{ "ADAFRUIT"  : { "name" : "Adafruit Industries", "url" : "https:\/\/www.adafruit.com\/" },
+  "OLIMEX"    : { "name" : "Olimex Ltd"         , "url" : "https:\/\/www.olimex.com\/"},
+  "NCD"       : { "name" : "National Control Device", "url" : "https:\/\/ncd.io\/"},
+  "SPARKFUN"  : { "name" : "SparkFun ", "url" : "https:\/\/www.sparkfun.com\/"},
+	"MCHOBBY"   : { "name" : "MC Hobby", "url" : "https:\/\/shop.mchobby.be\/"},
+	"GARATRONIC": { "name" : "Garatronic", "url" : "https:\/\/garatronic.fr\/"},
 	"NONE"     : { "name" : "(other)", "url" : ""}
 }

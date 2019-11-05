@@ -41,5 +41,9 @@
 	"UNO-R3":
 			{ "descr" : { "FR" : "Connecteur compatible Arduino UNO R3 pour la Pyboard",
 										"ENG" : "Arduino Uno R3 compatible connector for the Pyboard" }
+			},
+	"HAT":
+			{ "descr" : { "FR" : "Connecteur HAT Raspberry-Pi pour les extensions utilisable avec la NadHat PYB405 (Variante Pyboard de Garatronic.fr)",
+										"ENG" : "Raspberry-Pi's HAT  connector to use with the NadHat PYB405 (Pyboard variant from Garatronic.fr)" }
 			}
 }
