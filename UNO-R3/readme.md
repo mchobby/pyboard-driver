@@ -134,6 +134,11 @@ La carte expose les bus standard d'un Arduino ainsi que de nombreux bus en extra
 Les notes ci-dessous expliquent comment créer les différents bus nécessaires.
 
 __Connecteur R3:__ créer les bus standards
+
+La bibliothèque `uno.py` décrite ci-avant permet de créer simplement les bus Arduino à l'aide des fonctions utilitaires `i2c_bus()`,  `i2c_analog_bus()`, `uart_bus()` ou `spi_bus`.
+
+Il reste néanmoins possible de créer les différents bus à l'aide de l'API machine et les noms de broche de la Pyboard (voir graphique du brochage) comme indiqué ci-dessous.
+
 ``` python
 # I2C côté broche 13 (I2C matériel)
 from machine import I2C
@@ -157,8 +162,9 @@ __Connecteur UEXT:__ créer les bus
 from machine import I2C
 i2c = I2C(2)
 
-from machine import SPI
+from machine import SPI, Pin
 spi = SPI(2)
+ss = Pin( "X8", Pin.OUT, value=1 )
 
 from machine import UART
 uart = UART(1, 9600) # UART à 9600 bauds
@@ -166,7 +172,7 @@ uart = UART(1, 9600) # UART à 9600 bauds
 
 __Connecteur RAPIDO:__ créer le bus
 ``` python
-from machine import I2C
+from machine import I2C 
 i2c = I2C(2)
 ```
 
