@@ -26,7 +26,10 @@ Cette interface est prévue pour les produits compatibles 3.3V (voir broche IORe
 Le raccordement proposé ci-dessous couvre toutes les broches de la spécification R3!. __Le mapping est compatible avec UEXT, NCD, QWIIC déjà proposés sur ce dépôt__.
 
 ## Schéma
-Voir le fichier [PYBV11_to_ARDUINO_UNO_R3.pdf](docs/_static/Schematic_V1.0-_PYBV11_to_ARDUINO_UNO_R3.pdf)
+* [PYBV11_to_ARDUINO_UNO_R3.pdf](docs/_static/Schematic_V1.0-_PYBV11_to_ARDUINO_UNO_R3.pdf) brochage
+* [Assignation des broches Pyboard](docs/_static/pyboard-pin-assignation.jpg)
+
+
 
 ## Logique 3.3V
 Bien que la Pyboard soit globalement (__mais pas complètement__) tolérante 5V, il est important de considérer cet adaptateur UNO R3 comme fonctionnant en logique 3V.
@@ -172,7 +175,7 @@ uart = UART(1, 9600) # UART à 9600 bauds
 
 __Connecteur RAPIDO:__ créer le bus
 ``` python
-from machine import I2C 
+from machine import I2C
 i2c = I2C(2)
 ```
 
@@ -199,7 +202,7 @@ Tous nos pilotes MicroPython sont stockés sur le GitHub [pyboard-driver](https:
 
 # Liste d'achat
 * Adaptateur Pyboard-UNO-R3 @ MCHobby (bientôt disponible)
+* [Cartes MicroPython Pyboard](https://shop.mchobby.be/fr/56-micropython)
 * [Carte prototypage Pyboard](https://shop.mchobby.be/fr/micropython/598-plaque-de-prototypage-pour-pyboard-3232100005983.html)
 * [Carte de prototypage Arduino](https://shop.mchobby.be/fr/shields/12-shield-de-prototypage-pour-arduino-3232100000124-adafruit.html)
-* [Cartes MicroPython Pyboard](https://shop.mchobby.be/fr/56-micropython)
 * [Gamme Arduino @ MCHobby](https://shop.mchobby.be/fr/5-arduino).
