@@ -27,7 +27,7 @@ Le raccordement proposé ci-dessous couvre toutes les broches de la spécificati
 
 ## Schéma
 * [PYBV11_to_ARDUINO_UNO_R3.pdf](docs/_static/Schematic_V1.0-_PYBV11_to_ARDUINO_UNO_R3.pdf) brochage
-* [Assignation des broches Pyboard](docs/_static/pyboard-pin-assignation.jpg)
+* [Assignation des broches Pyboard](docs/_static/pyboard-pin-assignation.jpg) encore 8 broches de libres + 4 broches des LEDs rouge, vert, bleu, jaune
 
 
 
