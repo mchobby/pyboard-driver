@@ -189,9 +189,61 @@ while True:
     sleep( 0.5 ) # attendre 1/2 seconde
 ```
 
-## Entrée Analogique
+## Entrée Analogique (3.3 V max)
+La carte est équipée de de plusieurs entrée analogiques (A0 à A5) mais aussi sur les broches 2 à 7.
 
-TODO
+Celle-cis peuvent être utilisés pour lire une tension entre 0 et 3.3V.
+
+Il est possible d'utiliser les constantes PIN_A0..PIN_A5 ou PIN_2..PIN_7 pour identifier ces broches.
+Le graphique du brochage permet également de repérer le nom des boches MicroPython d'origine (PIN_A3 = X22).
+
+![Lecture entrée analogique](docs/_static/input-pot.jpg)
+
+_note:_ pour une plus grande stabilité, il est parfois nécessaire d'ajouter une capacité de 10nF entre la sortie du potentiomètre et la masse.
+
+__Lecture Analogique 12 bits:__
+
+Par défaut, le convertisseur fonctionne en 12 bits, cela signifie qu'il retourne une valeur numérique entre 0 et 4096. La résolution est donc de 3.3/4096 = 0.0008 V (8 mV)!
+
+Cette précision est équivalente aux Arduino Zero, Due et MKR.
+
+``` python
+from pyb import ADC
+from uno import *
+from time import sleep
+
+a3 = ADC(PIN_A3) # identique à ADC("X22")
+while True:
+	# Lecture résolution 12 bits
+	val = a3.read() # 0 à 4095
+	volts = val/4096*3.3
+	print( "read: %i  Volts: %3f v" % (val,volts) )
+	sleep( 0.500 )
+```
+
+__Lecture Analogique 10 bits:__
+
+Pour les habités du monde Arduino UNO ou la précision est en 10 bits (valeur de 0 à 1023), la bibliothèque `uno.py` propose la fonction `analog_read()` pour convertir la valeur en 10 bits.
+
+``` python
+from pyb import ADC
+from uno import *
+from time import sleep
+
+a3 = ADC(PIN_A3) # same as ADC("X22")
+while True:
+	# lecture en résultion 10 bits
+	val = analog_read(a3) # 0 à 1024
+	volts = val/1024*3.3
+	print( "read: %i  Volts: %3f v" % (val,volts) )
+	sleep( 0.500 )
+```
+
+__Plus d'information:__
+Le traitement des entrées analogique est un sujet relativement vaste avec des possibilités d'acquisition de signal!
+Vous trouverez plus de détails sur ce sujet dans les références suivantes:
+* [Livre "MicroPython et Pyboard", Meurisse D. paru aux Editions ENI](https://www.editions-eni.fr/livre/micropython-et-pyboard-python-sur-microcontroleur-de-la-prise-en-main-a-l-utilisation-avancee-9782409022906)
+* [Classe ADC sur MicroPython.org](http://docs.micropython.org/en/latest/library/pyb.ADC.html) (_Anglais_)
 
 ## Sortie PWM
 

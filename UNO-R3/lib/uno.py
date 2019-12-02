@@ -32,7 +32,7 @@ See project source @ https://github.com/mchobby/pyboard-driver/tree/master/UNO-R
 __version__ = "0.0.1"
 
 from machine import SPI, I2C, Pin, UART
-from pyb import Timer, udelay
+from pyb import Timer, udelay, ADC
 
 # -- UNO -> Pyboard Pin conversion ----------
 PIN_0 = "Y2"
@@ -63,6 +63,18 @@ SERVO1 = "X1"
 SERVO2 = "X2"
 SERVO3 = "X3"
 SERVO4 = "X4"
+
+def map(x, in_min, in_max, out_min, out_max):
+	""" Equivalent of Arduino map() function """
+	return int( (x - in_min) * (out_max - out_min) // (in_max - in_min) + out_min )
+
+# -- Analog Read --------------
+# Make an analog read like Arduino UNO (on 10 bits)
+def analog_read( pin ):
+	""" Make a 10 bits reading (like Arduino UNO) on a Analog Pin """
+	assert type( pin ) is ADC, "pin must be a pyb.ADC object"
+	# read with 12bit & convert to 10 bits
+	return map( pin.read(), 0, 4095, 0, 1024 )
 
 # -- BUS tooling --------------
 def spi_bus( **kwargs ):
