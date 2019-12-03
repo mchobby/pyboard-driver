@@ -245,11 +245,44 @@ Vous trouverez plus de détails sur ce sujet dans les références suivantes:
 * [Livre "MicroPython et Pyboard", Meurisse D. paru aux Editions ENI](https://www.editions-eni.fr/livre/micropython-et-pyboard-python-sur-microcontroleur-de-la-prise-en-main-a-l-utilisation-avancee-9782409022906)
 * [Classe ADC sur MicroPython.org](http://docs.micropython.org/en/latest/library/pyb.ADC.html) (_Anglais_)
 
-## Sortie PWM
-
-TODO
-
 ## Sortie Analogique (DAC)
+
+Les broches A4 et A5 peuvent également servir de sortie analogique dont il est possible de fixer la tension entre 0 et 3.3V.
+
+__Résolution 8 bits par défaut:__
+
+Sur 8 bit, il est possible de fixer une valeur entre 0 et 255 sur le convertiseur.
+
+Pour produire une tension de 2.3V, il faut fournir la valeur (255/3.3)*2.6V = 201 au convertisseur DAC
+
+``` python
+from pyb import DAC
+from uno import *
+dac = DAC( PIN_A5 )
+dac.write( 201 ) # Produit une tension de 2.6V
+
+```
+Il est également possible de convertir une valeur 8 bits arbitraire. Par exemple, la valeur 98 produirait la tension de 3.3/255*98
+
+__Résolution 12 bits:__
+
+Il est également possible de configurer le convertisseur DAC en résolution 12 bits (valeur de 0 à 4095).
+
+``` python
+from pyb import DAC
+from uno import *
+dac = DAC( PIN_A4, bits=12 )
+out_v = 1.5 # Tension sortie 1.5V
+dac.write( int(out_v/(3.3/4095)) )
+```
+
+__Produire une courbe:__
+
+Le traitement des sorties analogiques couvre également la production de signaux arbitraire tels que des sinusoïdes ou autre:
+* [Livre "MicroPython et Pyboard", Meurisse D. paru aux Editions ENI](https://www.editions-eni.fr/livre/micropython-et-pyboard-python-sur-microcontroleur-de-la-prise-en-main-a-l-utilisation-avancee-9782409022906)
+* [Classe DAC sur MicroPython.org](https://docs.micropython.org/en/latest/library/pyb.DAC.html) (_Anglais_)
+
+## Sortie PWM
 
 TODO
 
