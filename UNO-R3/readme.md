@@ -286,6 +286,55 @@ Le traitement des sorties analogiques couvre également la production de signaux
 
 TODO
 
+``` python
+from pwm import *
+from uno import *
+from time import sleep
+
+print( "PWM on Pin 13 (Y6)")
+pwm13 = pwm(PIN_13) # pwm("Y6") serait identique
+
+print( "PWM de 0 à 100%")
+for i in range(0,101, 5): # par pas de 5
+	pwm13.percent = i  # 0 à 100% de cycle utile
+	sleep(0.200)
+
+# Désactiver la broche en entrée = haute impédance
+print( "Désactiver la broche PWM" )
+pwm13.release()
+sleep( 1 )
+
+# Réactiver le PWM sur broche 13
+print( "Réactiver le PWM à 50%" )
+pwm13 = pwm(PIN_13)
+pwm13.percent = 50
+sleep( 1 )
+pwm13.percent = 0
+```
+
+Sur un Arduino, le contrôle PWM se fait avec un `analogWrite()` et une valeur de 0-255.
+
+La bibliothèque PWM supporte la méthode `write()` qui accepte une valeur entre 0 et 255.
+``` python
+from pwm import *
+from uno import *
+from time import sleep
+
+print( "PWM on Pin 13 (Y6)")
+pwm13 = pwm(PIN_13) # pwm("Y6") serait identique
+
+# Do it the Arduino Way (with 8 bit value)
+print( "Utiliser une valeur 8bits (0-255) pour controler le PWM" )
+for i in range(0,256,3): # par pas de 3
+	pwm13.write( i )
+	sleep(0.050)
+
+# Libérer la broche PWM
+pwm13.release()
+```
+
+
+
 ## Neopixel
 
 La carte est équipée d'une LED WS2812b (également appelée [NéoPixel dans les produits Adafruit Industries](https://shop.mchobby.be/fr/55-neopixels-et-dotstar)). Il s'agit de LED RVB intelligentes pouvant être chaînée. La carte PYBOARD-UNO-R3 dispose d'un convertisseur de niveau logique pour commander cette LED sous 5V afin d'avoir un maximum de luminosité et des couleurs vives. La carte dispose également d'une sortie permettant d'ajouter d'autres LEDs.

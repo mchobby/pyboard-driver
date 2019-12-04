@@ -34,6 +34,8 @@ def setup_next_pin():
 
 sw.callback( setup_next_pin )
 
+print( "Press the A switch (USR button) to select next PIN" )
+
 __pin = None
 __current_idx = __idx
 while True:
