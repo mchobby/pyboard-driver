@@ -61,15 +61,14 @@ class PwmPin( object ):
 	# pin    : Ref to pin,
 	# timer  : Ref to created timer,
 	# channel: Ref to channel
-	__slot__ = ["pin", "timer", "channel", "_percent", "_owner"]
+	__slot__ = ["pin", "timer", "channel", "_percent" ]
 
-	def __init__( self, owner, pin, timer, channel ):
+	def __init__( self, pin, timer, channel ):
 		""" Initialize for the PWM for the initialized objects """
 		self.pin = pin
 		self.timer = timer
 		self.channel = channel
 		self._percent = None
-		self._owner = owner # reference to the factory
 
 	def release( self ):
 		""" Deinit the PWM pin """
@@ -128,7 +127,7 @@ class PwmFactory( object ):
 		_channel = _timer.channel( pwm_def[1], pwm_def[2], pin=_pin ) # Timer, channel, pin
 		_channel.pulse_width_percent( duty_percent )
 		# register the PwmPin
-		self.pins[pin_name]=PwmPin( self, _pin, _timer, _channel)
+		self.pins[pin_name]=PwmPin( _pin, _timer, _channel)
 		return self.pins[pin_name]
 
 pwm_factory = None
