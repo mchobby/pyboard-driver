@@ -67,6 +67,11 @@ p = Pin( PIN_9, Pin.IN ) # broche Arduino 9
 print( p.value() )       # Affiche 1 ou 0
 ```
 
+## Bibliothèque "pwm"
+La bibliothèque `pwm.py` contient des définitions et fonctions permettant de facilement contrôler les différentes broches PWM d'une Pyboard (et donc de la PYBOARD-UNO-R3).
+
+L'utilisation de cette bibliothèque est décrite plus bas dans la section "Sorties PWM".
+
 __Fonctions utilitaires:__
 
 La bibliothèque `uno.py` propose également des fonctions pour créer rapidement les bus I2C, SPI, UART correspondant à la carte UNO R3.
@@ -284,35 +289,27 @@ Le traitement des sorties analogiques couvre également la production de signaux
 
 ## Sortie PWM
 
-TODO
+La carte PYBOARD-UNO-R3 expose de très nombreuses broches PWM (Pulse Modulation Width = Modulation de largeur d'impulsion) qu'il est très facile de piloter à l'aide de la bibliothèque `pwm.py`.
 
 ``` python
 from pwm import *
 from uno import *
 from time import sleep
 
-print( "PWM on Pin 13 (Y6)")
-pwm13 = pwm(PIN_13) # pwm("Y6") serait identique
+# pwm13 = pwm("Y6") est identique
+pwm13 = pwm(PIN_13)
 
 print( "PWM de 0 à 100%")
 for i in range(0,101, 5): # par pas de 5
-	pwm13.percent = i  # 0 à 100% de cycle utile
+	pwm13.percent = i  # fixer le cycle utile
 	sleep(0.200)
 
-# Désactiver la broche en entrée = haute impédance
-print( "Désactiver la broche PWM" )
-pwm13.release()
-sleep( 1 )
-
-# Réactiver le PWM sur broche 13
-print( "Réactiver le PWM à 50%" )
-pwm13 = pwm(PIN_13)
-pwm13.percent = 50
-sleep( 1 )
+# Mettre le signal au niveau bas
 pwm13.percent = 0
 ```
 
-Sur un Arduino, le contrôle PWM se fait avec un `analogWrite()` et une valeur de 0-255.
+__PWM en 8 bits__
+Sur un Arduino, le contrôle PWM se fait avec un `analogWrite()` et une valeur de 0-255 (valeur 8 bits).
 
 La bibliothèque PWM supporte la méthode `write()` qui accepte une valeur entre 0 et 255.
 ``` python
@@ -320,20 +317,46 @@ from pwm import *
 from uno import *
 from time import sleep
 
-print( "PWM on Pin 13 (Y6)")
-pwm13 = pwm(PIN_13) # pwm("Y6") serait identique
+pwm13 = pwm(PIN_13)
 
-# Do it the Arduino Way (with 8 bit value)
-print( "Utiliser une valeur 8bits (0-255) pour controler le PWM" )
+# Le faire à la méthode Arduino (avec valeur 8 bits)
 for i in range(0,256,3): # par pas de 3
 	pwm13.write( i )
 	sleep(0.050)
-
-# Libérer la broche PWM
-pwm13.release()
 ```
 
+__PWM release__
+Une fois une broche PWM initialisée, il est possible de mettre le signal au niveau bas avec `pwm13.percent = 0` ou au niveau haut avec `pwm13.percent=100`.
 
+La broche reste configurée en sortie!
+
+Il est possible d'utiliser la méthode 'pwm13.release()' pour reconfigurer la broche en entrée (donc haute impédance) et ainsi cesser toute opération PWM sur la broche.
+
+``` python
+from pwm import *
+from uno import *
+from time import sleep
+
+# pwm13 = pwm("Y6") est identique
+pwm13 = pwm(PIN_13)
+
+# PWM à 40% de cycle utile
+pwm13.percent = 40
+sleep(2)
+
+# Désactiver le PWM et mettre la broche en haute impédance (=entrée)
+pwm13.release()
+sleep( 2 )
+
+# Besoin de réactiver le PWM sur la broche ?
+# Alors réactiver la broche 13 en PWM
+pwm13 = pwm(PIN_13)
+pwm13.percent = 50
+sleep( 2 )
+
+# Mettre au niveau bas
+pwm13.percent = 0
+```
 
 ## Neopixel
 
