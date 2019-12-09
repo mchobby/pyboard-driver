@@ -21,7 +21,7 @@ Explorer par:
 * Interface:
 [FEATHERWING](docs/indexes/drv_by_intf_FEATHERWING.md), [GPIO](docs/indexes/drv_by_intf_GPIO.md), [HAT](docs/indexes/drv_by_intf_HAT.md), [I2C](docs/indexes/drv_by_intf_I2C.md), [NCD](docs/indexes/drv_by_intf_NCD.md), [ONEWIRE](docs/indexes/drv_by_intf_ONEWIRE.md), [QWIIC](docs/indexes/drv_by_intf_QWIIC.md), [SPI](docs/indexes/drv_by_intf_SPI.md), [STEMMA](docs/indexes/drv_by_intf_STEMMA.md), [UART](docs/indexes/drv_by_intf_UART.md), [UEXT](docs/indexes/drv_by_intf_UEXT.md), [UNO-R3](docs/indexes/drv_by_intf_UNO-R3.md)
 * Fabriquant:
-[ADAFRUIT](docs/indexes/drv_by_man_ADAFRUIT.md), [GARATRONIC](docs/indexes/drv_by_man_GARATRONIC.md), [MCHOBBY](docs/indexes/drv_by_man_MCHOBBY.md), [NCD](docs/indexes/drv_by_man_NCD.md), [NONE](docs/indexes/drv_by_man_NONE.md), [OLIMEX](docs/indexes/drv_by_man_OLIMEX.md), [SPARKFUN](docs/indexes/drv_by_man_SPARKFUN.md)
+[ADAFRUIT](docs/indexes/drv_by_man_ADAFRUIT.md), [GARATRONIC](docs/indexes/drv_by_man_GARATRONIC.md), [MCHOBBY](docs/indexes/drv_by_man_MCHOBBY.md), [NCD](docs/indexes/drv_by_man_NCD.md), [NONE](docs/indexes/drv_by_man_NONE.md), [OLIMEX](docs/indexes/drv_by_man_OLIMEX.md), [POLOLU](docs/indexes/drv_by_man_POLOLU.md), [SPARKFUN](docs/indexes/drv_by_man_SPARKFUN.md)
 
 <table>
 <thead>
@@ -194,6 +194,18 @@ Explorer par:
 <small>Exemples expliquant comment utiliser la Pyboard comme périphérique HID (clavier, souris)</small><br/><br />
       <strong>Testé avec</strong> : PYBOARD<br />
       <strong>Fabricant</strong> : <br />
+      </td>
+  </tr>
+  <tr><td><a href="../../tree/master/zumo-robot">zumo-robot</a></td>
+      <td><strong>Composants</strong> : <br />
+      <strong>Interfaces</strong> : UNO-R3<br />
+<small>Piloter un Robot Zumo pour Arduino avec un microcontroleur MicroPython Pyboard</small><br/><br />
+      <strong>Testé avec</strong> : PYBOARD<br />
+      <strong>Fabricant</strong> : POLOLU<br />
+<ul>
+<li>Voir <a href="https://shop.mchobby.be/fr/prototypage-robotique-roue/448-robot-zumo-pour-arduino-assemble-moteurs-3232100004481-pololu.html">Zumo Robot @ MCHobby</a></li>
+<li>Voir <a href="https://www.pololu.com/product/2510">Zumo Robot @ Pololu</a></li>
+</ul>
       </td>
   </tr>
 </tbody>

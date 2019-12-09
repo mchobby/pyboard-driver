@@ -4,5 +4,6 @@
   "SPARKFUN"  : { "name" : "SparkFun ", "url" : "https:\/\/www.sparkfun.com\/"},
 	"MCHOBBY"   : { "name" : "MC Hobby", "url" : "https:\/\/shop.mchobby.be\/"},
 	"GARATRONIC": { "name" : "Garatronic", "url" : "https:\/\/garatronic.fr\/"},
-	"NONE"     : { "name" : "(other)", "url" : ""}
+	"POLOLU"    : { "name" : "Pololu Robotics", "url" : "https:\/\/www.pololu.com"},
+	"NONE"      : { "name" : "(other)", "url" : ""}
 }

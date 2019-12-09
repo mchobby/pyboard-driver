@@ -183,5 +183,18 @@
 			"ressources"    : [ ],
 			"descr"	: {"FR" : "Exemples expliquant comment utiliser la Pyboard comme périphérique HID (clavier, souris)",
 								 "ENG": "Examples to use the Pyboard as HID peripheral (mouse, keyboard)" }
+		},
+		{	"folder"       : "zumo-robot",
+			"components"    : [],
+			"interfaces"    : ["UNO-R3"],
+			"manufacturers" : ["POLOLU"],
+			"plateforms"    : ["PYBOARD"],
+			"ressources"    : [ { "label" : "Zumo Robot @ MCHobby",
+														           "url"   : "https:\/\/shop.mchobby.be\/fr\/prototypage-robotique-roue\/448-robot-zumo-pour-arduino-assemble-moteurs-3232100004481-pololu.html" },
+                       { "label" : "Zumo Robot @ Pololu",
+														           "url"   : "https:\/\/www.pololu.com\/product\/2510" } 
+                     ],
+			"descr"	: {"FR" : "Piloter un Robot Zumo pour Arduino avec un microcontroleur MicroPython Pyboard",
+								      "ENG": "Drive the Robot Zumo for Arduino with a MicroPython Pyboard microcontroler" }
 		}
 ]

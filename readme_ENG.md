@@ -15,7 +15,7 @@ Explore it by:
 * Interface:
 [FEATHERWING](docs/indexes/drv_by_intf_FEATHERWING_ENG.md), [GPIO](docs/indexes/drv_by_intf_GPIO_ENG.md), [HAT](docs/indexes/drv_by_intf_HAT_ENG.md), [I2C](docs/indexes/drv_by_intf_I2C_ENG.md), [NCD](docs/indexes/drv_by_intf_NCD_ENG.md), [ONEWIRE](docs/indexes/drv_by_intf_ONEWIRE_ENG.md), [QWIIC](docs/indexes/drv_by_intf_QWIIC_ENG.md), [SPI](docs/indexes/drv_by_intf_SPI_ENG.md), [STEMMA](docs/indexes/drv_by_intf_STEMMA_ENG.md), [UART](docs/indexes/drv_by_intf_UART_ENG.md), [UEXT](docs/indexes/drv_by_intf_UEXT_ENG.md), [UNO-R3](docs/indexes/drv_by_intf_UNO-R3_ENG.md)
 * Manufacturer:
-[ADAFRUIT](docs/indexes/drv_by_man_ADAFRUIT_ENG.md), [GARATRONIC](docs/indexes/drv_by_man_GARATRONIC_ENG.md), [MCHOBBY](docs/indexes/drv_by_man_MCHOBBY_ENG.md), [NCD](docs/indexes/drv_by_man_NCD_ENG.md), [NONE](docs/indexes/drv_by_man_NONE_ENG.md), [OLIMEX](docs/indexes/drv_by_man_OLIMEX_ENG.md), [SPARKFUN](docs/indexes/drv_by_man_SPARKFUN_ENG.md)
+[ADAFRUIT](docs/indexes/drv_by_man_ADAFRUIT_ENG.md), [GARATRONIC](docs/indexes/drv_by_man_GARATRONIC_ENG.md), [MCHOBBY](docs/indexes/drv_by_man_MCHOBBY_ENG.md), [NCD](docs/indexes/drv_by_man_NCD_ENG.md), [NONE](docs/indexes/drv_by_man_NONE_ENG.md), [OLIMEX](docs/indexes/drv_by_man_OLIMEX_ENG.md), [POLOLU](docs/indexes/drv_by_man_POLOLU_ENG.md), [SPARKFUN](docs/indexes/drv_by_man_SPARKFUN_ENG.md)
 <table>
 <thead>
   <th>Folder</th><th>Description</th>
@@ -187,6 +187,18 @@ Explore it by:
 <small>Examples to use the Pyboard as HID peripheral (mouse, keyboard)</small><br/><br />
       <strong>Tested with</strong> : PYBOARD<br />
       <strong>Manufacturer</strong> : <br />
+      </td>
+  </tr>
+  <tr><td><a href="../../tree/master/zumo-robot">zumo-robot</a></td>
+      <td><strong>Components</strong> : <br />
+      <strong>Interfaces</strong> : UNO-R3<br />
+<small>Drive the Robot Zumo for Arduino with a MicroPython Pyboard microcontroler</small><br/><br />
+      <strong>Tested with</strong> : PYBOARD<br />
+      <strong>Manufacturer</strong> : POLOLU<br />
+<ul>
+<li>See <a href="https://shop.mchobby.be/fr/prototypage-robotique-roue/448-robot-zumo-pour-arduino-assemble-moteurs-3232100004481-pololu.html">Zumo Robot @ MCHobby</a></li>
+<li>See <a href="https://www.pololu.com/product/2510">Zumo Robot @ Pololu</a></li>
+</ul>
       </td>
   </tr>
 </tbody>
