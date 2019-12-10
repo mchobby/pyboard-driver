@@ -1,3 +1,5 @@
+# Test the Neopixel present on the PYBOARD-UNO-R3 board
+# 
 from uno import pixels
 from time import sleep
 

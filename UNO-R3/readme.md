@@ -45,7 +45,7 @@ Les détails du branchement sont disponibles ici dans le projet [Pin-Mapping-tab
 Les bibliothèques suivantes sont nécessaires pour exploiter toutes les fonctionnalités de la carte. Les bibliothèques doivent être accessibles dans le système de fichiers de la carte Pyboard (à la racine ou dans un sous-répertoire `lib`).
 
 * ws2812.py : contrôler des NeoPixels avec le bus SPI [disponible ici (esp8266-upy GitHub)](https://github.com/mchobby/esp8266-upy/tree/master/neopixel)
-* yyy.py : description [disponible ici (esp8266-upy GitHub)](url)
+* ssd1306.py : contrôle écran OLED à base de contrôleur SSD1306 [disponible ici (MicroPython GitHub)](https://github.com/micropython/micropython/tree/master/drivers/display)
 
 ## Bibliothèque "uno"
 La bibliothèque `uno.py` contient des définitions et fonctions permettant de facilement passer du brochage Arduino au brochage Pyboard de manière assez transparente.
@@ -67,11 +67,6 @@ p = Pin( PIN_9, Pin.IN ) # broche Arduino 9
 print( p.value() )       # Affiche 1 ou 0
 ```
 
-## Bibliothèque "pwm"
-La bibliothèque `pwm.py` contient des définitions et fonctions permettant de facilement contrôler les différentes broches PWM d'une Pyboard (et donc de la PYBOARD-UNO-R3).
-
-L'utilisation de cette bibliothèque est décrite plus bas dans la section "Sorties PWM".
-
 __Fonctions utilitaires:__
 
 La bibliothèque `uno.py` propose également des fonctions pour créer rapidement les bus I2C, SPI, UART correspondant à la carte UNO R3.
@@ -92,6 +87,17 @@ spi, ss = spi_bus( baudrate=20000 )
 
 ```
 Toutes ces fonctions acceptent les paramètres complémentaires supportés par l'API machine de MicroPython.
+
+
+## Bibliothèque "pwm"
+La bibliothèque `pwm.py` contient des définitions et fonctions permettant de facilement contrôler les différentes broches PWM d'une Pyboard (et donc de la PYBOARD-UNO-R3).
+
+L'utilisation de cette bibliothèque est décrite plus bas dans la section "Sorties PWM".
+
+## Bibliothèque "unoextra"
+La bibliothèque `unoextra.py` contient des classes utilitaires supplémentaires permettant de contrôler l'écran OLED ou le chargeur d'accu présent sur PYBOARD-UNO-R3.
+
+L'utilisation de cette bibliothèque est décrite plus bas dans la section "OLED" et "Chargeur Accu".
 
 # Prise en main
 Cette section reprend l'utilisation des différents éléments de la carte.
@@ -487,7 +493,7 @@ Voir le fichier d'exemple [`test_servo.py`](examples/test_servo.py) et sa [vidé
 
 Brancher deux servo-moteurs sur les sorties SERVO1 et SERVO2 puis saisir le code suivant:
 
-```
+``` Python
 from pyb import Servo
 from time import sleep
 servo1 = Servo(1)
@@ -504,7 +510,85 @@ servo1.angle( +90 )
 servo2.angle( +90 )
 ```
 
-## Chargeur LIPO
+## Afficheur OLED
+La carte Pyboard-Uno-R3 dispose d'un écran OLED 128*64 pixels placés sur un bus I2C séparé du brochage UNO.
+
+Cet écran peut donc être utilisé en toute indépendance sans interférer avec vos autres opérations. Cet écran est piloté par l'intermédiaire du pilote `ssd1306.py` (classe `SSD1306_I2C`) disponible sur le GitHub de MicroPython (voir section dépendance pour télécharger la bibliothèque).
+
+Pour simplifier encore plus les choses, la bibliothèque `unoextra.py` propose la classe `Unoled` comme une surcouche du pilote original. Ce pilote `Unoled` intègre la notion de curseur pour simplifier l'affichage de texte à l'écran.
+
+Toutes les fonctionnalités du `SSD1306_I2C` restent applicables à la classe `Unoled` (manipulation de pixels, dessin de rectangle, ...). Ces fonctionnalités sont détaillés dans le tutoriel [OLED FeatherWing](https://wiki.mchobby.be/index.php?title=FEATHER-MICROPYTHON-OLED#Tester_la_biblioth.C3.A8que)... seule la création de l'instance `lcd` diffère du tutoriel.
+
+``` Python
+from unoextra import Unoled
+from time import sleep
+
+lcd = Unoled()
+
+# Methode FrameBuffer = position absolue
+# pour texte et dessin
+lcd.text("Bonjour", 10,10, 1)
+lcd.text("MicroPython !", 10,20, 1)
+# Dessiner un rectangle blanc - rect( x, y, w, h, c )
+lcd.rect( 3, 3, 128-2*3, 64-2*3, 1 )
+lcd.show() # doit être appelé
+sleep( 2 )
+
+# Affichage + défilement
+# print() et println() rafraîssent l'écran
+lcd.clear()
+for i in range(11):
+	lcd.println( "Line %s" % i )
+	sleep( 0.5 )
+sleep(2)
+```
+
+Il est également possible de contrôler la position du curseur, ce qui permet d'afficher de petites animations comme dans l'exemple suivant:
+
+``` Python
+from unoextra import Unoled
+from time import sleep
+
+lcd = Unoled()
+
+lcd.clear()
+s = "\|/-"
+lcd.print('Progress:')
+pos = lcd.cursor()
+iCount = 0
+while iCount < 20:
+	lcd.set_cursor( pos )
+	lcd.print( s[iCount%len(s)] )
+	sleep( 0.250 )
+	iCount += 1
+lcd.set_cursor( pos )
+lcd.println('Done!')
+```
+
+Il existe d'autres exemples dans le fichier [test_oled_basic.py](examples/test_oled_basic.py) .
+
+**Utiliser directement le pilote SSD1306_I2C:**
+
+Il n'est pas obligatoire de passer par la classe `Unoled` pour piloter l'écran OLED présent sur la carte.
+Voici un exemple décrivant comment instancier et utiliser directement le pilote SSD1306_I2C.
+
+``` Python
+from machine import I2C, Pin
+from ssd1306 import SSD1306_I2C
+
+i2c=I2C(sda=Pin("Y4"), scl=Pin("Y3"))
+lcd=SSD1306_I2C(128,64,i2c)
+# Effacer l'écran
+lcd.fill(0)
+# Afficher du texte
+lcd.text("Bonjour", 10,10, 1)
+lcd.text("MicroPython !", 10,20, 1)
+# Afficher un rectangle blanc - rect( x, y, w, h, c )
+lcd.rect( 3, 3, 128-2*3, 64-2*3, 1 )
+lcd.show()
+```  
+
+## Chargeur Accu
 Le chargeur Lipo dispose d'une entrée I2C.
 
 ## Bus I2C, SPI, UART
