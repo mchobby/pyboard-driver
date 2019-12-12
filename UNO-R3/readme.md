@@ -23,6 +23,8 @@ Pour connecter an shield Arduino sur votre Pyboard, vous aurez besoin de savoir 
 
 Cette interface est prévue pour les produits compatibles 3.3V (voir broche IORef sur extension Arduino R3)
 
+Charger Note: Jaune fixe + Vert clignotant = No battery 
+
 Le raccordement proposé ci-dessous couvre toutes les broches de la spécification R3!. __Le mapping est compatible avec UEXT, NCD, QWIIC déjà proposés sur ce dépôt__.
 
 ## Schéma
