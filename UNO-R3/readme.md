@@ -23,7 +23,7 @@ Pour connecter an shield Arduino sur votre Pyboard, vous aurez besoin de savoir 
 
 Cette interface est prévue pour les produits compatibles 3.3V (voir broche IORef sur extension Arduino R3)
 
-Charger Note: Jaune fixe + Vert clignotant = No battery 
+Charger Note: Jaune fixe + Vert clignotant = No battery
 
 Le raccordement proposé ci-dessous couvre toutes les broches de la spécification R3!. __Le mapping est compatible avec UEXT, NCD, QWIIC déjà proposés sur ce dépôt__.
 
@@ -511,6 +511,7 @@ sleep( 2 )
 servo1.angle( +90 )
 servo2.angle( +90 )
 ```
+Pour information, les sorties servo-moteurs (X1 à X4) utilisent le Timer 5.
 
 ## Afficheur OLED
 La carte Pyboard-Uno-R3 dispose d'un écran OLED 128*64 pixels placés sur un bus I2C séparé du brochage UNO.

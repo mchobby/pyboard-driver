@@ -124,6 +124,8 @@ REG_FAULT = 0x0C
 REG_BATV  = 0x0E
 REG_SYSV  = 0x0F
 REG_VBUSV = 0x11
+REG_IINLIM  = 0x00 # Input current Limit
+REG_ICHARGER= 0x12
 
 # For REG_STAT
 USB100 = 0 # USB100 input is detected
@@ -160,6 +162,10 @@ BTV_VSYS = ( 2.304, # Base value
  			[0.02, 0.04, 0.08, 0.160, 0.320, 0.640, 1.280 ] ) # Bits 0 to 6 weight
 BTV_VBUSV= ( 2.6,
 			 [0.1,0.2,0.4,0.8,1.6,3.2,6.4])
+BTV_IINLIM= ( 0.100,
+			 [0.05, 0.100, 0.200, 0.400, 0.800, 1.600] )
+BTV_ICHARGER=( 0,
+			 [0.050, 0.100, 0.200, 0.400, 0.800, 1.600, 3.200]  )
 
 class QB25895(object):
 	""" Driver for the BQ25895 from Texas Instrument
@@ -192,11 +198,11 @@ class QB25895(object):
 		# Make sure to add command bit to read request.
 		return self._i2c.writeto_mem( self._address, address, value ) # write one byte
 
-	def bits_to_volts( self, value, btv ):
+	def bits_to_value( self, value, btv ):
 		# The BQxxx use a baseline voltage + volt_weight to add for each bit positionned to 1
 		# btv is a BTV_xxx constant with base value + list of bit weight
 		result = btv[0] # Base voltage
-		for i in range(1,7): #from 1 to 6
+		for i in range(1,len(btv[1])): #from 0 to 6
 			if (value & (1<<i))>0 :
 				result = result + btv[1][i]
 		return result
@@ -213,6 +219,11 @@ class QB25895(object):
 
 		data = bytes( [val] )
 		self._write_u8( REG_CONF, data )
+
+	def update( self ):
+		""" Update everything possible """
+		self.update_status()
+		self.update_fault()
 
 	def update_status( self ):
 		""" Read and update the various charging STATus """
@@ -290,7 +301,7 @@ class QB25895(object):
 		val = self._read_u8(REG_BATV)
 		# Thermal Status = val & 0b10000000
 		# BatV = val & 0b01111111
-		return self.bits_to_volts( val & 0b01111111, BTV_VSYS )
+		return self.bits_to_value( val & 0b01111111, BTV_VSYS )
 
 	@property
 	def vsys( self ):
@@ -298,14 +309,28 @@ class QB25895(object):
 		val = self._read_u8(REG_SYSV)
 		# first bit is reserved
 		# BatV = val & 0b01111111
-		return self.bits_to_volts( val & 0b01111111, BTV_VSYS )
+		return self.bits_to_value( val & 0b01111111, BTV_VSYS )
 
 	@property
 	def vbus( self ):
 		""" BUS (USB VBUS) Voltage """
 		val = self._read_u8(REG_VBUSV)
 		# VBUS Good Status = val & 0b10000000
-		return self.bits_to_volts( val & 0b01111111, BTV_VBUSV )
+		return self.bits_to_value( val & 0b01111111, BTV_VBUSV )
+
+	@property
+	def input_current_limit( self ):
+		""" Input current limit in Amps as float"""
+		val = self._read_u8(REG_IINLIM)
+		# Enable HIZ mode = val & 0b10000000
+		# Enable ILIM     = val & 0b01000000
+		return self.bits_to_value( val & 0b00111111, BTV_IINLIM )
+
+	@property
+	def ibat( self ):
+		""" Battery charge current (amps as float). """
+		val = self._read_u8(REG_ICHARGER)
+		return self.bits_to_value( val & 0b01111111, BTV_ICHARGER )
 
 class Charger( QB25895 ):
 	""" Interface class for the PYBOARD-UNO-R3 board (based on QB25895 driver) """

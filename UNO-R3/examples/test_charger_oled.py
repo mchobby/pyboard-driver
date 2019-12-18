@@ -3,7 +3,6 @@
 from unoextra import *
 from time import sleep
 
-
 ch = Charger()
 lcd = Unoled()
 
@@ -22,6 +21,9 @@ while True:
 	lcd.println( "VBat: %2.2f v" % ch.vbat, show=False )
 	lcd.println( "VSYS: %2.2f v" % ch.vsys, show=False )
 	lcd.println( "VBus: %2.2f v" % ch.vbus, show=False )
-	lcd.println( "Charging: %s" % CHARGING_TEXT[ch.charging_status] )
+	lcd.println( "Charging: %s" % CHARGING_TEXT[ch.charging_status], show=False )
+	#lcd.println( "I In Lim: %1.3f" % ch.input_current_limit )
+	lcd.println( "I bat   : %2.3f" % ch.ibat )
+	ch.update()
 	i+=1
 	sleep(1)
