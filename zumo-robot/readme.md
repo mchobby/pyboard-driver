@@ -1,7 +1,4 @@
-# .: ALPHA VERSION :.
-ce projet est encore en cours de documentation.
-
-# ROBOT ZUMO V1.2 avec MicroPython Pyboard
+# ROBOT ZUMO V1.2 sous MicroPython avec la Pyboard originale
 
 Voici le robot Zumo V1.2. Vous pouvez le retrouver en pièces détachées ou assemblé comme sur l'image.
 Il est composé d'un châssis, deux moteurs, un shield pour Arduino, une lame en acier inoxydable de 0,9mm d'épaisseur montée à l'avant du châssis lui permettant ainsi de pousser les objets et adversaires aux alentours, d'une matrice réfléchissante spécialement conçue pour le Zumo.
@@ -13,7 +10,7 @@ Pour plus de détails à propos du robot Zumo vous pouvez trouvez ceci sur le si
 Ce robot Zumo est initialement programmé à l'aide d'un Arduino Uno ou d'un Arduino Leonardo.
 Dans ce projet le robot Zumo est programmé grâce à un [adaptateur Pyboard vers UNO-R3](https://github.com/mchobby/pyboard-driver/tree/master/UNO-R3).
 
-Toutes les libraires et exemples en Arduino fournis par [Pololu] ont été portés en Micropython.
+Toutes les libraires et exemples en Arduino fournis par [Pololu](https://www.pololu.com/) ont été portés en Micropython.
 
 
 # Raccordements
@@ -28,15 +25,16 @@ Vous pouvez aussi réaliser les connexions Pyboard --> UNO-R3 comme indiqué sur
 
 ## BorderDetect
 
-L'exemple [BorderDetect] est un programme ou le robot Zumo ne sors jamais d'un ring. Le ring est une surface blanche un contour noir. Le capteur infrarouge détecte la différence de couleurs à l'aide de la librairie [QTRsensors]. Le noir est peu réfléchissant et le blanc est fortement réfléchissant. A l'aide de ses informations les moteurs vont avancer, reculer ou tourner.  
+L'exemple [BorderDetect] est un programme ou le robot Zumo ne sors jamais d'un ring. Le ring est une surface blanche un contour noir. Le capteur infrarouge détecte la différence de couleurs à l'aide de la librairie [QTRsensors]. Le noir est peu réfléchissant et le blanc est fortement réfléchissant. A l'aide de ses informations les moteurs vont avancer, reculer ou tourner.
 
-"PHOTO RING ZUMO"
+![PHOTO RING ZUMO](docs/_static/zumo_robot_ring.jpg)
+
 "VIDEO ZUMO ET RING"
 
 ## LineFollower
 
 Comme son nom l'indique le robot Zumo suit un ligne. Dans cet exemple la ligne est noir. La ligne peut être droite comme courbée.
-Grâce à la libraire [QTRsensors] et [ZumoMotor] le robot Zumo garde une bonne trajectoire.
+Grâce à la libraire [QTRsensors](https://github.com/mchobby/pyboard-driver/tree/master/Zumo-Robot/lib/qtrsensors.py) et [ZumoMotor](https://github.com/mchobby/pyboard-driver/tree/master/Zumo-Robot/lib/zumoshield.py) le robot Zumo garde une bonne trajectoire.
 
 [VIDEO LINEFOLLOWER]
 
@@ -59,11 +57,11 @@ Le [Capteur de réflectance](https://www.pololu.com/product/1419/) existe en plu
 
 Le buzzer sur le shield du robot Zumo est un Piezo buzzer. C'est un buzzer passif. Un buzzer passif n'est pas limité à un son comme l'actif. Ce script permet d'émettre le son des notes d'un octave, de modifier l'octave et de modifier le temps des notes.
 
-![Pieze Buzzer](https://tse4.mm.bing.net/th?id=OIP.gRXT9KY6YvMFjEQuCNrhJAHaFM&pid=Api&P=0&w=220&h=155)
+![Pieze Buzzer](docs/_static/buzzer.jpg)
 
 ## Zumoshield
 
-Le script Zumoshield contient toutes les fonction nécessaires pour commander les [moteurs du Zumo](https://shop.mchobby.be/fr/moteurs-continu/431-micro-moteur-751-hp-axe-3mm-d-engrenage-metal-3232100004313-pololu.html?search_query=moteurs&results=168). Il y a également l'initiation des broches pour le [Capteur de réflectance](https://www.pololu.com/product/1419/)
+Le script Zumoshield contient toutes les fonction nécessaires pour commander les [moteurs 75:1 du Zumo](https://shop.mchobby.be/fr/moteurs-continu/431-micro-moteur-751-hp-axe-3mm-d-engrenage-metal-3232100004313-pololu.html?search_query=moteurs&results=168). Il y a également l'initiation des broches pour le [Capteur de réflectance](https://www.pololu.com/product/1419/)
 
 ![Moteur75:1](docs/_static/moteur75-1.jpg)
 ## Pushbutton
