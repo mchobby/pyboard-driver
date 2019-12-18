@@ -25,7 +25,9 @@ This adapter is documented in the [PYBOARD-UNO-R3](https://github.com/mchobby/py
 ## DIY Connection
 You can also make the various connections between the Pyboard <--> UNO-R3 as show in the beginning of this documentation. It is not the most beautiful assembly but this is fully functional.
 
-See the DIY schematic of the [PYBOARD-UNO-R3](https://github.com/mchobby/pyboard-driver/tree/master/UNO-R3) project.
+With DIY wiring, you will need to use a [Pololu's S7V7F5 5V regulator](https://www.pololu.com/product/2119) to generates the 5V from the VIN battery voltage provided by the Zumo Robot Shield. Please, follow this [power-distribution schematic](https://github.com/mchobby/pyboard-driver/blob/master/UNO-R3/docs/_static/power-distribution.jpg) as described in the PYBOARD-UNO-R3 project. The PYBOARD-UNO-R3 board does have a its own buck charger.
+
+See the DIY schematic of the [PYBOARD-UNO-R3](https://github.com/mchobby/pyboard-driver/tree/master/UNO-R3) for the pyboard-pin to arduino-pin wiring.
 
 # Test
 
