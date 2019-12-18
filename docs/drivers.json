@@ -83,15 +83,6 @@
 			"descr"	: {"FR" : "UPPY (alpha) : Interface de Prototypage Universelle pour Pyboard.",
 								 "ENG": "UPPY (alpha) : Universal Prototyping interface for Pyboard." }
 		},
-		{	"folder"        : "servorobot",
-			"components"    : ["PCA9685"],
-			"interfaces"    : [],
-			"manufacturers" : ["ADAFRUIT"],
-			"plateforms"    : ["PYBOARD"],
-			"ressources"    : [ ],
-			"descr"	: {"FR" : "Créer un robot marcheur à base de micro servo moteur et d'une Pyboard.",
-								 "ENG": "Create Pyboard's based walking robot with micro Servo Robot and PWM Driver." }
-		},
 		{	"folder"        : "modvga",
 			"components"    : ["MOD-VGA"],
 			"interfaces"    : ["UEXT"],
@@ -158,10 +149,12 @@
 		{	"folder"        : "servorobot",
 			"components"    : ["PCA9685"],
 			"interfaces"    : ["I2C"],
-			"manufacturers" : [],
+			"manufacturers" : ["ADAFRUIT"],
 			"plateforms"    : ["PYBOARD"],
 			"ressources"    : [ { "label" : "AllBot Patte 2 Servo @ MCHobby",
-														"url"   : "https:\/\/shop.mchobby.be\/fr\/moteur\/913-allbot-patte-2-servo-vr012-3232100009134-velleman.html" }
+														"url"   : "https:\/\/shop.mchobby.be\/fr\/moteur\/913-allbot-patte-2-servo-vr012-3232100009134-velleman.html" },
+													{ "label" : "PWM Driver (PCA9685) @ MCHobby",
+														"url"   : "https:\/\/shop.mchobby.be\/fr\/breakout\/89-adafruit-controleur-pwm-servo-16-canaux-12-bits-i2c-interface-pca9685-3232100000896-adafruit.html" }
 												],
 			"descr"	: {"FR" : "Créer un robot à 4 pattes avec des servo-moteurs et un contrôleur PWM PCA9685.",
 								 "ENG": "Create a 4 paws servo-motor walking robot with a PCA9685 PWM controler." }
@@ -192,9 +185,20 @@
 			"ressources"    : [ { "label" : "Zumo Robot @ MCHobby",
 														           "url"   : "https:\/\/shop.mchobby.be\/fr\/prototypage-robotique-roue\/448-robot-zumo-pour-arduino-assemble-moteurs-3232100004481-pololu.html" },
                        { "label" : "Zumo Robot @ Pololu",
-														           "url"   : "https:\/\/www.pololu.com\/product\/2510" } 
+														           "url"   : "https:\/\/www.pololu.com\/product\/2510" }
                      ],
 			"descr"	: {"FR" : "Piloter un Robot Zumo pour Arduino avec un microcontroleur MicroPython Pyboard",
 								      "ENG": "Drive the Robot Zumo for Arduino with a MicroPython Pyboard microcontroler" }
+		},
+		{	"folder"       : "keypad-4x4",
+			"components"    : [],
+			"interfaces"    : ["GPIO"],
+			"manufacturers" : [],
+			"plateforms"    : ["PYBOARD"],
+			"ressources"    : [ { "label" : "Clavier 16 touches souple @ MCHobby",
+														           "url"   : "https:\/\/shop.mchobby.be\/fr\/tactile-flex-pot-softpad\/83-clavier-16-touches-souple-3232100000834.html" }
+                     ],
+			"descr"	: {"FR" : "Utiliser un keypad 4x4 avec un microcontroleur MicroPython Pyboard",
+								 "ENG": "Use a 4x4 keypad with a MicroPython Pyboard microcontroler" }
 		}
 ]
