@@ -1,3 +1,5 @@
+[This file also exists in ENGLISH here](readme_ENG.md)
+
 # ROBOT ZUMO V1.2 sous MicroPython avec la Pyboard originale
 
 Ce portage MicroPython concerne le [Robot Zumo de Pololu](https://www.pololu.com/product/2510). Ce robot peut être acheté en pièce détachées ou en version pré-assemblé (comme sur la photo). Ce robot est conçu pour un carte Arduino Uno __MAIS NOUS ALLONS LE FAIRE FONCTIONNER avec une carte MicroPython Pyboard__.

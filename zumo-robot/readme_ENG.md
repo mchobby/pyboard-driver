@@ -1,3 +1,5 @@
+[Ce fichier existe également en FRANCAIS ici](readme.md)
+
 # ROBOT ZUMO V1.2 under MicroPython with the Pyboard original
 
 This MicroPython portage is about the [Zumo Robot from Pololu](https://www.pololu.com/product/2510). That robot can be assembled from various parts or you can be purchased fully assembled (like shown on the picture). This robot is designed for Arduino Uno board __BUT WE WILL MAKE IT RUNNING with a MicroPython Pyboard__.
