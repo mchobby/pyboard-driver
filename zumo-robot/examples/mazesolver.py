@@ -36,7 +36,6 @@ the goal by following the shorter path.
 # OUT OF OR IN
 
 
-
 from zumoshield import ZumoReflectanceSensorArray, ZumoMotor
 from zumobuzzer import PololuBuzzer, NOTE_G
 from pushbutton import PushbuttonStateMachine, Pushbutton, PushbuttonBase
@@ -54,7 +53,7 @@ button = Pushbutton(ZUMO_BUTTON)
 
 NUM_SENSORS = 6
 SENSOR_THRESHOLD = 600
-TURN_SPEED = 200
+TURN_SPEED = 180
 SPEED = 150
 sensors = [0 for i in range(6)]
 LINE_THICKNESS = 0.75
@@ -85,11 +84,16 @@ def turn(dir):          # Tourne en fonction de la lettre d'entrée
     buzzer.play("c8")
     if dir == "L":
             motors.setSpeeds(-TURN_SPEED,TURN_SPEED)
+
             while(count < 2):
                     reflectanceSensors.readLine(sensors)
                     count += ABOVE_LINE(sensors[0]) ^ last_status
                     last_status = ABOVE_LINE(sensors[0])
+
+                    #print("Count: %s  |last status: %s" %(count,last_status))
+                    #print(sensors)
             time.sleep_ms(int(OVERSHOOT(LINE_THICKNESS)/0.5))
+            print("LEFT")
 
     if dir== "B":   # si B Left
             #tourne a gauche
@@ -99,15 +103,17 @@ def turn(dir):          # Tourne en fonction de la lettre d'entrée
                 count += ABOVE_LINE(sensors[0]) ^ last_status
                 last_status = ABOVE_LINE(sensors[0])
             time.sleep_ms(int(OVERSHOOT(LINE_THICKNESS)/0.5))
+            print("BACK")
 
     elif (dir=="R"): #Right
             motors.setSpeeds(TURN_SPEED,-TURN_SPEED)
             while (count<2):
                 reflectanceSensors.readLine(sensors)
-                count+=ABOVE_LINE(sensors[3]) ^ last_status
-                last_status = ABOVE_LINE(sensors[3])
-
-
+                count+=ABOVE_LINE(sensors[5]) ^ last_status
+                last_status = ABOVE_LINE(sensors[5])
+            #Timer un peu plus long car les moteurs ne sont pas les memes
+            time.sleep_ms(int(OVERSHOOT(LINE_THICKNESS)/0.4))
+            print("RIGHT")
     elif(dir=="S"):
             pass
     else:
@@ -116,14 +122,13 @@ def turn(dir):          # Tourne en fonction de la lettre d'entrée
 #fonction qui détermine le sens de rotation durant la phase d'apprentisage.
 def selectTurn(found_left,found_straight,found_right):
     if(found_left):
-        print("LEFT")
+        return("L")
     elif(found_straight):
-        print("STRAIGHT")
         return("S")
     elif(found_right):
-        print("RIGHT")
+        return("R")
     else:
-        print("BACK")
+        return("B")
 
 def followSegment():
 
@@ -155,11 +160,12 @@ def followSegment():
             print(sensors)
             return
         reflectanceSensors.readLine(sensors)
-
+        #print("Intersection 1: %s" %sensors)
         """If qui montre qu'il y a une intersection a gauche ou droite"""
         if( (ABOVE_LINE(sensors[0]) == 1) or ABOVE_LINE(sensors[5]) == 1 ):
             # Si on arrive dans ce if il y a une intersection
             reflectanceSensors.readLine(sensors)
+            print("Intersection 2: %s" %sensors)
             return
 
 
@@ -169,48 +175,54 @@ def followSegment():
 #plus d'info dans le 3pi maze solving exemple
 def solveMaze():
     dir = None
+    comptnointer=0
     global path
     global path_length
     while(True):
 
         followSegment()
-        # Variables pour voir si la ligne est a gauche,tout droit ou a droite
+
+        """Quand on sort de la fonction followSegment c'est qu'on a trouv" une intersection ou qu'on est a la fin du labyrinthe.
+        Variables pour voir si la ligne est a gauche,tout droit ou a droite"""
         found_left = 0
         found_straight = 0
         found_right = 0
 
         sensors=[0 for i in range(NUM_SENSORS)]
-        #lit les capteurs et regarde le type d'intersection
+        """Juste après l'intersection ait été détectée on regarde ce qu'il y a en dessous des capteurs.
+        #On regarde si il y a une chemin à gauche et/ou à droite"""
         reflectanceSensors.readLine(sensors)
-        #regarde si il y a une sortie a gauche ou droite
         if( ABOVE_LINE(sensors[0]) == 1):
             found_left = 1
         if( ABOVE_LINE(sensors[5]) == 1):
-
             found_right = 1
         #print("Left: %s | right: %s | STRAIGHT: %s " %(found_left,found_right,found_straight))
 
-        #on avance encore un peu pour mieux voir comment est l'intersection
-        #temps défini par OVERSHOOT(LINE_THICKNESS)/2
+
+
+
+
+
+        """On avance un petit peu pour être plus centré sur l'intersection au cas ou aurait loupé un chemin."""
         motors.setSpeeds(SPEED,SPEED)
-        time.sleep_ms(int(OVERSHOOT(LINE_THICKNESS)/2.0))
-        motors.setSpeeds(0,0)
-        reflectanceSensors.readLine(sensors)
-
-
+        time.sleep_ms(int(OVERSHOOT(LINE_THICKNESS)/2.0))    # (((INCHES_TO_ZUNITS * (LINE_THICKNESS))/SPEED)/2)
+        motors.setSpeeds(0,0)                                #   ((17142 * 0.75)/150)/2 = 42,8 ms
         reflectanceSensors.readLine(sensors)
         #on reverifie comment est l'intersection
         if( ABOVE_LINE(sensors[0]) == 1):
             found_left = 1
         if( ABOVE_LINE(sensors[5]) == 1):
-
             found_right = 1
         #print("Left: %s | right: %s | STRAIGHT: %s " %(found_left,found_right,found_straight))
 
+
+        """On avance plus loin que l'intersection pour vérifier si il y a un chemin tout droit."""
         motors.setSpeeds(SPEED,SPEED)
-        time.sleep_ms(int(OVERSHOOT(LINE_THICKNESS)*2.0))
-        motors.setSpeeds(0,0)
+        time.sleep_ms(int(OVERSHOOT(LINE_THICKNESS)*2.5))   # (((INCHES_TO_ZUNITS * (LINE_THICKNESS))/SPEED)/2)
+        motors.setSpeeds(0,0)                               #   ((17142 * 0.75)/150)*2 = 171,42ms
         reflectanceSensors.readLine(sensors)
+
+
 
         reflectanceSensors.readLine(sensors)
         if( ABOVE_LINE(sensors[0]) == 1):
@@ -220,22 +232,17 @@ def solveMaze():
         #print("Left: %s | right: %s | STRAIGHT: %s " %(found_left,found_right,found_straight))
         """ Si capteur 2-3 sont sur du noir il y a une ligne en face"""
         if( (ABOVE_LINE(sensors[2])==1) or (ABOVE_LINE(sensors[3])==1) ):
-
-            print("straight")
             reflectanceSensors.readLine(sensors)
-            print(sensors)
             found_straight = 1
-            """Si les 6 capteurs sont a ce point la encore toutes sur du noir c'est qu'on est arrivé a la fin"""
+        """Si les 6 capteurs sont a ce point la encore toutes sur du noir c'est qu'on est arrivé a la fin"""
         if( (ABOVE_LINE(sensors[0])==1) and (ABOVE_LINE(sensors[1])==1) and (ABOVE_LINE(sensors[2])==1) and (ABOVE_LINE(sensors[3])==1) and (ABOVE_LINE(sensors[4])==1) and (ABOVE_LINE(sensors[5])==1)):
-
             motors.setSpeeds(0,0)
-
             break
-        #button.waitForButton()
+
+
+
+        #print("Left: %s | right: %s | STRAIGHT: %s " %(found_left,found_right,found_straight))
         dir = selectTurn(found_left,found_straight,found_right)
-        print("Left: %s | right: %s | STRAIGHT: %s | Dir: %s" %(found_left,found_right,found_straight,dir))
-
-
         turn(dir)
         path[path_length]=dir
         path_length +=1
@@ -246,18 +253,20 @@ def goToFinishLine():  #dernier loop pour refaire tout le labyrinthe en une fois
     global path_length
     sensors=[0 for i in range(NUM_SENSORS)]
     i = 0
+    j = 0
     if (path[0] == "B"):
         turn("B")
         i+=1
 
-    for x in range(path_length):
+    for j in range(i,path_length):
         followSegment()
         motors.setSpeeds(SPEED,SPEED)
-        time.sleep_ms(int(OVERSHOOT(LINE_THICKNESS)*2.0))
         time.sleep_ms(int(OVERSHOOT(LINE_THICKNESS)/2.0))
+        time.sleep_ms(int(OVERSHOOT(LINE_THICKNESS)*3.0))
+
         motors.setSpeeds(0,0)
-        print("Tournant: %s" %path[x])
-        turn(path[x])
+        print("Tournant: %s" %path[j])
+        turn(path[j])
 
     followSegment()
     reflectanceSensors.readLine(sensors)
@@ -267,21 +276,22 @@ def goToFinishLine():  #dernier loop pour refaire tout le labyrinthe en une fois
 def simplifyPath():
     global path
     global path_length
-    print(" Path1: %s" %path)
+
     if ((path_length < 3) or (path[path_length -2] != "B")):
         return
     total_angle = 0
 
     for i in range(4):
+        if(path[path_length - i] == "S"):
+            total_angle += 0
         if(path[path_length - i] == "R"):
             total_angle += 90
         if(path[path_length - i] == "L"):
             total_angle += 270
         if(path[path_length - i] == "B"):
+            print("if4: B")
             total_angle += 180
-
         total_angle = total_angle % 360
-
     if(total_angle == 0 ):
         path[path_length - 3] = 'S';
     if(total_angle == 90):
@@ -291,8 +301,11 @@ def simplifyPath():
     if(total_angle == 270):
         path[path_length - 3] = 'L';
 
-    print(" Path2: %s "%path)
+    for i in range(3):
+        path[path_length - i] = 0
+
     path_length -= 2
+
 
 
 
@@ -310,18 +323,6 @@ time.sleep_us(500)
 led.value(1)
 button.waitForButton()
 time.sleep(1)
-for i in range(80):
-    if(((i>10) and (i<=30)) or ((i>50) and (i <= 70))):  #entre 10 et 30 il tourne dans un sens entre 50 et 70 il tourne dans l'autre sens
-        print(i)
-        motors.setSpeeds(-TURN_SPEED,TURN_SPEED)
-    else:
-        print(i)
-        motors.setSpeeds(TURN_SPEED,-TURN_SPEED)
-
-    reflectanceSensors.calibrate()
-    time.sleep(0.02)
-motors.setSpeeds(0,0)
-button.waitForButton()
 
 for i in range(4):
 
@@ -345,14 +346,10 @@ for i in range(4):
             #Quand le capteur 0 passe sur une ligne noir above_line =1 . On fait ensuite un xor avec last_status
             count+= ABOVE_LINE(sensors[0]) ^ last_status
             last_status=ABOVE_LINE(sensors[0])
-            #print("COUNT: %s | Last_Status: %s " %(count, last_status))
 
     count = 0
     last_status =0
 turn("L")
-
-
-
 motors.setSpeeds(0,0)
 button.waitForButton()
 motors.setSpeeds(0,0)
@@ -367,4 +364,5 @@ while(True):
     while(True):
         button.waitForButton()
         goToFinishLine()
-        buzzer.play(">>a32")
+        buzzer.play("l16 cdegreg4")
+		
