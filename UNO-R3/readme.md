@@ -592,7 +592,68 @@ lcd.show()
 ```  
 
 ## Chargeur Accu
-Le chargeur Lipo dispose d'une entrée I2C.
+Le chargeur Lipo présent sur la carte dispose d'une entrée I2C, celui-ci à été branché sur le même bus que l'écran OLED.
+
+Il est donc possible d'interagir avec le chargeur pour récupérer des informations utiles. L'exemple ci-dessous reprend le code de `test_charger.py` et affiche des informations sur la console. D'autres scripts d'exemples pour le chargeur sont également disponibles.
+
+``` Python
+from unoextra import *
+from time import sleep
+
+ch = Charger()
+
+# Conversion des statut en texte
+CHARGING_TEXT = { CHARGING_NOT_CHARGING : "Not charging",
+				  CHARGING_PRE_CHARGE   : "< V BATLOWV",
+				  CHARGING_FAST_CHARGE  : "Fast Charging",
+				  CHARGING_DONE         : "Charge Termination Done" }
+
+VBUS_TEXT = { VBUS_NO_INPUT : "No input",
+			  VBUS_USB_SDP  : "USB Host SDP",
+			  VBUS_USB_CDP  : "USB CDP (1.5A)",
+			  VBUS_USB_DCP  : "USB DCP (3.25A)",
+			  VBUS_USB_DCP_MAX : "Adjustable High Voltage DCP (MaxCharge) (1.5A)",
+			  VBUS_USB_UNKNOW  : "Unknown Adapter (500mA)",
+			  VBUS_NOT_STD     : "Non-Standard Adapter (1A/2A/2.1A/2.4A)",
+			  VBUS_OTG         : "USB OTG" }
+
+CHARGING_FAULT_TEXT = { CHARGING_FAULT_NORMAL : "Normal",
+		CHARGING_FAULT_INPUT  : "Input fault. VBUS > V ACOV or VBAT < VBUS < V VBUSMIN (typical 3.8V)",
+		CHARGING_FAULT_THERMAL: "Thermal shutdown",
+		CHARGING_FAULT_TIMER  : "Charge Safety Timer Expiration" }
+
+NTC_FAULT_TEXT = { NTC_FAULT_NORMAL    : "Normal",
+				   NTC_FAULT_BUCK_COLD : "TS Cold in Buck mode",
+				   NTC_FAULT_BUCK_HOT  : "TS Hot in Buck mode",
+				   NTC_FAULT_BOOST_COLD: "TS Cold in Boost mode",
+				   NTC_FAULT_BOOST_HOT : "TS Hot in Boost mode" }
+
+# Activer la conversion ADC (1 sec)
+ch.config( conv_rate=True )
+
+while True:
+	# Afficher les statut connu
+	print( "-"*40 )
+	print( "USB Input Status      : %s" % ("USB500" if ch.usb_input_status == USB500 else "USB100") )
+	print( "VSYS regulation status: %s" % ("BAT < VSYSMIN" if ch.vsys_regulation else "BAT > VSYSMIN") )
+	print( "Power Good            : %s" % ch.power_good )
+	print( "CHARGING              : %s" % CHARGING_TEXT[ch.charging_status] )
+	print( "VBUS Status           : %s" % VBUS_TEXT[ch.vbus_status] )
+	print( "Watchdog fault        : %s" % ("Watchdog timer expiration" if ch.watchdog_fault else "Normal") )
+	print( "Boost fault           : %s" % ("VBUS overloaded in OTG, or VBUS OVP, or battery is too low in boost mode" if ch.boost_fault else "Normal") )
+	print( "Charging fault        : %s" % CHARGING_FAULT_TEXT[ch.charging_fault] )
+	print( "Battery Fault         : %s" % ("BATOVP (VBAT > V BATOVP)" if ch.battery_fault else "Normal") )
+	print( "NTC Fault             : %s" % NTC_FAULT_TEXT[ch.ntc_fault] )
+	print( "Battery Voltage       : %s" % ch.vbat )
+	print( "SYS Voltage           : %s" % ch.vsys )
+	print( "BUS Voltage           : %s" % ch.vbus )
+
+	sleep(1)
+	# Demander la mise-à-jour des statut
+	ch.update_status()
+	# Demander une mise-à-jour des fautes (Fault)
+	ch.update_fault()
+```
 
 ## Bus I2C, SPI, UART
 La carte expose les bus standard d'un Arduino ainsi que de nombreux bus en extra.
@@ -651,19 +712,69 @@ Cela signifie que le port série sur les broche Arduino 0 et 1 est __totalement 
 ## Exemple UEXT
 Le connecteur UEXT transporte plusieurs bus (I2C,SPI,UART) et de nombreux [modules UEXT sont disponibles chez Olimex Ltd](https://www.olimex.com/Products/Modules/) (et son réseau de revendeur)
 
-TODO
+Le GitHub [ESP8266-upy dispose d'une catégorie de pilotes MicroPython supportant le connecteur UEXT](https://github.com/mchobby/esp8266-upy/blob/master/docs/indexes/drv_by_intf_UEXT.md).
+
+Dans l'exemple ci-dessous, nous allons utiliser un [module MOD-IR-TEMP équipé du capteur de température MLX90614BAA de Melexis](https://shop.mchobby.be/fr/nouveaute/1621-mod-ir-temp-capteur-de-temperature-mlx90614baa-sans-contact-3232100016217-olimex.html) (I2C, capteur infrarouge, sans contact). Il s'agit d'un module UEXT produit par Olimex.
+
+Le capteur se branche à l'aide d'un simple câble UEXT comme sur l'image ci-dessous
+
+![Caractéristique de l'adaptateur](docs/_static/UNO-R3-UEXT.jpg)
+
+Ensuite, il faut installer la bibliothèque  `mlx90614.py` du capteur disponible sur [https://github.com/mchobby/esp8266-upy/tree/master/modirtemp](https://github.com/mchobby/esp8266-upy/tree/master/modirtemp) sur la carte MicroPython.
+
+Enfin, en utilisant la création du bus I2C avec le code ci-dessous (comme décris dans la section "__Connecteur UEXT__" ci-avant).
+
+``` python
+from machine import I2C
+i2c = I2C(2)
+```
+
+Une fois le bus I2C créer, l'utilisation du capteur MOD-IR-TEMP avec [les exemples de la bibliothèque `mlx90614.py`](https://github.com/mchobby/esp8266-upy/tree/master/modirtemp) devient trivial.
+
+``` python
+from machine import I2C, Pin
+from mlx90614 import MLX90614
+import time
+
+i2c = I2C( 2, freq=100000 )
+
+mlx = MLX90614( i2c )
+val = mlx.values # Human Friendly values
+print( "Ambiant T°: %s" % val[0] ) # Ambiant temperature
+print( "Object  T°: %s" % val[1] ) # Object temperature
+print( "" )
+print( '%-15s %-15s' % ("Ambiant T°","Object  T°") )
+while True:
+	print( '%-15s %-15s' % mlx.values )
+	time.sleep(1)
+``
+
+Ce qui produit les résultats suivants:
+
+```
+raw_values (Ambiant, Object) (24.26999, 32.26999)
+Ambiant T°: 24.270 C
+Object  T°: 32.270 C
+
+Ambiant T°     Object  T°    
+24.270 C        32.270 C       
+24.270 C        31.570 C       
+24.250 C        30.390 C       
+24.250 C        34.550 C       
+24.270 C        34.910 C      
+```
 
 ## Exemple RAPIDO
 Ce connecteur est compatible [Qwiic de Sparkfun](https://www.sparkfun.com/qwiic) ou [Stemma d'Adafruit](https://learn.adafruit.com/introducing-adafruit-stemma-qt/what-is-stemma) .
 
-TODO
+__CE POINT DOIT ENCORE ETRE DOCUMENTE__.
 
 # Où trouver des pilotes MicroPython
 
 Tous nos pilotes MicroPython sont stockés sur le GitHub [pyboard-driver](https://github.com/mchobby/pyboard-driver) ET le GitHub [esp8266-upy](https://github.com/mchobby/esp8266-upy). Les pilotes MicroPython fonctionnant sur ESP8266 fonctionneront aussi avec des Pyboard :-)
 
 # Liste d'achat
-* Adaptateur Pyboard-UNO-R3 @ MCHobby (bientôt disponible)
+* [Adaptateur Pyboard-UNO-R3 @ MCHobby](https://shop.mchobby.be/product.php?id_product=1745) (bientôt disponible)
 * [Cartes MicroPython Pyboard](https://shop.mchobby.be/fr/56-micropython)
 * [Carte prototypage Pyboard](https://shop.mchobby.be/fr/micropython/598-plaque-de-prototypage-pour-pyboard-3232100005983.html)
 * [Carte de prototypage Arduino](https://shop.mchobby.be/fr/shields/12-shield-de-prototypage-pour-arduino-3232100000124-adafruit.html)
