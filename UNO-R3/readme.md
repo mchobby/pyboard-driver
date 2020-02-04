@@ -1,18 +1,14 @@
 [This file also exists in ENGLISH here](readme_ENG.md)
 
-# ..: VERSION ALPHA :..
+# PYBOARD-UNO-R3 : l'adaptateur Pyboard vers UNO-R3
 
-__Ce projet est encore en cours de modélisation et évolue rapidement.__
+Programmer un Pyboard en Python c'est génial, pourvoir le faire sur une carte avec un brochage bien maîtriser et populaire comme celui de l'Arduino UNO R3 serait encore mieux!
 
-__D'autres informations seront publiées prochainement.__
-
-# Adaptateur Pyboard vers UNO-R3
-
-Voici une proposition de raccordement, brochage et adaptateur pour Arduino R3 sur une carte PyBoard.
+Le projet propose une carte d'extension pratique équipé de plusieurs interfaces transformant votre Pyboard en véritable laboratoire de développement.
 
 ![Caractéristique de l'adaptateur](docs/_static/UNO-R3-description.jpg)
 
-L'intérêt d'un adaptateur UNO-R3 c'est qu'il permet de brancher des shields Arduino (ex: shield moteur Adafruit) que l'on peut contrôler à partir d'une Pyboard et de scripts Python.
+L'intérêt d'un [adaptateur PYBOARD-UNO-R3](https://shop.mchobby.be/fr/micropython/1745-adaptateur-pyboard-vers-uno-r3-extra-3232100017450.html) c'est qu'il permet de brancher des shields Arduino (ex: shield moteur Adafruit) que l'on peut contrôler à partir d'une Pyboard et de scripts Python.
 
 Par ailleurs, la carte contient de nombreuses fonctionnalités intéressantes permettant de transformer rapidement une Pyboard en environnement de prototypage/apprentissage très facile à prendre en main (voir graphique ci-dessus).
 
@@ -23,9 +19,11 @@ Pour connecter an shield Arduino sur votre Pyboard, vous aurez besoin de savoir 
 
 Cette interface est prévue pour les produits compatibles 3.3V (voir broche IORef sur extension Arduino R3)
 
-Charger Note: Jaune fixe + Vert clignotant = No battery
+Le pin mapping Pyboard vers UNO-R3 couvre les spécifications et les fonctions de l'UNO-R3!. __Le mapping est compatible avec les connectiques UEXT, NCD, QWIIC déjà proposés sur le dépôt [Pyboard-Driver](https://github.com/mchobby/pyboard-driver)__.
 
-Le raccordement proposé ci-dessous couvre toutes les broches de la spécification R3!. __Le mapping est compatible avec UEXT, NCD, QWIIC déjà proposés sur ce dépôt__.
+Note à propos du chargeur:
+* Jaune fixe + Vert clignotant = pas d'accumulateur.
+* The chargeur peut également être utilisé avec des pack d'accu NiMh de 3 battons, plus sûr pour nos enfants. Cependant, le cycle de recharge ne se termine pas.
 
 ## Schéma
 * [PYBV11_to_ARDUINO_UNO_R3.pdf](docs/_static/Schematic_V1.0-_PYBV11_to_ARDUINO_UNO_R3.pdf) brochage
@@ -152,7 +150,7 @@ while True:
     sleep( 0.5 ) # attendre 1/2 seconde
 ```
 
-Il ne reste plus qu'a placer la broche à la masse à l'aide d'un switch (ou autre dispositif).
+Il ne reste plus qu'a placer la broche à la masse ou à 3.3V pour voir la modification de l'état affiché sur la session REPL.
 
 __Résistance pull-up interne:__
 
@@ -216,7 +214,7 @@ _note:_ pour une plus grande stabilité, il est parfois nécessaire d'ajouter un
 
 __Lecture Analogique 12 bits:__
 
-Par défaut, le convertisseur fonctionne en 12 bits, cela signifie qu'il retourne une valeur numérique entre 0 et 4096. La résolution est donc de 3.3/4096 = 0.0008 V (8 mV)!
+Par défaut, le convertisseur fonctionne en 12 bits, cela signifie qu'il retourne une valeur numérique entre 0 et 4095. Avec 4096 valeurs possibles, la résolution est donc de 3.3/4096 = 0.0008 V (8 mV)!
 
 Cette précision est équivalente aux Arduino Zero, Due et MKR.
 
@@ -243,9 +241,9 @@ from pyb import ADC
 from uno import *
 from time import sleep
 
-a3 = ADC(PIN_A3) # same as ADC("X22")
+a3 = ADC(PIN_A3) # identique à  ADC("X22")
 while True:
-	# lecture en résultion 10 bits
+	# lecture en résolution 10 bits
 	val = analog_read(a3) # 0 à 1024
 	volts = val/1024*3.3
 	print( "read: %i  Volts: %3f v" % (val,volts) )
@@ -253,7 +251,7 @@ while True:
 ```
 
 __Plus d'information:__
-Le traitement des entrées analogique est un sujet relativement vaste avec des possibilités d'acquisition de signal!
+Le traitement des entrées analogiques est un sujet relativement vaste avec des possibilités d'acquisition de signal!
 Vous trouverez plus de détails sur ce sujet dans les références suivantes:
 * [Livre "MicroPython et Pyboard", Meurisse D. paru aux Editions ENI](https://www.editions-eni.fr/livre/micropython-et-pyboard-python-sur-microcontroleur-de-la-prise-en-main-a-l-utilisation-avancee-9782409022906)
 * [Classe ADC sur MicroPython.org](http://docs.micropython.org/en/latest/library/pyb.ADC.html) (_Anglais_)
@@ -266,7 +264,7 @@ __Résolution 8 bits par défaut:__
 
 Sur 8 bit, il est possible de fixer une valeur entre 0 et 255 sur le convertiseur.
 
-Pour produire une tension de 2.3V, il faut fournir la valeur (255/3.3)*2.6V = 201 au convertisseur DAC
+Pour produire une tension de 2.3V, il faut fournir la valeur (255/3.3)x2.6V = 201 au convertisseur DAC
 
 ``` python
 from pyb import DAC
@@ -338,7 +336,7 @@ Une fois une broche PWM initialisée, il est possible de mettre le signal au niv
 
 La broche reste configurée en sortie!
 
-Il est possible d'utiliser la méthode 'pwm13.release()' pour reconfigurer la broche en entrée (donc haute impédance) et ainsi cesser toute opération PWM sur la broche.
+Il est possible d'utiliser la méthode `pwm13.release()` pour reconfigurer la broche en entrée (donc haute impédance) et ainsi cesser toute opération PWM sur la broche.
 
 ``` python
 from pwm import *
@@ -661,7 +659,11 @@ Les notes ci-dessous expliquent comment créer les différents bus nécessaires.
 
 __Connecteur R3:__ créer les bus standards
 
-La bibliothèque `uno.py` décrite ci-avant permet de créer simplement les bus Arduino à l'aide des fonctions utilitaires `i2c_bus()`,  `i2c_analog_bus()`, `uart_bus()` ou `spi_bus`.
+La bibliothèque `uno.py` décrite ci-avant permet de créer simplement les bus Arduino à l'aide des fonctions utilitaires suivantes:
+* `i2c_bus()` pour le bus I2C disponible au dessus de la broche 13 (I2C matériel).
+* `i2c_analog_bus()` pour le bus I2C disponible sur sur les broches A4 et A5 (I2C Logiciel, notez que vous avze deux bus I2C distincts).
+* `uart_bus()` Pour l'UART disponible sur les broches 0 et 1.
+* `spi_bus` pour le bus SPI (ustilisé par les écrans TFT).
 
 Il reste néanmoins possible de créer les différents bus à l'aide de l'API machine et les noms de broche de la Pyboard (voir graphique du brochage) comme indiqué ci-dessous.
 
@@ -678,7 +680,7 @@ i2c = I2C( sda=Pin("X5"), scl=Pin("X6") )
 from machine import SPI
 spi = SPI(2)
 
-# Broches 1 et 2 (indépendant)
+# Port série sur 0 et 1 (totalement libre d'usage)
 from machine import UART
 uart = UART(6, 9600) # UART à 9600 bauds
 ```
@@ -747,7 +749,7 @@ print( '%-15s %-15s' % ("Ambiant T°","Object  T°") )
 while True:
 	print( '%-15s %-15s' % mlx.values )
 	time.sleep(1)
-``
+```
 
 Ce qui produit les résultats suivants:
 
