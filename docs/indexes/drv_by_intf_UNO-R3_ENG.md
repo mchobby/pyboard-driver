@@ -11,7 +11,7 @@ Arduino Uno R3 compatible connector for the Pyboard
   <tr><td><a href="../../../../tree/master/UNO-R3">UNO-R3</a></td>
       <td><strong>Components</strong> : <br />
       <strong>Interfaces</strong> : UNO-R3<br />
-<small>(ALPHA version) Create a 4 paws servo-motor walking robot with a PCA9685 PWM controler.</small><br/><br />
+<small>Interface Arduino UNO R3 for the Pyboard</small><br/><br />
       <strong>Tested with</strong> : PYBOARD<br />
       <strong>Manufacturer</strong> : <br />
       </td>

@@ -71,7 +71,7 @@ Explore it by:
   <tr><td><a href="../../tree/master/UNO-R3">UNO-R3</a></td>
       <td><strong>Components</strong> : <br />
       <strong>Interfaces</strong> : UNO-R3<br />
-<small>(ALPHA version) Create a 4 paws servo-motor walking robot with a PCA9685 PWM controler.</small><br/><br />
+<small>Interface Arduino UNO R3 for the Pyboard</small><br/><br />
       <strong>Tested with</strong> : PYBOARD<br />
       <strong>Manufacturer</strong> : <br />
       </td>
@@ -104,6 +104,17 @@ Explore it by:
 <ul>
 <li>See <a href="https://shop.mchobby.be/fr/feather-adafruit/957-feather-ethernet-wing-3232100009578-adafruit.html">Ethernet FeatherWing @ MCHobby</a></li>
 <li>See <a href="https://www.adafruit.com/product/3201">Adafruit Ethernet FeatherWing @ Adafruit</a></li>
+</ul>
+      </td>
+  </tr>
+  <tr><td><a href="../../tree/master/keypad-4x4">keypad-4x4</a></td>
+      <td><strong>Components</strong> : <br />
+      <strong>Interfaces</strong> : GPIO<br />
+<small>Use a 4x4 keypad with a MicroPython Pyboard microcontroler</small><br/><br />
+      <strong>Tested with</strong> : PYBOARD<br />
+      <strong>Manufacturer</strong> : <br />
+<ul>
+<li>See <a href="https://shop.mchobby.be/fr/tactile-flex-pot-softpad/83-clavier-16-touches-souple-3232100000834.html">Clavier 16 touches souple @ MCHobby</a></li>
 </ul>
       </td>
   </tr>
@@ -164,20 +175,13 @@ Explore it by:
   </tr>
   <tr><td><a href="../../tree/master/servorobot">servorobot</a></td>
       <td><strong>Components</strong> : PCA9685<br />
-      <strong>Interfaces</strong> : <br />
-<small>Create Pyboard's based walking robot with micro Servo Robot and PWM Driver.</small><br/><br />
-      <strong>Tested with</strong> : PYBOARD<br />
-      <strong>Manufacturer</strong> : ADAFRUIT<br />
-      </td>
-  </tr>
-  <tr><td><a href="../../tree/master/servorobot">servorobot</a></td>
-      <td><strong>Components</strong> : PCA9685<br />
       <strong>Interfaces</strong> : I2C<br />
 <small>Create a 4 paws servo-motor walking robot with a PCA9685 PWM controler.</small><br/><br />
       <strong>Tested with</strong> : PYBOARD<br />
-      <strong>Manufacturer</strong> : <br />
+      <strong>Manufacturer</strong> : ADAFRUIT<br />
 <ul>
 <li>See <a href="https://shop.mchobby.be/fr/moteur/913-allbot-patte-2-servo-vr012-3232100009134-velleman.html">AllBot Patte 2 Servo @ MCHobby</a></li>
+<li>See <a href="https://shop.mchobby.be/fr/breakout/89-adafruit-controleur-pwm-servo-16-canaux-12-bits-i2c-interface-pca9685-3232100000896-adafruit.html">PWM Driver (PCA9685) @ MCHobby</a></li>
 </ul>
       </td>
   </tr>

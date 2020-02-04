@@ -11,7 +11,7 @@ Connecteur compatible Arduino UNO R3 pour la Pyboard
   <tr><td><a href="../../../../tree/master/UNO-R3">UNO-R3</a></td>
       <td><strong>Composants</strong> : <br />
       <strong>Interfaces</strong> : UNO-R3<br />
-<small>(ALPHA version) Arduino UNO R3 compatible interface for Pyboard</small><br/><br />
+<small>Arduino UNO R3 compatible interface for Pyboard</small><br/><br />
       <strong>Testé avec</strong> : PYBOARD<br />
       <strong>Fabricant</strong> : <br />
       </td>

@@ -165,8 +165,8 @@
 			"manufacturers" : [],
 			"plateforms"    : ["PYBOARD"],
 			"ressources"    : [ ],
-			"descr"	: {"FR" : "(ALPHA version) Arduino UNO R3 compatible interface for Pyboard",
-								 "ENG": "(ALPHA version) Create a 4 paws servo-motor walking robot with a PCA9685 PWM controler." }
+			"descr"	: {"FR" : "Arduino UNO R3 compatible interface for Pyboard",
+								 "ENG": "Interface Arduino UNO R3 for the Pyboard" }
 		},
 		{	"folder"        : "usbhid",
 			"components"    : [],

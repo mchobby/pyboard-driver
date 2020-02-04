@@ -78,7 +78,7 @@ Explorer par:
   <tr><td><a href="../../tree/master/UNO-R3">UNO-R3</a></td>
       <td><strong>Composants</strong> : <br />
       <strong>Interfaces</strong> : UNO-R3<br />
-<small>(ALPHA version) Arduino UNO R3 compatible interface for Pyboard</small><br/><br />
+<small>Arduino UNO R3 compatible interface for Pyboard</small><br/><br />
       <strong>Testé avec</strong> : PYBOARD<br />
       <strong>Fabricant</strong> : <br />
       </td>
@@ -111,6 +111,17 @@ Explorer par:
 <ul>
 <li>Voir <a href="https://shop.mchobby.be/fr/feather-adafruit/957-feather-ethernet-wing-3232100009578-adafruit.html">Ethernet FeatherWing @ MCHobby</a></li>
 <li>Voir <a href="https://www.adafruit.com/product/3201">Adafruit Ethernet FeatherWing @ Adafruit</a></li>
+</ul>
+      </td>
+  </tr>
+  <tr><td><a href="../../tree/master/keypad-4x4">keypad-4x4</a></td>
+      <td><strong>Composants</strong> : <br />
+      <strong>Interfaces</strong> : GPIO<br />
+<small>Utiliser un keypad 4x4 avec un microcontroleur MicroPython Pyboard</small><br/><br />
+      <strong>Testé avec</strong> : PYBOARD<br />
+      <strong>Fabricant</strong> : <br />
+<ul>
+<li>Voir <a href="https://shop.mchobby.be/fr/tactile-flex-pot-softpad/83-clavier-16-touches-souple-3232100000834.html">Clavier 16 touches souple @ MCHobby</a></li>
 </ul>
       </td>
   </tr>
@@ -171,20 +182,13 @@ Explorer par:
   </tr>
   <tr><td><a href="../../tree/master/servorobot">servorobot</a></td>
       <td><strong>Composants</strong> : PCA9685<br />
-      <strong>Interfaces</strong> : <br />
-<small>Créer un robot marcheur à base de micro servo moteur et d'une Pyboard.</small><br/><br />
-      <strong>Testé avec</strong> : PYBOARD<br />
-      <strong>Fabricant</strong> : ADAFRUIT<br />
-      </td>
-  </tr>
-  <tr><td><a href="../../tree/master/servorobot">servorobot</a></td>
-      <td><strong>Composants</strong> : PCA9685<br />
       <strong>Interfaces</strong> : I2C<br />
 <small>Créer un robot à 4 pattes avec des servo-moteurs et un contrôleur PWM PCA9685.</small><br/><br />
       <strong>Testé avec</strong> : PYBOARD<br />
-      <strong>Fabricant</strong> : <br />
+      <strong>Fabricant</strong> : ADAFRUIT<br />
 <ul>
 <li>Voir <a href="https://shop.mchobby.be/fr/moteur/913-allbot-patte-2-servo-vr012-3232100009134-velleman.html">AllBot Patte 2 Servo @ MCHobby</a></li>
+<li>Voir <a href="https://shop.mchobby.be/fr/breakout/89-adafruit-controleur-pwm-servo-16-canaux-12-bits-i2c-interface-pca9685-3232100000896-adafruit.html">PWM Driver (PCA9685) @ MCHobby</a></li>
 </ul>
       </td>
   </tr>
