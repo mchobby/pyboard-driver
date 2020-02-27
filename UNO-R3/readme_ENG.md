@@ -597,6 +597,8 @@ The Lipo charger available on the PYBOARD-UNO-R3 does have a I2C interface. The 
 
 User code can interact with the charger to grab useful informations. The following `test_charger.py` example extract information and displays it on the REPL console. Other examples code dedicated to the charger are available in the repository.
 
+__The charger must be powered to respond on I2C bus. The charger can be powered via its microUSB connector or the battery connector.__
+
 ``` Python
 from unoextra import *
 from time import sleep

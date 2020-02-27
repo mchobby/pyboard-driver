@@ -23,7 +23,7 @@ Le pin mapping Pyboard vers UNO-R3 couvre les spécifications et les fonctions d
 
 Note à propos du chargeur:
 * Jaune fixe + Vert clignotant = pas d'accumulateur.
-* The chargeur peut également être utilisé avec des pack d'accu NiMh de 3 battons, plus sûr pour nos enfants. Cependant, le cycle de recharge ne se termine pas.
+* Le chargeur peut également être utilisé avec des pack d'accu NiMh de 3 battons, plus sûr pour nos enfants. Cependant, le cycle de recharge ne se termine pas.
 
 ## Schéma
 * [PYBV11_to_ARDUINO_UNO_R3.pdf](docs/_static/Schematic_V1.0-_PYBV11_to_ARDUINO_UNO_R3.pdf) brochage
@@ -593,6 +593,8 @@ lcd.show()
 Le chargeur Lipo présent sur la carte dispose d'une entrée I2C, celui-ci à été branché sur le même bus que l'écran OLED.
 
 Il est donc possible d'interagir avec le chargeur pour récupérer des informations utiles. L'exemple ci-dessous reprend le code de `test_charger.py` et affiche des informations sur la console. D'autres scripts d'exemples pour le chargeur sont également disponibles.
+
+__Le chargeur doit être mis sous tension pour répondre le bus I2C. Cela doit se faire via connecteur microUSB ou via le connecteur d'accu.__
 
 ``` Python
 from unoextra import *
