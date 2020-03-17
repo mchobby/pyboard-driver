@@ -19,7 +19,7 @@ Voici une description des bibliothèques disponibles dans ce dépôt. <strong>Ch
 
 Explorer par:
 * Interface:
-[FEATHERWING](docs/indexes/drv_by_intf_FEATHERWING.md), [GPIO](docs/indexes/drv_by_intf_GPIO.md), [HAT](docs/indexes/drv_by_intf_HAT.md), [I2C](docs/indexes/drv_by_intf_I2C.md), [NCD](docs/indexes/drv_by_intf_NCD.md), [ONEWIRE](docs/indexes/drv_by_intf_ONEWIRE.md), [QWIIC](docs/indexes/drv_by_intf_QWIIC.md), [SPI](docs/indexes/drv_by_intf_SPI.md), [STEMMA](docs/indexes/drv_by_intf_STEMMA.md), [UART](docs/indexes/drv_by_intf_UART.md), [UEXT](docs/indexes/drv_by_intf_UEXT.md), [UNO-R3](docs/indexes/drv_by_intf_UNO-R3.md)
+[FEATHERWING](docs/indexes/drv_by_intf_FEATHERWING.md), [GPIO](docs/indexes/drv_by_intf_GPIO.md), [HAT](docs/indexes/drv_by_intf_HAT.md), [I2C](docs/indexes/drv_by_intf_I2C.md), [NCD](docs/indexes/drv_by_intf_NCD.md), [ONEWIRE](docs/indexes/drv_by_intf_ONEWIRE.md), [PYBSTICK](docs/indexes/drv_by_intf_PYBSTICK.md), [QWIIC](docs/indexes/drv_by_intf_QWIIC.md), [SPI](docs/indexes/drv_by_intf_SPI.md), [STEMMA](docs/indexes/drv_by_intf_STEMMA.md), [UART](docs/indexes/drv_by_intf_UART.md), [UEXT](docs/indexes/drv_by_intf_UEXT.md), [UNO-R3](docs/indexes/drv_by_intf_UNO-R3.md)
 * Fabriquant:
 [ADAFRUIT](docs/indexes/drv_by_man_ADAFRUIT.md), [GARATRONIC](docs/indexes/drv_by_man_GARATRONIC.md), [MCHOBBY](docs/indexes/drv_by_man_MCHOBBY.md), [NCD](docs/indexes/drv_by_man_NCD.md), [NONE](docs/indexes/drv_by_man_NONE.md), [OLIMEX](docs/indexes/drv_by_man_OLIMEX.md), [POLOLU](docs/indexes/drv_by_man_POLOLU.md), [SPARKFUN](docs/indexes/drv_by_man_SPARKFUN.md)
 
@@ -49,6 +49,14 @@ Explorer par:
 <ul>
 <li>Voir <a href="https://ncd.io/">UEXT breakout @ National Control Device</a></li>
 </ul>
+      </td>
+  </tr>
+  <tr><td><a href="../../tree/master/PYBStick">PYBStick</a></td>
+      <td><strong>Composants</strong> : <br />
+      <strong>Interfaces</strong> : PYBSTICK<br />
+<small>PYBStick: une carte MicroPython abordable pour tous projets</small><br/><br />
+      <strong>Testé avec</strong> : PYBSTICK<br />
+      <strong>Fabricant</strong> : <br />
       </td>
   </tr>
   <tr><td><a href="../../tree/master/QWIIC">QWIIC</a></td>

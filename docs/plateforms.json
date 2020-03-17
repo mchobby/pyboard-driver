@@ -8,6 +8,11 @@
 					            "ENG" : "MicroPython Pyboard-D" },
 				  "url" : "https:\/\/shop.mchobby.be\/fr\/56-micropython"
 				},
+	"PYBSTICK" :
+				{ "descr" : { "FR" : "MicroPython PYBStick",
+					            "ENG" : "MicroPython PYBStick" },
+				  "url" : "none"
+				},
 	"PYB405" :
 			{ "descr" : { "FR" : "MicroPython NadHat PYB405",
 				            "ENG" : "MicroPython NadHat PYB405" },

@@ -42,6 +42,10 @@
 			{ "descr" : { "FR" : "Connecteur compatible Arduino UNO R3 pour la Pyboard",
 										"ENG" : "Arduino Uno R3 compatible connector for the Pyboard" }
 			},
+	"PYBSTICK":
+			{ "descr" : { "FR" : "Connecteur de la carte MicroPython PYBStick",
+										"ENG" : "PYBStick MicroPython board connector" }
+			},
 	"HAT":
 			{ "descr" : { "FR" : "Connecteur HAT Raspberry-Pi pour les extensions utilisable avec la NadHat PYB405 (Variante Pyboard de Garatronic.fr)",
 										"ENG" : "Raspberry-Pi's HAT  connector to use with the NadHat PYB405 (Pyboard variant from Garatronic.fr)" }

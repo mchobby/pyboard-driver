@@ -168,6 +168,15 @@
 			"descr"	: {"FR" : "Arduino UNO R3 compatible interface for Pyboard",
 								 "ENG": "Interface Arduino UNO R3 for the Pyboard" }
 		},
+		{	"folder"        : "PYBStick",
+			"components"    : [],
+			"interfaces"    : ["PYBSTICK"],
+			"manufacturers" : [],
+			"plateforms"    : ["PYBSTICK"],
+			"ressources"    : [ ],
+			"descr"	: {"FR" : "PYBStick: une carte MicroPython abordable pour tous projets",
+								 "ENG": "PYBStick: an affordable MicroPython board for all projects" }
+		},
 		{	"folder"        : "usbhid",
 			"components"    : [],
 			"interfaces"    : [],
