@@ -14,14 +14,14 @@ La PYBStick 26 existe en 3 modèle: Lite, Standard et Pro
 
 # Information technique
 
-## PYBStick 26 Lite
+## PYBStick Lite 26
 
-![Brochage de la PYBStick 26 Lite](docs/_static/PYBStick-LITE-26.jpg)
+![Brochage de la PYBStick Lite 26](docs/_static/PYBStick-LITE-26.jpg)
 
 Aussi disponible en haute définition sur le lien [PYBStick-LITE-26.png](docs/_static/PYBStick-LITE-26.png)
 
 ## Schéma
-* Schéma [PYBStick 26 Lite.pdf](docs/_static/Schematic_V1.0-PYBStick26Lite.pdf)
+* Schéma [PYBStick Lite 26.pdf](docs/_static/Schematic_V1.0-PYBStick26Lite.pdf)
 * Assignation des broches [PYBStick-pinout.ods](docs/_static/PYBStick-pinout.ods) (_LibreOffice Calc_)
 
 ## Logique 3.3V
