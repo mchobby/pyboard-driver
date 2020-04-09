@@ -209,9 +209,39 @@ La PYBStick Lite ne dispose pas de sortie analogique (DAC).
 
 ## Sortie PWM
 
-TODO
+La carte PYBStick 26 expose de nombreuses broches PWM (Pulse Modulation Width = Modulation de largeur d'impulsion) qu'il est très facile de piloter à l'aide de la bibliothèque [`lib/pwm.py`](lib/pwm.py).
 
-La carte PYBStick 26 expose de nombreuses broches PWM (Pulse Modulation Width = Modulation de largeur d'impulsion) qu'il est très facile de piloter à l'aide de la bibliothèque `pwm.py`.
+![LED en sortie](docs/_static/pybstick-output-led.jpg)
+
+```
+>>> from pwm import *
+>>> p = pwm( "S8" )
+>>> # Set 33% of duty cycle
+>>> p.percent = 33
+```
+L'exemple suivant permet de commander l'intensité de la LED sur la broche S8 en fonction de la position du potentiomètre branché sur la S19.
+
+![LED en PWM](docs/_static/pybstick-pwm-led.jpg)
+
+```
+from pwm import *
+from pyb import ADC
+from time import sleep
+
+p = pwm("S8")
+adc = ADC("S19")
+
+while True:
+	p.percent = int( adc.read()*100/4095 )
+	sleep( 0.300 )
+```
+
+Ce script est disponible dans les exemples sous le nom [`pwm_led.py`](examples/pwm_led.py)
+
+Ressources:
+* L'exemple [`pwm_all.py`](examples/pwm_all.py) permet de tester une à une (en pressant le bouton USR) toutes les broches PWM de la PYBStick.
+* MicroPython.org propose la page "[Hardware timer](https://docs.micropython.org/en/latest/wipy/tutorial/timer.html)".
+* Le livre ["MicroPython et Pyboard" paru aux éditions Eni](https://www.editions-eni.fr/livre/micropython-et-pyboard-python-sur-microcontroleur-de-la-prise-en-main-a-l-utilisation-avancee-9782409022906) consacre une section entière à la gestion des Timers, Channel, PWM, cycle utile.
 
 ## NeoPixel
 
@@ -222,12 +252,6 @@ La carte est équipée d'une LED WS2812b (également appelée [NéoPixel dans le
 __Dépendance:__ la bibliothèque `ws2812` doit être présente sur la carte. Voir la section dépendance pour localiser la bibliothèque.
 
 Voir le fichier d'exemple [`test_led.py`](examples/test_led.py) et sa [vidéo sur YouTube](https://youtu.be/NBv3lBmyQYc)
-
-## Buzzer
-
-La carte PYBStick peu être équipé d'un buzzer pour produire produire des sons et des notes.
-
-TODO - s'insiprer de Pyboard-UNO-R3
 
 ## Servo
 
