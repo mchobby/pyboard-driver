@@ -255,15 +255,49 @@ Voir le fichier d'exemple [`test_led.py`](examples/test_led.py) et sa [vidéo su
 
 ## Servo
 
-TODO - a revoir et compléter
+La PYBStick expose 3 sorties permettant de contrôler des [servo-moteurs modélistes](https://fr.wikipedia.org/wiki/Servomoteur).
 
-Il y a 4 sorties Servo prêt à l'emploi sur la PYBOARD-UNO-R3 pour commander un Servo.
+__Alimentation:__ Il est possible d'alimenter un ou deux micro-servo par l'intermédiaire du port USB de la PYBStick (via un ordinateur). Cependant cela risque fort d'injecter pléthore de parasite sur l'alimentation de votre ordinateur et de la PYBStick sans compter qu'ils sont aussi énergivores (un courant de blocage de 500mA n'est pas une exception). Voyez la proposition d'alimentation plus bas.
 
-Les servo sont positionnés entre -90 et +90 degrés. A l'initialisation, le servo moteur est positionné à 0 degrés.
+![PYBStick et Servo-moteur](docs/_static/pybstick-servo.jpg)
 
-Voir le fichier d'exemple [`test_servo.py`](examples/test_servo.py) et sa [vidéo sur YouTube](https://youtu.be/0a2VYjg0XG8).
+![Servo-moteur connexion](docs/_static/motor-servo-connectors.png)
 
-Brancher deux servo-moteurs sur les sorties SERVO1 et SERVO2 puis saisir le code suivant:
+Les servos sont positionnés entre -90 et +90 degrés. A l'initialisation, le servo-moteur est positionné à 0 degrés.
+
+```
+from pyb import Servo
+from time import sleep
+
+s = Servo(1)    # initialise l angle à 0°
+time.sleep( 1 ) # Attendre 1 seconde
+s.angle( 90 )
+time.sleep( 1 )
+s.angle( -90 )
+time.sleep( 1 )
+s.angle( -90 )
+```
+
+Alimentation externe pour les servo-moteurs.
+
+![Pyboard et Servo-moteur](docs/_static/pybstick-servo2.jpg)
+
+Brancher deux servo-moteurs sur les sorties SERVO(1) et SERVO(4) puis saisir le code suivant pour coordonner le mouvement des deux servo-moteurs.
+
+```
+from pyb import Servo
+from time import sleep
+s1 = Servo(1)
+s1.angle(+90)
+s4 = Servo(4)
+s4.angle(-90)
+# déplacement coordonné
+s1.angle(-90,4000) # Déplacement à -90 pendant 4000 ms
+s4.angle(+90,4000) # Déplacement à +90 pendant 4000 ms
+sleep( 4 ) # Attendre fin de déplacement
+s1.angle(0)
+s4.angle(0)
+```
 
 ## Bus I2C, SPI, UART
 
