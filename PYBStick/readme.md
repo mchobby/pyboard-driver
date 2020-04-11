@@ -21,7 +21,7 @@ La PYBStick 26 existe en 3 modèle: Lite, Standard et Pro
 Aussi disponible en haute définition sur le lien [PYBStick-LITE-26.png](docs/_static/PYBStick-LITE-26.png)
 
 ## Schéma
-* Schéma [PYBStick Lite 26.pdf](docs/_static/Schematic_V1.0-PYBStick26Lite.pdf)
+* Schéma [PYBStick Lite 26.pdf](docs/Schema_PYBSTICK26_LITE-STD_r2.pdf)
 * Assignation des broches [PYBStick-pinout.ods](docs/_static/PYBStick-pinout.ods) (_LibreOffice Calc_)
 
 ## Logique 3.3V
@@ -31,14 +31,13 @@ TODO
 # Bibliothèque
 
 ## Dépendances
-TODO : a revoir
 
 Les bibliothèques suivantes sont nécessaires pour exploiter toutes les fonctionnalités de la carte. Les bibliothèques doivent être accessibles dans le système de fichiers de la carte MicroPython (à la racine ou dans un sous-répertoire `lib`).
 
-* ws2812.py : contrôler des NeoPixels avec le bus SPI [disponible ici (esp8266-upy GitHub)](https://github.com/mchobby/esp8266-upy/tree/master/neopixel)
+* __ws2812.py__ : contrôler des NeoPixels avec le bus SPI [disponible ici (esp8266-upy GitHub)](https://github.com/mchobby/esp8266-upy/tree/master/neopixel)
 
 ## Bibliothèque "pwm"
-La bibliothèque `pwm.py` contient des définitions et fonctions permettant de facilement contrôler les différentes broches PWM d'une PYBStick.
+La bibliothèque [`pwm.py`](lib/pwm.py) contient des définitions et fonctions permettant de facilement contrôler les différentes broches PWM d'une PYBStick.
 
 L'utilisation de cette bibliothèque est décrite plus bas dans la section "Sorties PWM".
 
@@ -82,6 +81,36 @@ def rappel():
 Hello
 Hello
 Hello
+```
+
+## LEDs utilisateurs
+
+La PYBStick, tout comme la Pyboard originale dispose de 4 LEDs de couleurs qui peuvent être contrôlées depuis le script utilisateur.
+
+![Bouton utilisateur](docs/_static/pybstick-user-button.jpg)
+
+```
+>>> from pyb import LED
+>>>
+>>> l1 = LED(1) # P5 = Red / Rouge
+>>> l1.on()     # allumer
+>>> l1.off()    # éteindre
+>>> l1.toggle() # Inverser état
+>>>
+>>> l2 = LED(2) # P4 = Green / Vert
+>>> l2.on()     # allumer
+>>> l2.off()    # éteindre
+>>> l2.toggle() # Inverser état
+>>>
+>>> l3 = LED(3) # P3 = Orange
+>>> l3.on()
+>>> l3.off()
+>>> l3.intensity( 20 ) # Intensité entre 0 et 255. l3 et l4 uniquement.
+>>>
+>>> l4 = LED(4) # P4 = Blue / Bleu
+>>> l4.on()
+>>> l4.off()
+>>> l4.intensity( 20 ) # Intensité entre 0 et 255. l3 et l4 uniquement.
 ```
 
 ## Broche Numérique - en entrée
@@ -200,7 +229,7 @@ Quelques exemples complémentaires fournissent de nombreuses autres informations
 * [`adc_sampling.py`](examples/adc_sampling.py) effectue un échantillonnage 8 bits sur une entrée.
 * Plus d'information sur [la page ADC de MicroPython.org](https://docs.micropython.org/en/latest/library/pyb.ADC.html)
 
-__Parasites:__ un potentiomètre étant constitué d'un curseur se déplaçant le long d'une résistance, il n'est pas rare d'avoir des faux-contact et effet transitoire. Si ceux-ci sont faible et très court, ils peuvent néanmoins planter un convertisseur ADC (démontré sur un ADC1115). Si vous expérimentez ce type de désagrément, placez alors une capacité de 10nF entre la sortie du signal et la masse :-)
+__Parasites:__ un potentiomètre étant constitué d'un curseur se déplaçant le long d'une résistance, il n'est pas rare d'avoir des faux-contacts et effets transitoires. Si ceux-ci sont faible et très court, ils peuvent néanmoins planter un convertisseur ADC (démontré sur un ADC1115). Si vous expérimentez ce type de désagrément, placez alors une capacité de 10nF entre la sortie du signal et la masse :-)
 
 ## Sortie Analogique (DAC)
 
@@ -245,13 +274,60 @@ Ressources:
 
 ## NeoPixel
 
-TODO - Revoir et corriger
-
-La carte est équipée d'une LED WS2812b (également appelée [NéoPixel dans les produits Adafruit Industries](https://shop.mchobby.be/fr/55-neopixels-et-dotstar)). Il s'agit de LED RVB intelligentes pouvant être chaînée. La carte PYBOARD-UNO-R3 dispose d'un convertisseur de niveau logique pour commander cette LED sous 5V afin d'avoir un maximum de luminosité et des couleurs vives. La carte dispose également d'une sortie permettant d'ajouter d'autres LEDs.
-
 __Dépendance:__ la bibliothèque `ws2812` doit être présente sur la carte. Voir la section dépendance pour localiser la bibliothèque.
 
-Voir le fichier d'exemple [`test_led.py`](examples/test_led.py) et sa [vidéo sur YouTube](https://youtu.be/NBv3lBmyQYc)
+Grâce à son bus SPI, la PYBStick peut contrôler des LEDs WS2812b (également appelée [NéoPixel dans les produits Adafruit Industries](https://shop.mchobby.be/fr/55-neopixels-et-dotstar)). Il s'agit de LED RVB intelligentes pouvant être chaînée dont le protocole exploitant un seul signal de donné à 800 KHz exige une maîtrise totale du timing durant l'envoi des données. [Cette vidéo YouTube](https://youtu.be/x7EwcywFcYU) permet de se faire une idée du résultat lumineux que l'on peut obtenir avec ce type de LED.
+
+Grâce au bus SPI présent sur la PYBStick et au procédé d'oversampling (sur-échantillonnage) la PYBStick est capable de contrôler des NeoPixels.
+
+Le schéma ci-dessous montre comment raccorder un [Stick NeoPixel composé de 8 LEDs](https://shop.mchobby.be/fr/neopixels-et-dotstar/407-stick-neopixel-8-leds-rgb--3232100004078-adafruit.html) et le contrôler avec une tension et signal logique de 3.3V. Le régulateur 3.3V de la PYBStick permet de contrôler uniquement LEDs NeoPixels (comptez jusqu'a 60mA par LED), voyez la section "__NeoPixel sous 5V__" pour contrôler plus de LEDs.
+
+![PYBStick-NeoPixels](docs/_static/pybstick-neopixel-3v.jpg)
+
+Le fichier d'exemple [`neopixel_simple.py`](examples/neopixel_simple.py), repris partiellement ci-dessous, indique comment prendre le contrôle des LEDs NeoPixels.
+
+```
+from ws2812 import NeoPixel
+from time import sleep
+np = NeoPixel( spi_bus=1, led_count=8, intensity=1 )
+
+# Fixer la couleur la couleur du premier pixel
+# avec un tuple (r,g,b) ou chaque valeur est
+# située entre 0 et 255
+np[0] = (255,0,0) # rouge
+
+np[1] = (0,255,0) # vert
+np[2] = (0,0,128) # bleu (1/2 brillance)
+
+# Voir aussi HTML Color Picker
+# https://www.w3schools.com/colors/colors_picker.asp
+np[3] = (255, 102, 0) # Orange
+np[4] = (255, 0, 102) # Rose bonbon
+np[5] = (153, 51, 255) # Violet
+np[6] = (102, 153, 255) # bleu pastel
+np[7] = (153, 255, 153) # vert pastel
+
+np.write()
+
+sleep( 2 )
+
+# Tout éteindre
+np.fill( (0,0,0) )
+np.write()
+```
+
+__NeoPixel sous 5V:__
+
+Bien que fonctionnant sous 3V, le  
+
+![PYBStick-NeoPixels](docs/_static/pybstick-neopixel-5v.jpg)
+
+Grâce  La carte PYBOARD-UNO-R3 dispose d'un convertisseur de niveau logique pour commander cette LED sous 5V afin d'avoir un maximum de luminosité et des couleurs vives. La carte dispose également d'une sortie permettant d'ajouter d'autres LEDs.
+
+__Ressources__
+* La bibliothèque [`esp8266-upy/neopixel`](https://github.com/mchobby/esp8266-upy/tree/master/neopixel)<br />Contenant quelques exemples Pyboard que vous pourrez utiliser directement avec la PYBStick puisqu'ils utilisent tout deux la SPI(1) .
+* [Guide NeoPixel]https://wiki.mchobby.be/index.php?title=NeoPixel-UserGuide) (_MCHobby Wiki, Français_)<br />un guide utilisateur avec tout ce qu'il faut savoir à propos de ces LEDs exceptionnelles.
+* [Alimenter des Pixels LEDs avec piles et accus](https://wiki.mchobby.be/index.php?title=Piles_et_accus_pour_alimenter_des_Pixels) (_MCHobby Wiki, Français_)<br />Guide trouver la meilleure façon d'alimenter projets à base de LEDs NeoPixels.
 
 ## Servo
 
@@ -299,32 +375,62 @@ s1.angle(0)
 s4.angle(0)
 ```
 
-## Bus I2C, SPI, UART
+## Bus I2C
 
-TODO - a revoir complètement
+Le bus I2C est un bus de communication 2 fils transportant le signal de donnée (SDA) et signal d'horloge (SCL).
 
-La carte expose les bus standard d'un Arduino ainsi que de nombreux bus en extra.
-Les notes ci-dessous expliquent comment créer les différents bus nécessaires.
+Le protocol de communication inclus un mécanisme d'adressage, ce qui permet de connecter plusieurs périphériques I2C (pour autant que chaque périphérique dispose de sa propre adresse). Une fois découvert et maîtrisé le bus I2C devient presque incontournable.
 
-__Connecteur:__ créer les bus standards
+La PYBStick dispose de 2 bus I2C:
+* I2C(1) sur S3=sda et S5=scl
+* I2C(3) sur S11=sda et S13=scl
 
-``` python
-# I2C côté broche 13 (I2C matériel)
-from machine import I2C
-i2c = I2C(2)
+L'exemple ci-dessous présente le branchement d'un capteur '''[BME280](https://shop.mchobby.be/fr/breakout/684-bme280-sens-temperature-humidite-pression--3232100006843-adafruit.html)''' de Bosch permettant de relever pression atmosphérique, température et humidité relative.
 
-# Sur broche A4, A5 (I2C logiciel, Bit-Banging)
-from machine import I2C
-i2c = I2C( sda=Pin("X5"), scl=Pin("X6") )
+![PYBStick et BME280](docs/_static/pybstick-bme280.jpg)
 
-# Broche 10,11,12,13
-from machine import SPI
-spi = SPI(2)
+Après avoir branché un composant sur un bus I2C il est facile de détecter sa présence à l'aide d'une opération de scan.
 
-# Port série sur 0 et 1 (totalement libre d'usage)
-from machine import UART
-uart = UART(6, 9600) # UART à 9600 bauds
 ```
+>>> from machine import I2C
+>>> i2c = I2C(1) # SDA=S3, SCL=S5
+>>> i2c.scan()
+[119]
+>>>
+```
+Un périphérique répond à l'adresse 119 (décimal, soit 0x77), c'est l'adresse par défaut du BME280.
+
+L'utilisation de ce composant s'appuie sur la bibliothèque [`bme280.py`](https://github.com/mchobby/esp8266-upy/tree/master/bme280-bmp280) disponible sur le [__dépôt esp8266-upy__](https://github.com/mchobby/esp8266-upy) (des pilotes MicroPython multiplateforme).
+
+Après avoir copié le fichier `bme280.py` sur la carte MicroPython, le code suivant peut être saisi dans la session REPL pour tester la capteur.
+
+```
+>>> from machine import I2C
+>>> from bme280 import *
+>>>
+>>> # Créer le bus I2C
+>>> i2c = I2C(1) # SDA=S3, SCL=S5
+>>>
+>>> # créer un instance du pilote BME280
+>>> bme = BME280(i2c=i2c)
+>>>
+>>> print( bme.values )
+('22.22C', '1005.85hPa', '44.46%')
+>>> print( bme.raw_values )
+(22.24, 1005.83, 44.48)
+>>>
+```
+
+La classe `BME280` expose deux propriétés `values` retournant les valeurs sous forme de chaîne de caractères avec unité et `raw_values` permettant d'obtenir des données typées autorisant les traitements mathématiques.
+
+## Bus UART
+
+todo
+
+## Bus SPI
+
+todo
+
 
 # Où trouver des pilotes MicroPython
 
