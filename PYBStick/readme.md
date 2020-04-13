@@ -26,7 +26,9 @@ Aussi disponible en haute définition sur le lien [PYBStick-LITE-26.png](docs/_s
 
 ## Logique 3.3V
 
-TODO
+Les plateforme STM32 fonctionnent en logique 3.3V et dispose de nombreuses broches tolérantes 5V (broche en entrée).
+
+Attention cependant à ne pas abuser de cette tolérance et de réaliser autant-que-faire-ce-peut des raccordements en logique 3.3V. 
 
 # Bibliothèque
 
@@ -81,6 +83,26 @@ def rappel():
 Hello
 Hello
 Hello
+```
+
+## Bouton Boot0 (B)
+
+Ce bouton est utilisé pour placer la carte en mode DFU lorsqu'il est enfoncé au démarrage de la plateforme. Le mode DFU permet de téléverser un nouveau firmware (Arduino ou mise-à-jour de MicroPython) sur la carte.
+
+Une fois la carte démarrée et le firmware en cours d'exécution, ce bouton est libre d'usage (car Boot0 n'est plus contrôlé).
+
+Il est possible de réutiliser ce bouton dans vos propres scripts utilisateur. Voici comment faire.
+
+```
+>>> from machine import Pin
+>>> p = Pin( "SW2", Pin.IN )
+>>>
+>>> # bouton non pressé
+>>> p.value()
+0
+>>> # Bouton pressé
+>>> p.value()
+1
 ```
 
 ## LEDs utilisateurs
