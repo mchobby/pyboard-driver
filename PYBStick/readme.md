@@ -28,7 +28,7 @@ Aussi disponible en haute définition sur le lien [PYBStick-LITE-26.png](docs/_s
 
 Les plateforme STM32 fonctionnent en logique 3.3V et dispose de nombreuses broches tolérantes 5V (broche en entrée).
 
-Attention cependant à ne pas abuser de cette tolérance et de réaliser autant-que-faire-ce-peut des raccordements en logique 3.3V. 
+Attention cependant à ne pas abuser de cette tolérance et de réaliser autant-que-faire-ce-peut des raccordements en logique 3.3V.
 
 # Bibliothèque
 
@@ -378,7 +378,7 @@ s.angle( -90 )
 
 Alimentation externe pour les servo-moteurs.
 
-![Pyboard et Servo-moteur](docs/_static/pybstick-servo2.jpg)
+![Pyboard et Servo-moteur](docs/_static/pybstick-dcmotor-servo.jpg)
 
 Brancher deux servo-moteurs sur les sorties SERVO(1) et SERVO(4) puis saisir le code suivant pour coordonner le mouvement des deux servo-moteurs.
 
@@ -396,6 +396,41 @@ sleep( 4 ) # Attendre fin de déplacement
 s1.angle(0)
 s4.angle(0)
 ```
+
+## Moteur continu à commande Servo
+
+Il existe également des moteurs continu que l'on peu commander à l'aide d'un signal de servo-moteur.
+
+C'est le cas de ce [Micro moteur 75:1 Gravity avec contrôleur Servo de DFRobot](https://shop.mchobby.be/product.php?id_product=1811) disponible chez MCHobby.
+
+Grâce à un seul fils de commande transportant le signal Servo et au contrôleur équipant le moteur, il est possible de commander ce moteur:
+* En marche/l'arrêt
+* En vitesse
+* En sens de rotation
+
+Cela ravira les nouveaux venus car il n'y a pas à se compliquer la vie avec les raccordement d'un circuit de puissance (L293/L298), etc tout est déjà présent sur le moteur.
+
+![PYBStick et moteur DC à signal Servo](docs/_static/pybstick-dcmotor-servo.jpg)
+
+```
+MicroPython v1.11-473-g86090de on 2019-11-15; PYBv1.1 with STM32F405RG
+Type "help()" for more information.
+>>>
+>>> from pyb import Servo
+>>> s1 = Servo(1)
+>>> s1.speed( +100 ) # sens anti-horlogique, vitesse 100%
+>>> s1.speed( -100 ) # Sens horlogique, vitesse 100%
+>>> s1.speed( -50 )  # Sens horlogique, vitesse 50%
+>>> s1.speed( -10 )  # Sens horlogique, vitesse 10%
+>>> s1.speed( 0 )    # Arrêt
+```
+
+__Note technique:__
+* Le signal d'un servo-moteur est une impulsion de 500µs à 2500µs correspondant à un angle allant de -90° à +90°.
+* Les impulsions entre 1400µs et 1600µs (soit -9° à +9°) place le moteur à l'arrêt. Lorsqu'une impulsion est inférieure à 1400us (<= -10°) le moteur commence à tourner dans le sens des aiguilles d'une montre et de plus en plus vite pour des valeurs d'impulsions approchant 500us (tendant vers -90°).
+* Les valeurs supérieures à 1600µs (>= 10°) font tourner le moteur anti-horlogique. Plus la valeur tend vers 2500µs (soit +90°) et plus le moteur tourne vite.
+
+Vous trouverez également d'autres informations techniques sur la page dédiée à [l'utilisation de ce moteur avec la carte MicroPython Pyboard](https://wiki.mchobby.be/index.php?title=Hack-micropython-dfrobot-motor) (_Wiki, MCHobby_)
 
 ## Bus I2C
 
@@ -457,6 +492,26 @@ todo
 # Où trouver des pilotes MicroPython
 
 Tous nos pilotes MicroPython sont stockés sur le GitHub [pyboard-driver](https://github.com/mchobby/pyboard-driver) ET le GitHub [esp8266-upy](https://github.com/mchobby/esp8266-upy). Les pilotes MicroPython fonctionnant sur ESP8266 fonctionneront aussi avec des Pyboard :-)
+
+# Ressources
+
+## sticker-connector
+
+Le documents [`sticker-connector.pdf`](docs/sticker-connectors.pdf) permet d'imprimer deux petites bandelettes couleurs permettant d'identifier facilement les broches de la PYBStick.
+
+![Bandelettes d'identification](docs/_static/sticker-connectors.jpg)
+
+Pour coller les bandelettes, vous pouvez utiliser des gommettes de collage pour album photo et un bon cutter pour couper les excédents.
+
+## 3D - Case basique
+
+Garatronic, le créateur de la PYBStick propose un boîtier à imprimer. Les fichiers STL peuvent être téléchargés depuis le répertoire [`docs/3d/case-basic`](docs/3d/case-basic)
+
+![Boîtier basique pour PYBStick](docs/_static/case-basic.jpg)
+
+## Bouton Reset et réinitialisation d'usine
+
+todo
 
 # Liste d'achat
 
