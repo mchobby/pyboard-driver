@@ -503,6 +503,15 @@ Le documents [`sticker-connector.pdf`](docs/sticker-connectors.pdf) permet d'imp
 
 Pour coller les bandelettes, vous pouvez utiliser des gommettes de collage pour album photo et un bon cutter pour couper les excédents.
 
+## PYBStick drawing
+
+__Image PNG:__
+
+Envie de faire vos propres schéma à base de PYBStick? Pas de problème, nous avons prévu une image PNG avec fond transparent en 3 résolution. Nous les utilisons régulièrement avec Gimp.
+* [PYBStick-Lite-26-template(640px).png](docs/_statics/PYBStick-Lite-26-template(640px).png) - 640 pixels de haut
+* [PYBStick-Lite-26-template(800px).png](docs/_statics/PYBStick-Lite-26-template(800px).png) - 800 pixels de haut
+* [PYBStick-Lite-26-template.png](docs/_statics/PYBStick-Lite-26-template.png) - la plus haute résolution, 2700 pixels de haut
+
 ## 3D - Case basique
 
 Garatronic, le créateur de la PYBStick propose un boîtier à imprimer. Les fichiers STL peuvent être téléchargés depuis le répertoire [`docs/3d/case-basic`](docs/3d/case-basic)
