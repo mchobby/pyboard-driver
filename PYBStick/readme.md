@@ -488,6 +488,50 @@ todo
 
 todo
 
+# Bouton Reset et mode DFU
+
+## Mode DFU
+Pour passer en mode DFU (Device Firmware Upgrade), il faut que le bouton B (Boot0) soit enfoncé au moment de la mise sous tension.
+
+Le mode DFU est utilisé pour mettre le Firmware MicroPython à jour ou pour programmer la  carte PYBStick à partir d'Arduino IDE (ce qui revient à écraser le Firmware MicroPython).
+
+Sous Linux, il est possible de vérifier la présence de la PYBStick en mode DFU à l'aide de l'utilitaire `dfu-util --list`. Si la PYBStick est en mode DFU alors vous obtiendrez le résultat suivant:
+
+```
+$ dfu-util --list
+dfu-util 0.9
+
+Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.
+Copyright 2010-2016 Tormod Volden and Stefan Schmidt
+This program is Free Software and has ABSOLUTELY NO WARRANTY
+Please report bugs to http://sourceforge.net/p/dfu-util/tickets/
+
+Found DFU: [0483:df11] ver=2200, devnum=52, cfg=1, intf=0, path="2-1.4", alt=3, name="@Device Feature/0xFFFF0000/01*004 e", serial="346A386B3437"
+Found DFU: [0483:df11] ver=2200, devnum=52, cfg=1, intf=0, path="2-1.4", alt=2, name="@OTP Memory /0x1FFF7800/01*512 e,01*016 e", serial="346A386B3437"
+Found DFU: [0483:df11] ver=2200, devnum=52, cfg=1, intf=0, path="2-1.4", alt=1, name="@Option Bytes  /0x1FFFC000/01*016 e", serial="346A386B3437"
+Found DFU: [0483:df11] ver=2200, devnum=52, cfg=1, intf=0, path="2-1.4", alt=0, name="@Internal Flash  /0x08000000/04*016Kg,01*064Kg,03*128Kg", serial="346A386B3437"
+```
+
+Pour la mise-à-jour du Firmware MicroPython, [vous pouvez vous référer à notre tutoriel sur la MicroPython Pyboard](https://wiki.mchobby.be/index.php?title=MicroPython.Pyboard.mise-a-jour). Il faudra, bien entendu, télécharger (depuis Internet) et téléverser le Firmware correspondant à la PYBStick.
+
+## Mode DFU et Reset
+
+Il est également possible d'activer le mode DFU en gardant le bouton B (Boot0) enfoncé pendant que l'activation de la broche Reset.
+
+La broche Reset peut être activée en la placant à la masse à l'aide d'un morceau de fil ou en plaçant vous même un bouton poussoir entre les broches __/rst__ et __GND__.
+
+Nulle doute que cette dernière option ravira les développeurs Arduino.
+
+![Ajouter un bouton Reset sur la PYBStick](docs/_static/pybstick-reset.jpg)
+
+__Note:__ le bouton Reset n'est pas présent sur la carte pour des raisons de coût et d'encombrement.
+
+# Réinitialisation d'usine
+
+MicroPython dispose d'un __mode sans échec__ et d'une procédure de __réinitialisation d'usine__. Ces deux procedures sont identique sur la carte MicroPython Pyboard et son documentés sur le Wiki de MCHobby.
+
+* [Mode sans Echec (safe mode)](https://wiki.mchobby.be/index.php?title=MicroPython-Hack-safemode) démarre la carte sans exécuter `boot.py` et `main.py`.
+* [Réinitialisation d'usine](https://wiki.mchobby.be/index.php?title=MicroPython-Hack-safemode) (plus bas dans l'article) pour réinitialiser le firmware MicroPython sur la carte.
 
 # Où trouver des pilotes MicroPython
 
@@ -503,6 +547,15 @@ Le documents [`sticker-connector.pdf`](docs/sticker-connectors.pdf) permet d'imp
 
 Pour coller les bandelettes, vous pouvez utiliser des gommettes de collage pour album photo et un bon cutter pour couper les excédents.
 
+## pin-mapping
+
+Il existe également le document [pin-scale-map.pdf](docs/pin-scale-map.pdf) reprenant le mapping des broches à l'échelle 1:1
+
+En repliant et collant le papier puis en pratiquant les découpes aux emplacements indiqués, il est possible de glisser l'assemblage sur les GPIOs du PYBStick
+
+![Pin Mapper](docs/_static/pin-scale-map.jpg)
+
+
 ## PYBStick drawing
 
 __Image PNG:__
@@ -517,10 +570,6 @@ Envie de faire vos propres schéma à base de PYBStick? Pas de problème, nous a
 Garatronic, le créateur de la PYBStick propose un boîtier à imprimer. Les fichiers STL peuvent être téléchargés depuis le répertoire [`docs/3d/case-basic`](docs/3d/case-basic)
 
 ![Boîtier basique pour PYBStick](docs/_static/case-basic.jpg)
-
-## Bouton Reset et réinitialisation d'usine
-
-todo
 
 # Liste d'achat
 
