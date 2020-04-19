@@ -105,6 +105,10 @@ Il est possible de réutiliser ce bouton dans vos propres scripts utilisateur. V
 1
 ```
 
+__Attention:__ Boot0, donc le bouton B, est branché sur la broche S7. Lorsque le bouton B est pressé, S7 est connecté sur +3.3V par l'intermédiaire d'une résistance de 470 Ohms.
+
+C'est pour cette raison qu'__il est vivement recommandé d'utilisé S7 en entrée__. Si S7 est utilisé en sortie alors il ne faut pas utiliser le bouton B durant le fonctionnement de votre script.
+
 ## LEDs utilisateurs
 
 La PYBStick, tout comme la Pyboard originale dispose de 4 LEDs de couleurs qui peuvent être contrôlées depuis le script utilisateur.
@@ -564,6 +568,10 @@ Envie de faire vos propres schéma à base de PYBStick? Pas de problème, nous a
 * [PYBStick-Lite-26-template(640px).png](docs/_statics/PYBStick-Lite-26-template(640px).png) - 640 pixels de haut
 * [PYBStick-Lite-26-template(800px).png](docs/_statics/PYBStick-Lite-26-template(800px).png) - 800 pixels de haut
 * [PYBStick-Lite-26-template.png](docs/_statics/PYBStick-Lite-26-template.png) - la plus haute résolution, 2700 pixels de haut
+
+__Composant Fritzing:__
+
+Un composant Fritzing est disponible pour la PYBStick, vous le trouverez dans le répertoire [`docs/fritzing/`](docs/fritzing/)
 
 ## 3D - Case basique
 
