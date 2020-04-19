@@ -573,6 +573,8 @@ __Composant Fritzing:__
 
 Un composant Fritzing est disponible pour la PYBStick, vous le trouverez dans le répertoire [`docs/fritzing/`](docs/fritzing/)
 
+![Composant PYBStick pour Fritzing](docs/_static/pybstick-fritzing.jpg)
+
 ## 3D - Case basique
 
 Garatronic, le créateur de la PYBStick propose un boîtier à imprimer. Les fichiers STL peuvent être téléchargés depuis le répertoire [`docs/3d/case-basic`](docs/3d/case-basic)
