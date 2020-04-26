@@ -352,8 +352,15 @@ Grâce  La carte PYBOARD-UNO-R3 dispose d'un convertisseur de niveau logique pou
 
 __Ressources__
 * La bibliothèque [`esp8266-upy/neopixel`](https://github.com/mchobby/esp8266-upy/tree/master/neopixel)<br />Contenant quelques exemples Pyboard que vous pourrez utiliser directement avec la PYBStick puisqu'ils utilisent tout deux la SPI(1) .
-* [Guide NeoPixel]https://wiki.mchobby.be/index.php?title=NeoPixel-UserGuide) (_MCHobby Wiki, Français_)<br />un guide utilisateur avec tout ce qu'il faut savoir à propos de ces LEDs exceptionnelles.
+* [Guide NeoPixel](https://wiki.mchobby.be/index.php?title=NeoPixel-UserGuide) (_MCHobby Wiki, Français_)<br />un guide utilisateur avec tout ce qu'il faut savoir à propos de ces LEDs exceptionnelles.
 * [Alimenter des Pixels LEDs avec piles et accus](https://wiki.mchobby.be/index.php?title=Piles_et_accus_pour_alimenter_des_Pixels) (_MCHobby Wiki, Français_)<br />Guide trouver la meilleure façon d'alimenter projets à base de LEDs NeoPixels.
+
+## DotStar / APA102
+
+Les [LEDs APA102, aussi appelées DotStar chez Adafruit](https://shop.mchobby.be/fr/55-neopixels-et-dotstar), sont aussi des LEDs intelligentes utilisant un signal de données + un signal d'horloge.   
+Ces LEDs peuvent être contrôlées à l'aide du bus SPI de la PYBStick.
+
+Le cas de la PYBStick + DotStar à été traité [ICI sur le dépôt esp8266-upy](https://github.com/mchobby/esp8266-upy/tree/master/dotstar) .
 
 ## Servo
 
@@ -577,7 +584,7 @@ Un composant Fritzing est disponible pour la PYBStick, vous le trouverez dans le
 
 ## 3D - Case basique
 
-Garatronic, le créateur de la PYBStick propose un boîtier à imprimer. Les fichiers STL peuvent être téléchargés depuis le répertoire [`docs/3d/case-basic`](docs/3d/case-basic)
+Garatronic, le créateur de la PYBStick propose un boîtier à imprimer. Les fichiers STL peuvent être téléchargés depuis le répertoire [`docs/3d/case-basic`](docs/3d/case-basic) également disponible sur [Thingiverse](https://www.thingiverse.com/thing:4275160)
 
 ![Boîtier basique pour PYBStick](docs/_static/case-basic.jpg)
 
