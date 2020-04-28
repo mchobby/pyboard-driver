@@ -344,7 +344,7 @@ np.write()
 
 __NeoPixel sous 5V:__
 
-Bien que fonctionnant sous 3V, le  
+Bien que fonctionnant sous 3V, les NéoPixels offrent un meilleur rendu des couleurs (et plus vives) lorsqu'elles sont alimentées sous 5V.
 
 ![PYBStick-NeoPixels](docs/_static/pybstick-neopixel-5v.jpg)
 

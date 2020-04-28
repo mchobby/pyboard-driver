@@ -19,8 +19,8 @@ def sendchr(char, hid, kmap, modifiers=None):
 	hidkey_buffer[2], hidkey_buffer[0] = kmap[char]
 	if modifiers:
 		for modifier in modifiers:
-			if (hidkey_buffer[0] and modifier) != modifier: # If modifier not yet applied
-				hidkey_buffer[0] = hidkey_buffer[0] + modifier
+			if (hidkey_buffer[0] & modifier) != modifier: # If modifier not yet applied
+				hidkey_buffer[0] = hidkey_buffer[0] | modifier
 	hid.send(hidkey_buffer)
 	sleep_ms(10)
 	# key up
