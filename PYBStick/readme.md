@@ -2,17 +2,23 @@
 
 # PYBStick 26 : La carte MicroPython d'entrée de gamme pour tous les projets
 
-TODO : description
+La carte PYBStick est un projet commun de [Garatronic](http://garatronic.fr) et  [MCHobby](https://shop.mchobby.be). Nous voulions réaliser une carte MicroPython suffisamment abordable, pratique et bien documentée en Français pour pouvoir être inclue dans tous les projets sans devoir s'inquiéter du prix. Nous l'avons fait, c'est la PYBStick. La plateforme inclus le puissant STM32, ce qui permet d'avoir une puissante plateforme supportant à la fois Arduino IDE et MicroPython... que demander de plus?
 
 ![Caractéristiques de la PYBStick 26](docs/_static/pybstick-features.jpg)
 
 ## Modèles de PYBStick
 
-La PYBStick 26 existe en 3 modèle: Lite, Standard et Pro
+Une bonne chose ne venant jamais seule, la PYBStick 26 existe en plusieurs déclinaisons : Lite, Standard, Pro et duino (cette dernière réservée à Arduino).
 
 ![Modèles de PYBStick 26](docs/_static/PYBStick-models-list.png)
 
 # Information technique
+
+## PYBStick Standard 26
+
+![Brochage de la PYBStick Std 26](docs/_static/PYBStick-STD-26.jpg)
+
+Aussi disponible en haute définition sur le lien [PYBStick-STD-26.png](docs/_static/PYBStick-STD-26.png)
 
 ## PYBStick Lite 26
 
@@ -389,7 +395,7 @@ s.angle( -90 )
 
 Alimentation externe pour les servo-moteurs.
 
-![Pyboard et Servo-moteur](docs/_static/pybstick-dcmotor-servo.jpg)
+![Servo-moteur et alimentation externe](docs/_static/pybstick-servo2.jpg)
 
 Brancher deux servo-moteurs sur les sorties SERVO(1) et SERVO(4) puis saisir le code suivant pour coordonner le mouvement des deux servo-moteurs.
 
@@ -575,10 +581,15 @@ Envie de faire vos propres schéma à base de PYBStick? Pas de problème, nous a
 * [PYBStick-Lite-26-template(640px).png](docs/_statics/PYBStick-Lite-26-template(640px).png) - 640 pixels de haut
 * [PYBStick-Lite-26-template(800px).png](docs/_statics/PYBStick-Lite-26-template(800px).png) - 800 pixels de haut
 * [PYBStick-Lite-26-template.png](docs/_statics/PYBStick-Lite-26-template.png) - la plus haute résolution, 2700 pixels de haut
+* [PYBStick-STD-26-template(640px).png](docs/_statics/PYBStick-STD-26-template(640px).png) - 640 pixels de haut
+* [PYBStick-STD-26-template(800px).png](docs/_statics/PYBStick-STD-26-template(800px).png) - 800 pixels de haut
+* [PYBStick-STD-26-template.png](docs/_statics/PYBStick-STD-26-template.png) - la plus haute résolution, 2700 pixels de haut
 
 __Composant Fritzing:__
 
-Un composant Fritzing est disponible pour la PYBStick, vous le trouverez dans le répertoire [`docs/fritzing/`](docs/fritzing/)
+Un composant Fritzing est disponible pour la PYBStick, vous le trouverez dans le répertoire [`docs/fritzing/`](docs/fritzing/).
+
+Bien qu'il s'agisse d'un composant PYBStick lite, vous pouvez l'utiliser indépendamment pour la version Lite et Standard (le brochage et les fonctions sont identiques).
 
 ![Composant PYBStick pour Fritzing](docs/_static/pybstick-fritzing.jpg)
 
@@ -589,8 +600,6 @@ Garatronic, le créateur de la PYBStick propose un boîtier à imprimer. Les fic
 ![Boîtier basique pour PYBStick](docs/_static/case-basic.jpg)
 
 # Liste d'achat
-
-TODO
-
 * [PYBStick-Lite-26](https://shop.mchobby.be/product.php?id_product=1830)
+* [PYBStick-Std-26](https://shop.mchobby.be/product.php?id_product=1844)
 * [Cartes MicroPython](https://shop.mchobby.be/fr/56-micropython)
