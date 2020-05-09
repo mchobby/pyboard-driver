@@ -16,9 +16,12 @@ Une bonne chose ne venant jamais seule, la PYBStick 26 existe en plusieurs décl
 
 ## PYBStick Standard 26
 
+La version standard est équipée d'un STM32F411 cadencé à 100 MHz.
+Il s'agit d'un cortex M4F, processeur 32 bits avec coprocesseur de calcul flottant simple précision (40 bits) + DSP. [Fiche technique du STM32F411](https://www.st.com/content/st_com/en/products/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus/stm32-high-performance-mcus/stm32f4-series/stm32f411/stm32f411re.html) (_pdf_).
+
 ![Brochage de la PYBStick Std 26](docs/_static/PYBStick-STD-26.jpg)
 
-Aussi disponible en haute définition sur le lien [PYBStick-STD-26.png](docs/_static/PYBStick-STD-26.png)
+Aussi disponible en haute définition sur le lien [PYBStick-STD-26.png](docs/_static/PYBStick-STD-26.png).
 
 ## PYBStick Lite 26
 
@@ -26,15 +29,51 @@ Aussi disponible en haute définition sur le lien [PYBStick-STD-26.png](docs/_st
 
 Aussi disponible en haute définition sur le lien [PYBStick-LITE-26.png](docs/_static/PYBStick-LITE-26.png)
 
-## Schéma
-* Schéma [PYBStick Lite 26.pdf](docs/Schema_PYBSTICK26_LITE-STD_r2.pdf)
-* Assignation des broches [PYBStick-pinout.ods](docs/_static/PYBStick-pinout.ods) (_LibreOffice Calc_)
+## Alimentation
+
+Le plus simple pour alimenter votre PYBStick est d'utiliser le connecteur USB.
+
+La tension d'alimentation sera disponible sur VUSB (et sur VIN).
+
+![Circuit d'alimentation PYBStick](docs/_static/pybstick-power.jpg)
+
+D'autres options d'alimentation sont possibles et s'avérons utile pour les projets énergivores (ex: plateformes motorisées).
+
+__Alimenté par USB:__ (le plus facile)
+
+* La broche VBUS est à 5.00V à 5.25V (tension standard USB).
+* La broche VIN est à 4.85V (à cause de la chute de tension dans la diode Schottky B5817WS)
+* La broche 3.3V produit une tension de 3.3V (300 mA) par l'intermédiaire du régulateur de tension ME6215C33.
+
+Dans cette configuration, il est également possible de brancher une source d'alimentation externe sur VIN. La courant de cette alimentation externe sera bloqué par la diode Schottky et ne pourra donc pas se déverser dans la connexion USB.
+
+Si vous comptez brancher une alimentation externe sur VIN et connecter la PYBStick en USB en même temps alors il sera nécessaire de placer une diode en série avec alimentation externe (pour empêcher VBUS de déverser un courant dans l'alimentation externe).
+
+__Alimenté par VIN:__ (18V max)
+
+* La broche VIN peut recevoir une alimentation externe (18V max). Si le connecteur USB est succeptible d'être branché en même temps, il faut prévoir une diode Schottky (voir point précédent).
+* La broche VBUS est à 0V (si la plateforme n'est pas connectée sur une source USB).
+* La broche 3.3V produit une tension de 3.3V par l'intermédiaire du régulateur de tension 3.3V.
+
+__Alimenté par 3.3V:__
+
+Non recommandé et réservé à un public averti!
+
+Il est possible de brancher une source d'alimentation derrière le régulateur de tension (donc sur la broche 3.3V). Dans ce cas, vous ne pouvez plus alimenter la carte via VIN ou USB (VBUS).
+
+Toute erreur de tension ou de polarisation sur cette broche entraînera la destruction immédiate de la carte.
 
 ## Logique 3.3V
 
 Les plateforme STM32 fonctionnent en logique 3.3V et dispose de nombreuses broches tolérantes 5V (broche en entrée).
 
 Attention cependant à ne pas abuser de cette tolérance et de réaliser autant-que-faire-ce-peut des raccordements en logique 3.3V.
+
+Le régulateur de tension présent sur la carte (ME6215C33) est capable de produire un courant de 300mA (350 max). La protection sur-courant s'activera à 500 mA.
+
+## Schéma
+* Schéma [PYBStick Lite 26.pdf](docs/Schema_PYBSTICK26_LITE-STD_r2.pdf)
+* Assignation des broches [PYBStick-pinout.ods](docs/_static/PYBStick-pinout.ods) (_LibreOffice Calc_)
 
 # Bibliothèque
 
@@ -531,6 +570,12 @@ Found DFU: [0483:df11] ver=2200, devnum=52, cfg=1, intf=0, path="2-1.4", alt=0, 
 
 Pour la mise-à-jour du Firmware MicroPython, [vous pouvez vous référer à notre tutoriel sur la MicroPython Pyboard](https://wiki.mchobby.be/index.php?title=MicroPython.Pyboard.mise-a-jour). Il faudra, bien entendu, télécharger (depuis Internet) et téléverser le Firmware correspondant à la PYBStick.
 
+Une fois en mode DFU, vous pouvez pousser le nouveau firmware à l'aide de la commande suivante:
+
+`sudo dfu-util -a 0 -D fw_pybstick26std_20200506.dfu`  
+
+Où `fw_pybstick26std_20200506.dfu` contient le firmware de la carte.
+
 ## Mode DFU et Reset
 
 Il est également possible d'activer le mode DFU en gardant le bouton B (Boot0) enfoncé pendant que l'activation de la broche Reset.
@@ -554,7 +599,63 @@ MicroPython dispose d'un __mode sans échec__ et d'une procédure de __réinitia
 
 Tous nos pilotes MicroPython sont stockés sur le GitHub [pyboard-driver](https://github.com/mchobby/pyboard-driver) ET le GitHub [esp8266-upy](https://github.com/mchobby/esp8266-upy). Les pilotes MicroPython fonctionnant sur ESP8266 fonctionneront aussi avec des Pyboard :-)
 
+# Utilisateurs avancés
+
+## Broches en commun
+Les cartes PYBStick Lite, Standard et Pro partagent la même carte avec des processeurs différents. Cette approche permet d'ajouter des fonctions supplémentaires sur les sorties de la PYBStick (fonctions fournie par le port C présent sur les MicroControleurs de la  version Standart et Pro).
+
+Bien que seule les fonctions alternative complémentaires (ex: port série) devraient être utilisées sur les broches du port C, les broches en parallèles restent accessible indépendamement l'une de l'autre. Il ne faut pas manipuler ces deux broches en sorties en même temps car cela pourrait détruire le microcontrôleur!
+
+Voici la nomination des port alternatifs doublés sur les broches 13,15,16,18.
+* __13:__ S13=PB10 (fonctions standards), S13A=PC3 (fonctions complémentaires)
+* __15:__ S15=PB12 (fonctions standards), S15A=PC5 (fonctions complémentaires)
+* __16:__ S16=PB13 (fonctions standards), S15A=PC6 (fonctions complémentaires)
+* __18:__ S18=PB14 (fonctions standards), S18A=PC7 (fonctions complémentaires)
+
+Sur la 18ieme broche, communément appelée S18 sur la PYBStick. Sur cette position, il est possible de commander la broche 'S18' mais aussi la broches 'S18A' qui apporte les fonctions alternatives complémentaires. Comme ces deux broches sont montées en parallèles sur le microcontrôleurs, il ne faut pas commander en même temps la broche 'S18' et la broche 'S18A'. Il ne faut pas non plus commander la broche 'S18' et les fonctions alternatives offertes par 'S18A' (ex: UART(6) ) en même temps.
+
+Par exemple, en consultant l'assignation des broches [PYBStick-pinout.ods](docs/_static/PYBStick-pinout.ods) (_LibreOffice Calc_) pour la PYBStick Standard.
+
+Il est possible d'y voir que SPI(2) connecté sur les broches
+* S13 : MOSI --(correspond à)--> PC3 <-- c'est S13A qui offre la fonction. La vrai broche S13 reste inactive.
+* S18 : MISO --(correspond à)--> PB14 <-- c'est S18 qui offre la fonction.
+* S16 : CLK --(correspond à)--> PB13 <-- c'est S16 qui offre la fonction.
+* S15 : NSS  --(correspond à)--> PB12 <-- c'est S15 qui offre la fonction.
+
+Autre exemple, l'UART(6) correspondant a TXD6 et RDX6 est placé sur les broches suivantes:
+* S16: TXD6 --(correspondant à)--> PC6 <-- c'est S16A qui offre la fonction.. la vrai broche S16 reste inactive.
+* S18: RDX6 --(correspondant à)--> PC7 <-- c'est S18A qui offre la fonction.. la vrai broche S18 reste inactive.
+
+Enfin, pour utiliser l'entrée analogique sur la broche S15, il faut faire appel à la broche qui offre l'option alternative... donc "S15A"
+
+```
+>>> from pyb import ADC
+>>> adc = ADC( "S15A" )
+>>> adc.read()
+552
+```
+
 # Ressources
+
+## Firmwares
+
+Les différents Firmwares MicroPython sont disponibles dans les sous-répertoires firmware:
+
+[Liste des firmwares](firmware/readme.md)
+
+# Des projets MicroPython pour la PYBStick
+
+Le [GitHub PYBStic-Projects](https://github.com/mchobby/pybstick-projects) devrait rencontrer vos attentes.
+
+![Projet Madenn-Timer](docs/_static/madenn-timer.jpg)
+
+# Des pilotes micropython
+
+MCHobby SPRL développe de nombreux pilotes MicroPython mis à disposition gratuitement. Ce projet à débuté avec l'écriture du Livre "[Python, Raspberry Pi et Flask](https://www.editions-eni.fr/livre/python-raspberry-pi-et-flask-capturez-des-donnees-telemetriques-et-realisez-des-tableaux-de-bord-web-9782409016318)" et prolongé avec le livre "[MicroPython et Pyboard](https://www.editions-eni.fr/livre/micropython-et-pyboard-python-sur-microcontroleur-de-la-prise-en-main-a-l-utilisation-avancee-9782409022906)", ouvrages écris par Dominique (de chez MCHobby).
+
+Il s'agit de pilotes multi-plateformes (fonctionnant indépendamment de la plateforme MicroPython):
+* [__GitHub ESP8266__ - Pilote MicroPython](https://github.com/mchobby/esp8266-upy)
+* [__GitHub Pyboard-Driver__](https://github.com/mchobby/pyboard-driver) des pilotes MicroPython gourmand en ressources (donc plutôt réservé à des carte puissante comme PYBStick Pro, Pyboard, PYBD)
 
 ## sticker-connector
 
