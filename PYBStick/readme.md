@@ -551,6 +551,8 @@ Pour passer en mode DFU (Device Firmware Upgrade), il faut que le bouton B (Boot
 
 Le mode DFU est utilisé pour mettre le Firmware MicroPython à jour ou pour programmer la  carte PYBStick à partir d'Arduino IDE (ce qui revient à écraser le Firmware MicroPython).
 
+Sous Windows 10, je vous propose de lire l'article [Méthodologie pour sauvegarder et restaurer la PYBStick26 en version Micropython - Version Windows 10](https://github.com/philippeminerve/PYBStick26/blob/master/Restore.md)" de PhilippeMinerve
+
 Sous Linux, il est possible de vérifier la présence de la PYBStick en mode DFU à l'aide de l'utilitaire `dfu-util --list`. Si la PYBStick est en mode DFU alors vous obtiendrez le résultat suivant:
 
 ```
