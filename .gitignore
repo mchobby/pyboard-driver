@@ -1,6 +1,7 @@
 # Tools
 
 pushgit.sh
+makezip.sh
 UNO-R3-Pyboard-mapping.png
 
 # ignore gimp / Fritzing files
