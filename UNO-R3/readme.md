@@ -773,6 +773,9 @@ Ce connecteur est compatible [Qwiic de Sparkfun](https://www.sparkfun.com/qwiic)
 
 __CE POINT DOIT ENCORE ETRE DOCUMENTE__.
 
+# Ressources
+* [Pied pour la Pyboard-Uno-R3](https://www.thingiverse.com/thing:4210939) (_impression 3D_)
+
 # Où trouver des pilotes MicroPython
 
 Tous nos pilotes MicroPython sont stockés sur le GitHub [pyboard-driver](https://github.com/mchobby/pyboard-driver) ET le GitHub [esp8266-upy](https://github.com/mchobby/esp8266-upy). Les pilotes MicroPython fonctionnant sur ESP8266 fonctionneront aussi avec des Pyboard :-)

@@ -776,6 +776,9 @@ This connector should be compatible with [Qwiic from Sparkfun](https://www.spark
 
 __THIS POINT MUST STILL BE DOCUMENTED__.
 
+# Ressources
+* [Standing foot for Pyboard-Uno-R3](https://www.thingiverse.com/thing:4210939) (_3D printing_)
+
 # Where to find MicroPython drivers
 
 All the MCHobby's MicroPython drivers are available on the [pyboard-driver](https://github.com/mchobby/pyboard-driver) AND [esp8266-upy](https://github.com/mchobby/esp8266-upy) GitHub repositories. The MicroPython drivers running with the ESP8266 are cross plateform and WILL ALSO RUN WITH THE PYBOARD :-)
