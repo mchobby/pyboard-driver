@@ -681,12 +681,12 @@ En repliant et collant le papier puis en pratiquant les découpes aux emplacemen
 __Image PNG:__
 
 Envie de faire vos propres schéma à base de PYBStick? Pas de problème, nous avons prévu une image PNG avec fond transparent en 3 résolution. Nous les utilisons régulièrement avec Gimp.
-* [PYBStick-Lite-26-template(640px).png](docs/_statics/PYBStick-Lite-26-template(640px).png) - 640 pixels de haut
-* [PYBStick-Lite-26-template(800px).png](docs/_statics/PYBStick-Lite-26-template(800px).png) - 800 pixels de haut
-* [PYBStick-Lite-26-template.png](docs/_statics/PYBStick-Lite-26-template.png) - la plus haute résolution, 2700 pixels de haut
-* [PYBStick-STD-26-template(640px).png](docs/_statics/PYBStick-STD-26-template(640px).png) - 640 pixels de haut
-* [PYBStick-STD-26-template(800px).png](docs/_statics/PYBStick-STD-26-template(800px).png) - 800 pixels de haut
-* [PYBStick-STD-26-template.png](docs/_statics/PYBStick-STD-26-template.png) - la plus haute résolution, 2700 pixels de haut
+* [PYBStick-Lite-26-template(640px).png](docs/_static/PYBStick-Lite-26-template(640px).png) - 640 pixels de haut
+* [PYBStick-Lite-26-template(800px).png](docs/_static/PYBStick-Lite-26-template(800px).png) - 800 pixels de haut
+* [PYBStick-Lite-26-template.png](docs/_static/PYBStick-Lite-26-template.png) - la plus haute résolution, 2700 pixels de haut
+* [PYBStick-STD-26-template(640px).png](docs/_static/PYBStick-STD-26-template(640px).png) - 640 pixels de haut
+* [PYBStick-STD-26-template(800px).png](docs/_static/PYBStick-STD-26-template(800px).png) - 800 pixels de haut
+* [PYBStick-STD-26-template.png](docs/_static/PYBStick-STD-26-template.png) - la plus haute résolution, 2700 pixels de haut
 
 __Composant Fritzing:__
 
