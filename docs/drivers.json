@@ -209,5 +209,20 @@
                      ],
 			"descr"	: {"FR" : "Utiliser un keypad 4x4 avec un microcontroleur MicroPython Pyboard",
 								 "ENG": "Use a 4x4 keypad with a MicroPython Pyboard microcontroler" }
+		},
+		{	"folder"       : "UniPi-MicroPython-Automation",
+			"components"    : [],
+			"interfaces"    : ["I2C"],
+			"manufacturers" : [],
+			"plateforms"    : ["PYBSTICK"], 
+			"ressources"    : [ { "label" : "UniPiFace for PYBStick",
+														           "url"   : "https:\/\/shop.mchobby.be/fr/nouveaute/1891-carte-interface-unipi-pro-et-lite-pour-pybstick-3232100018914.html" },  
+                       { "label" : "UniPi V1.1",
+														           "url"   : "https:\/\/shop.mchobby.be\/fr\/tactile-flex-pot-softpad\/83-clavier-16-touches-souple-3232100000834.html" },
+                       { "label" : "UniPi Lite",
+														           "url"   : "https:\/\/shop.mchobby.be\/fr\/pi-extensions\/1196-extension-unipi-lite-pour-raspberry-pi-3232100011960-unipi-technology.html" }
+                     ],
+			"descr"	: {"FR" : "Créer un automate programmable MicroPython avec la PYBStick et UniPi",
+								 "ENG": "Create a MicroPython Automation controler with PYBStick and UniPi" }
 		}
 ]

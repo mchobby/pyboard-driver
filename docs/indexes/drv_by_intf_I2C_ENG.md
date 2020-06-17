@@ -8,6 +8,19 @@ I2C bus
   <th>Folder</th><th>Description</th>
 </thead>
 <tbody>
+  <tr><td><a href="../../../../tree/master/UniPi-MicroPython-Automation">UniPi-MicroPython-Automation</a></td>
+      <td><strong>Components</strong> : <br />
+      <strong>Interfaces</strong> : I2C<br />
+<small>Create a MicroPython Automation controler with PYBStick and UniPi</small><br/><br />
+      <strong>Tested with</strong> : PYBSTICK<br />
+      <strong>Manufacturer</strong> : <br />
+<ul>
+<li>See <a href="https://shop.mchobby.be/fr/nouveaute/1891-carte-interface-unipi-pro-et-lite-pour-pybstick-3232100018914.html">UniPiFace for PYBStick</a></li>
+<li>See <a href="https://shop.mchobby.be/fr/tactile-flex-pot-softpad/83-clavier-16-touches-souple-3232100000834.html">UniPi V1.1</a></li>
+<li>See <a href="https://shop.mchobby.be/fr/pi-extensions/1196-extension-unipi-lite-pour-raspberry-pi-3232100011960-unipi-technology.html">UniPi Lite</a></li>
+</ul>
+      </td>
+  </tr>
   <tr><td><a href="../../../../tree/master/ads1015-ads1115">ads1015-ads1115</a></td>
       <td><strong>Components</strong> : ADS1015, ADS1115, ADA1085<br />
       <strong>Interfaces</strong> : I2C<br />
