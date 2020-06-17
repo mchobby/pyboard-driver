@@ -251,6 +251,10 @@ La méthode `unipi.eeprom.dump()` affiche le contenu de l'EEPROM dans sa totalit
 0xf8 : 00 00 00 00 00 00 00 00 : ........
 ```
 
+# Ressources
+* [UniPi-Board.png](docs/UniPi-Board.png) : Image de la carte UniPi V1.1 vue du dessus
+* [UniPi-terminals.png](docs/UniPi-terminals.png) : Image du bornier d'entrée UniPi V1.1 (gros plan)
+
 # Licence
 Les bibliothèques et code d'examples UniPi pour MicroPython sont sous licence GPLv3
 The UniPi libraries and examples for MicroPython are released under GPLv3
