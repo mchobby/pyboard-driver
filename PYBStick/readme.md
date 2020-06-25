@@ -184,6 +184,8 @@ La PYBStick, tout comme la Pyboard originale dispose de 4 LEDs de couleurs qui p
 >>> l4.intensity( 20 ) # Intensité entre 0 et 255. l3 et l4 uniquement.
 ```
 
+L'exemple [pyb_leds.py](examples/pyb_leds.py) reprend le contenu du script de démarrage (`main.py`) d'une PYBStick flambant neuve.
+
 ## Broche Numérique - en entrée
 
 La lecture de l'état d'une entrée se fait à l'aide de la classe Pin configurée en entrée.
@@ -586,7 +588,7 @@ La broche Reset peut être activée en la placant à la masse à l'aide d'un mor
 
 Nulle doute que cette dernière option ravira les développeurs Arduino.
 
-![Ajouter un bouton Reset sur la PYBStick](docs/_static/pybstick-reset.jpg)
+[Ajouter un bouton Reset sur la PYBStick](docs/_static/pybstick-reset.jpg)
 
 __Note:__ le bouton Reset n'est pas présent sur la carte pour des raisons de coût et d'encombrement.
 
@@ -675,7 +677,6 @@ En repliant et collant le papier puis en pratiquant les découpes aux emplacemen
 
 ![Pin Mapper](docs/_static/pin-scale-map.jpg)
 
-
 ## PYBStick drawing
 
 __Image PNG:__
@@ -695,6 +696,12 @@ Un composant Fritzing est disponible pour la PYBStick, vous le trouverez dans le
 Bien qu'il s'agisse d'un composant PYBStick lite, vous pouvez l'utiliser indépendamment pour la version Lite et Standard (le brochage et les fonctions sont identiques).
 
 ![Composant PYBStick pour Fritzing](docs/_static/pybstick-fritzing.jpg)
+
+__Composant Kicad:__
+
+Un modèle Kicad est disponible pour réaliser vos propres cartes d'extensions pour la PYBStick.
+
+![Modèle Kicad pour "Extension PYBStick"](docs/kicad/pybstick-ext-kicad-modele.rar) _Archive RAR_
 
 ## 3D - Case basique
 
