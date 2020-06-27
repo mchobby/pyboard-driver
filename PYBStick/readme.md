@@ -88,6 +88,10 @@ La bibliothèque [`pwm.py`](lib/pwm.py) contient des définitions et fonctions p
 
 L'utilisation de cette bibliothèque est décrite plus bas dans la section "Sorties PWM".
 
+## Bibliothèque "buzzer²"
+La bibliothèque [`buzzer.py`](lib/buzzer.py) permet de contrôler un Piezo Buzzer branché sur la sortie S5. Les méthodes disponibles permettent de jouer une tonalité arbitraire, des notes de musique et même de mini sequences musicales encodées dans une chaîne de caractère.
+
+L'utilisation de cette bibliothèque est décrite plus bas dans la section "Buzzer".
 
 # Prise en main
 Cette section reprend l'utilisation des différents éléments de la carte.
@@ -313,7 +317,7 @@ La PYBStick Lite ne dispose pas de sortie analogique (DAC).
 
 La carte PYBStick 26 expose de nombreuses broches PWM (Pulse Modulation Width = Modulation de largeur d'impulsion) qu'il est très facile de piloter à l'aide de la bibliothèque [`lib/pwm.py`](lib/pwm.py).
 
-![LED en sortie](docs/_static/pybstick-output-led.jpg)
+![Sortie PWM](docs/_static/pybstick-output-led.jpg)
 
 ```
 >>> from pwm import *
@@ -344,6 +348,17 @@ Ressources:
 * L'exemple [`pwm_all.py`](examples/pwm_all.py) permet de tester une à une (en pressant le bouton USR) toutes les broches PWM de la PYBStick.
 * MicroPython.org propose la page "[Hardware timer](https://docs.micropython.org/en/latest/wipy/tutorial/timer.html)".
 * Le livre ["MicroPython et Pyboard" paru aux éditions Eni](https://www.editions-eni.fr/livre/micropython-et-pyboard-python-sur-microcontroleur-de-la-prise-en-main-a-l-utilisation-avancee-9782409022906) consacre une section entière à la gestion des Timers, Channel, PWM, cycle utile.
+
+## Buzzer
+
+L'utilisation d'un Buzzer sur PYBStick se fait à l'aide d'un signal PWM dont on modifie la fréquence.
+
+La bibliothèque [`buzzer.py`](lib/buzzer.py) propose la classe `Buzzer` qui permet de:
+* jouer une tonalité arbitraire
+* jouer une note de musique
+* Jouer une petite séquence musicale
+
+![Piezo Buzzer](docs/_static/pybstick-buzzer.jpg)
 
 ## NeoPixel
 
