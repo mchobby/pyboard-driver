@@ -392,7 +392,7 @@ tune2 = "c2,c,d3,c3,f3,e3,c2,c,d3,c3,g3,f3, 4"
 bz.tune( tune2, tempo=200 ) # plus rapide
 ```
 
-Enfin l'exemple ['test_buzzer_notes.py'](examples/test_buzzer_notes.py) indique comment jouer une simple note.
+Enfin l'exemple [`test_buzzer_notes.py`](examples/test_buzzer_notes.py) indique comment jouer une simple note.
 
 ## NeoPixel
 
