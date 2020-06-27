@@ -360,6 +360,40 @@ La bibliothèque [`buzzer.py`](lib/buzzer.py) propose la classe `Buzzer` qui per
 
 ![Piezo Buzzer](docs/_static/pybstick-buzzer.jpg)
 
+L'exemple ci-dessous, issus du script ['test_buzzer.py'](examples/test_buzzer.py), indique comment produire une tonalité sur le buzzer.
+
+```
+from buzzer import Buzzer
+from time import sleep
+
+bz = Buzzer()
+# Jouer un Do @ 523 Hertz
+bz.tone( 523 )
+sleep( 1 )
+# Silence
+bz.tone()
+```
+
+Il est également possible de jouer des séquences musicales à l'aide de la méthode `tune()` comme le démontre l'exemple [`test_buzzer_tune.py`](examples/test_buzzer_tune.py) .
+
+```
+from buzzer import Buzzer
+from time import sleep
+
+bz = Buzzer()
+
+# Liste de notes + rythme (séparée par des virgules)
+#   1ier caractère = la note tels de définie dans le dictionnaire NOTES
+#   2ieme caractère = duree de la note (1 si manquant)
+tune1 = "c,c,g,g,a,a,g2,f,f,e,e,d,d,c2, 4"
+bz.tune( tune1, tempo=300 ) # plus lent
+sleep(1)
+tune2 = "c2,c,d3,c3,f3,e3,c2,c,d3,c3,g3,f3, 4"
+bz.tune( tune2, tempo=200 ) # plus rapide
+```
+
+Enfin l'exemple ['test_buzzer_notes.py'](examples/test_buzzer_notes.py) indique comment jouer une simple note.
+
 ## NeoPixel
 
 __Dépendance:__ la bibliothèque `ws2812` doit être présente sur la carte. Voir la section dépendance pour localiser la bibliothèque.
