@@ -89,7 +89,9 @@ La bibliothèque [`pwm.py`](lib/pwm.py) contient des définitions et fonctions p
 L'utilisation de cette bibliothèque est décrite plus bas dans la section "Sorties PWM".
 
 ## Bibliothèque "buzzer²"
-La bibliothèque [`buzzer.py`](lib/buzzer.py) permet de contrôler un Piezo Buzzer branché sur la sortie S5. Les méthodes disponibles permettent de jouer une tonalité arbitraire, des notes de musique et même de mini sequences musicales encodées dans une chaîne de caractère.
+La bibliothèque [`buzzer.py`](lib/buzzer.py) permet de contrôler un Piezo Buzzer branché sur la sortie S5.
+
+Les méthodes disponibles permettent de jouer une tonalité arbitraire, des notes de musique et même de mini séquences musicales encodées dans une chaîne de caractères.
 
 L'utilisation de cette bibliothèque est décrite plus bas dans la section "Buzzer".
 
@@ -359,6 +361,9 @@ La bibliothèque [`buzzer.py`](lib/buzzer.py) propose la classe `Buzzer` qui per
 * Jouer une petite séquence musicale
 
 ![Piezo Buzzer](docs/_static/pybstick-buzzer.jpg)
+
+Une résistance de 330 Ohms est nécessaire pour limiter le courant. Il est aussi recommandé d'ajouter [une diode en roue libre comme décrit dans cet article](https:/arduino103.blogspot.com/2020/06/quelle-resistance-sur-un-piezo-buzzer.html).  
+
 
 L'exemple ci-dessous, issus du script ['test_buzzer.py'](examples/test_buzzer.py), indique comment produire une tonalité sur le buzzer.
 
@@ -641,52 +646,12 @@ Nulle doute que cette dernière option ravira les développeurs Arduino.
 
 __Note:__ le bouton Reset n'est pas présent sur la carte pour des raisons de coût et d'encombrement.
 
-# Réinitialisation d'usine
+## Réinitialisation d'usine
 
 MicroPython dispose d'un __mode sans échec__ et d'une procédure de __réinitialisation d'usine__. Ces deux procedures sont identique sur la carte MicroPython Pyboard et son documentés sur le Wiki de MCHobby.
 
 * [Mode sans Echec (safe mode)](https://wiki.mchobby.be/index.php?title=MicroPython-Hack-safemode) démarre la carte sans exécuter `boot.py` et `main.py`.
 * [Réinitialisation d'usine](https://wiki.mchobby.be/index.php?title=MicroPython-Hack-safemode) (plus bas dans l'article) pour réinitialiser le firmware MicroPython sur la carte.
-
-# Où trouver des pilotes MicroPython
-
-Tous nos pilotes MicroPython sont stockés sur le GitHub [pyboard-driver](https://github.com/mchobby/pyboard-driver) ET le GitHub [esp8266-upy](https://github.com/mchobby/esp8266-upy). Les pilotes MicroPython fonctionnant sur ESP8266 fonctionneront aussi avec des Pyboard :-)
-
-# Utilisateurs avancés
-
-## Broches en commun
-Les cartes PYBStick Lite, Standard et Pro partagent la même carte avec des processeurs différents. Cette approche permet d'ajouter des fonctions supplémentaires sur les sorties de la PYBStick (fonctions fournie par le port C présent sur les MicroControleurs de la  version Standart et Pro).
-
-Bien que seule les fonctions alternative complémentaires (ex: port série) devraient être utilisées sur les broches du port C, les broches en parallèles restent accessible indépendamement l'une de l'autre. Il ne faut pas manipuler ces deux broches en sorties en même temps car cela pourrait détruire le microcontrôleur!
-
-Voici la nomination des port alternatifs doublés sur les broches 13,15,16,18.
-* __13:__ S13=PB10 (fonctions standards), S13A=PC3 (fonctions complémentaires)
-* __15:__ S15=PB12 (fonctions standards), S15A=PC5 (fonctions complémentaires)
-* __16:__ S16=PB13 (fonctions standards), S15A=PC6 (fonctions complémentaires)
-* __18:__ S18=PB14 (fonctions standards), S18A=PC7 (fonctions complémentaires)
-
-Sur la 18ieme broche, communément appelée S18 sur la PYBStick. Sur cette position, il est possible de commander la broche 'S18' mais aussi la broches 'S18A' qui apporte les fonctions alternatives complémentaires. Comme ces deux broches sont montées en parallèles sur le microcontrôleurs, il ne faut pas commander en même temps la broche 'S18' et la broche 'S18A'. Il ne faut pas non plus commander la broche 'S18' et les fonctions alternatives offertes par 'S18A' (ex: UART(6) ) en même temps.
-
-Par exemple, en consultant l'assignation des broches [PYBStick-pinout.ods](docs/_static/PYBStick-pinout.ods) (_LibreOffice Calc_) pour la PYBStick Standard.
-
-Il est possible d'y voir que SPI(2) connecté sur les broches
-* S13 : MOSI --(correspond à)--> PC3 <-- c'est S13A qui offre la fonction. La vrai broche S13 reste inactive.
-* S18 : MISO --(correspond à)--> PB14 <-- c'est S18 qui offre la fonction.
-* S16 : CLK --(correspond à)--> PB13 <-- c'est S16 qui offre la fonction.
-* S15 : NSS  --(correspond à)--> PB12 <-- c'est S15 qui offre la fonction.
-
-Autre exemple, l'UART(6) correspondant a TXD6 et RDX6 est placé sur les broches suivantes:
-* S16: TXD6 --(correspondant à)--> PC6 <-- c'est S16A qui offre la fonction.. la vrai broche S16 reste inactive.
-* S18: RDX6 --(correspondant à)--> PC7 <-- c'est S18A qui offre la fonction.. la vrai broche S18 reste inactive.
-
-Enfin, pour utiliser l'entrée analogique sur la broche S15, il faut faire appel à la broche qui offre l'option alternative... donc "S15A"
-
-```
->>> from pyb import ADC
->>> adc = ADC( "S15A" )
->>> adc.read()
-552
-```
 
 # Ressources
 
@@ -696,13 +661,13 @@ Les différents Firmwares MicroPython sont disponibles dans les sous-répertoire
 
 [Liste des firmwares](firmware/readme.md)
 
-# Des projets MicroPython pour la PYBStick
+## Des projets MicroPython pour la PYBStick
 
 Le [GitHub PYBStic-Projects](https://github.com/mchobby/pybstick-projects) devrait rencontrer vos attentes.
 
 ![Projet Madenn-Timer](docs/_static/madenn-timer.jpg)
 
-# Des pilotes micropython
+## Des pilotes micropython
 
 MCHobby SPRL développe de nombreux pilotes MicroPython mis à disposition gratuitement. Ce projet à débuté avec l'écriture du Livre "[Python, Raspberry Pi et Flask](https://www.editions-eni.fr/livre/python-raspberry-pi-et-flask-capturez-des-donnees-telemetriques-et-realisez-des-tableaux-de-bord-web-9782409016318)" et prolongé avec le livre "[MicroPython et Pyboard](https://www.editions-eni.fr/livre/micropython-et-pyboard-python-sur-microcontroleur-de-la-prise-en-main-a-l-utilisation-avancee-9782409022906)", ouvrages écris par Dominique (de chez MCHobby).
 
@@ -750,13 +715,57 @@ __Composant Kicad:__
 
 Un modèle Kicad est disponible pour réaliser vos propres cartes d'extensions pour la PYBStick.
 
-![Modèle Kicad pour "Extension PYBStick"](docs/kicad/pybstick-ext-kicad-modele.rar) _Archive RAR_
+[Modèle Kicad pour "Extension PYBStick"](docs/kicad/pybstick-ext-kicad-modele.rar)  _(Archive RAR)_
 
 ## 3D - Case basique
 
 Garatronic, le créateur de la PYBStick propose un boîtier à imprimer. Les fichiers STL peuvent être téléchargés depuis le répertoire [`docs/3d/case-basic`](docs/3d/case-basic) également disponible sur [Thingiverse](https://www.thingiverse.com/thing:4275160)
 
 ![Boîtier basique pour PYBStick](docs/_static/case-basic.jpg)
+
+## 3D - PYBStick.step
+
+![PYBStick, fichier step](docs/3d/step.jpg)
+
+Besoin d'intégrer une modèle 3D de la PYBStick dans votre prochain projet 3D? Voici la ressource qu'il vous faut.1
+
+!PYBStick 26 Std, fichier step: [`docs/3d/pybstick26_std.step.zip`](docs/3d/pybstick26_std.step.zip) __(Archive Zip)__
+
+# Utilisateurs avancés
+
+## Broches en commun
+Les cartes PYBStick Lite, Standard et Pro partagent la même carte avec des processeurs différents. Cette approche permet d'ajouter des fonctions supplémentaires sur les sorties de la PYBStick (fonctions fournie par le port C présent sur les MicroControleurs de la  version Standart et Pro).
+
+Bien que seule les fonctions alternative complémentaires (ex: port série) devraient être utilisées sur les broches du port C, les broches en parallèles restent accessible indépendamement l'une de l'autre. Il ne faut pas manipuler ces deux broches en sorties en même temps car cela pourrait détruire le microcontrôleur!
+
+Voici la nomination des port alternatifs doublés sur les broches 13,15,16,18.
+* __13:__ S13=PB10 (fonctions standards), S13A=PC3 (fonctions complémentaires)
+* __15:__ S15=PB12 (fonctions standards), S15A=PC5 (fonctions complémentaires)
+* __16:__ S16=PB13 (fonctions standards), S15A=PC6 (fonctions complémentaires)
+* __18:__ S18=PB14 (fonctions standards), S18A=PC7 (fonctions complémentaires)
+
+Sur la 18ieme broche, communément appelée S18 sur la PYBStick. Sur cette position, il est possible de commander la broche 'S18' mais aussi la broches 'S18A' qui apporte les fonctions alternatives complémentaires. Comme ces deux broches sont montées en parallèles sur le microcontrôleurs, il ne faut pas commander en même temps la broche 'S18' et la broche 'S18A'. Il ne faut pas non plus commander la broche 'S18' et les fonctions alternatives offertes par 'S18A' (ex: UART(6) ) en même temps.
+
+Par exemple, en consultant l'assignation des broches [PYBStick-pinout.ods](docs/_static/PYBStick-pinout.ods) (_LibreOffice Calc_) pour la PYBStick Standard.
+
+Il est possible d'y voir que SPI(2) connecté sur les broches
+* S13 : MOSI --(correspond à)--> PC3 <-- c'est S13A qui offre la fonction. La vrai broche S13 reste inactive.
+* S18 : MISO --(correspond à)--> PB14 <-- c'est S18 qui offre la fonction.
+* S16 : CLK --(correspond à)--> PB13 <-- c'est S16 qui offre la fonction.
+* S15 : NSS  --(correspond à)--> PB12 <-- c'est S15 qui offre la fonction.
+
+Autre exemple, l'UART(6) correspondant a TXD6 et RDX6 est placé sur les broches suivantes:
+* S16: TXD6 --(correspondant à)--> PC6 <-- c'est S16A qui offre la fonction.. la vrai broche S16 reste inactive.
+* S18: RDX6 --(correspondant à)--> PC7 <-- c'est S18A qui offre la fonction.. la vrai broche S18 reste inactive.
+
+Enfin, pour utiliser l'entrée analogique sur la broche S15, il faut faire appel à la broche qui offre l'option alternative... donc "S15A"
+
+```
+>>> from pyb import ADC
+>>> adc = ADC( "S15A" )
+>>> adc.read()
+552
+```
 
 # Liste d'achat
 * [PYBStick-Lite-26](https://shop.mchobby.be/product.php?id_product=1830)
