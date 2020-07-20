@@ -50,6 +50,9 @@ Tous nos pilotes MicroPython sont stockés sur le GitHub [pyboard-driver](https:
 
 Les pilotes MicroPython pour les cartes exposants un connecteur UEXT sont stockes dans des répertoires commencant avec "__mod__" (ex: modvga, modrgb, modwii, etc).
 
+# Ressources
+* [Modèle UEXT.png pour schéma](uext-conn.png)
+
 # Liste d'achat
 * [Carte prototypage Pyboard](https://shop.mchobby.be/fr/micropython/598-plaque-de-prototypage-pour-pyboard-3232100005983.html)
 * [Connecteur UEXT mâle](https://shop.mchobby.be/fr/uext/1524-connecteur-idc-case-header-2x5-254mm-3232100015425.html) qui est un connecteur IDC 2x5 broches

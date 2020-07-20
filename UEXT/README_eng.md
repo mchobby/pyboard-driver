@@ -52,6 +52,9 @@ All our MicroPython drivers are stored on [pyboard-driver](https://github.com/mc
 
 The MicroPython drivers for boards exposing UEXT connector are stored under foldername starting with "__mod__" (eg: modvga, modrgb, modwii, etc).
 
+# Ressources
+* [Model UEXT.png for schematic](uext-conn.png)
+
 # Where to buy
 * [Pyboard prototyping board](https://shop.mchobby.be/fr/micropython/598-plaque-de-prototypage-pour-pyboard-3232100005983.html)
 * [UEXT male connector](https://shop.mchobby.be/fr/uext/1524-connecteur-idc-case-header-2x5-254mm-3232100015425.html) qui est un connecteur IDC 2x5 broches
