@@ -63,6 +63,16 @@ Il est possible de brancher une source d'alimentation derrière le régulateur d
 
 Toute erreur de tension ou de polarisation sur cette broche entraînera la destruction immédiate de la carte.
 
+__Alimentation LiPo:__
+
+La PYBStick ne dispose pas d'un contrôleur LiPo mais il est tout à fait possible d'ajouter un ACCU Lipo sur votre PYBStick à l'aide d'un [PowerBoost d'Adafruit](https://shop.mchobby.be/fr/recherche?controller=search&orderby=position&orderway=desc&search_query=powerboost&submit_search=).
+
+Si vous voulez pouvoir recharger l'accu sans couper l'alimentation du projet alors il faudra opter pour un "PowerBoost Chargeur" ([PowerBoost 500 Chargeur](https://shop.mchobby.be/fr/accu-et-regulateur/534-powerboost-500-chargeur-3232100005341-adafruit.html) ou le [PowerBoost 1000 Chargeur](https://shop.mchobby.be/fr/regulateurs/662-powerboost-1000-chargeur-3232100006621-adafruit.html) ).
+
+![PYBStick et PowerBoost Gargeur d'Adafruit](docs/_static/PYBSTICK-POWERBOOST-LIPO.jpg)
+
+Ce circuit est décrit plus en détail dans [notre article de blog](https://arduino103.blogspot.com/2020/07/pybstick-et-accu-lipo.html).
+
 ## Logique 3.3V
 
 Les plateforme STM32 fonctionnent en logique 3.3V et dispose de nombreuses broches tolérantes 5V (broche en entrée).
