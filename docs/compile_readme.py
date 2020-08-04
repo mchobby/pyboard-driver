@@ -162,6 +162,7 @@ def compile_all():
  		{'source' : '_static/_drv_by_intf.md', 'destin' : 'indexes/drv_by_intf_FEATHERWING.md', 'lang_code': 'fr', 'code' : 'FEATHERWING', 'filter' : lambda driver : any(['FEATHERWING'==intf for intf in driver.interfaces]) },
  		{'source' : '_static/_drv_by_intf.md', 'destin' : 'indexes/drv_by_intf_UNO-R3.md', 'lang_code': 'fr', 'code' : 'UNO-R3', 'filter' : lambda driver : any(['UNO-R3'==intf for intf in driver.interfaces]) },
  		{'source' : '_static/_drv_by_intf.md', 'destin' : 'indexes/drv_by_intf_HAT.md', 'lang_code': 'fr', 'code' : 'HAT', 'filter' : lambda driver : any(['HAT'==intf for intf in driver.interfaces]) },
+ 		{'source' : '_static/_drv_by_intf.md', 'destin' : 'indexes/drv_by_intf_PYBSTICK.md', 'lang_code': 'fr', 'code' : 'PYBSTICK', 'filter' : lambda driver : any(['PYBSTICK'==intf for intf in driver.interfaces]) },
 
  		{'source' : '_static/_drv_by_intf_ENG.md', 'destin' : 'indexes/drv_by_intf_GPIO_ENG.md', 'lang_code': 'eng', 'code' : 'GPIO', 'filter' : lambda driver : any(['GPIO'==intf for intf in driver.interfaces]) },
  		{'source' : '_static/_drv_by_intf_ENG.md', 'destin' : 'indexes/drv_by_intf_I2C_ENG.md', 'lang_code': 'eng', 'code' : 'I2C', 'filter' : lambda driver : any(['I2C'==intf for intf in driver.interfaces]) },
@@ -174,6 +175,7 @@ def compile_all():
  		{'source' : '_static/_drv_by_intf_ENG.md', 'destin' : 'indexes/drv_by_intf_FEATHERWING_ENG.md', 'lang_code': 'eng', 'code' : 'FEATHERWING', 'filter' : lambda driver : any(['FEATHERWING'==intf for intf in driver.interfaces]) },
  		{'source' : '_static/_drv_by_intf_ENG.md', 'destin' : 'indexes/drv_by_intf_UNO-R3_ENG.md', 'lang_code': 'eng', 'code' : 'UNO-R3', 'filter' : lambda driver : any(['UNO-R3'==intf for intf in driver.interfaces]) },
  		{'source' : '_static/_drv_by_intf_ENG.md', 'destin' : 'indexes/drv_by_intf_HAT_ENG.md', 'lang_code': 'eng', 'code' : 'HAT', 'filter' : lambda driver : any(['HAT'==intf for intf in driver.interfaces]) },
+ 		{'source' : '_static/_drv_by_intf_ENG.md', 'destin' : 'indexes/drv_by_intf_PYBSTICK_ENG.md', 'lang_code': 'eng', 'code' : 'PYBSTICK', 'filter' : lambda driver : any(['PYBSTICK'==intf for intf in driver.interfaces]) },
 
 		{'source' : '_static/_drv_by_man.md', 'destin' : 'indexes/drv_by_man_ADAFRUIT.md', 'lang_code': 'fr', 'code' : 'ADAFRUIT', 'filter' : lambda driver : any(['ADAFRUIT'==man for man in driver.manufacturers]) },
 		{'source' : '_static/_drv_by_man.md', 'destin' : 'indexes/drv_by_man_OLIMEX.md', 'lang_code': 'fr', 'code' : 'OLIMEX', 'filter' : lambda driver : any(['OLIMEX'==man for man in driver.manufacturers]) },

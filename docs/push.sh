@@ -1,5 +1,5 @@
 #!/bin/sh
-cd ~/python/esp8266-upy/docs
+cd ~/python/pyboard-driver/docs
 git add indexes/*.md
 git add _static/_*.md
 git add ../readme.md
