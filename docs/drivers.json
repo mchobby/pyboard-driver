@@ -194,7 +194,7 @@
 		{	"folder"        : "PYBStick-hat-face",
 			"components"    : [],
 			"interfaces"    : ["PYBSTICK","HAT"],
-			"manufacturers" : [],
+			"manufacturers" : ["GARATRONIC"],
 			"plateforms"    : ["PYBSTICK"],
 			"ressources"    : [ { "label" : "PYBStick Hat Face @ MCHobby",
 														           "url"   : "https:\/\/shop.mchobby.be\/fr\/nouveaute\/1935-interface-pybstick-vers-raspberry-pi-3232100019355.html" } ],

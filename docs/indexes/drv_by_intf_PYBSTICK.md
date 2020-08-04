@@ -21,7 +21,7 @@ Connecteur de la carte MicroPython PYBStick
       <strong>Interfaces</strong> : PYBSTICK, HAT<br />
 <small>Carte d'interface entre PYBStick et HAT pour Raspberry-Pi</small><br/><br />
       <strong>Testé avec</strong> : PYBSTICK<br />
-      <strong>Fabricant</strong> : <br />
+      <strong>Fabricant</strong> : GARATRONIC<br />
 <ul>
 <li>Voir <a href="https://shop.mchobby.be/fr/nouveaute/1935-interface-pybstick-vers-raspberry-pi-3232100019355.html">PYBStick Hat Face @ MCHobby</a></li>
 </ul>

@@ -10,6 +10,17 @@ voir
   <th>Répertoire</th><th>Description</th>
 </thead>
 <tbody>
+  <tr><td><a href="../../../../tree/master/PYBStick-hat-face">PYBStick-hat-face</a></td>
+      <td><strong>Composants</strong> : <br />
+      <strong>Interfaces</strong> : PYBSTICK, HAT<br />
+<small>Carte d'interface entre PYBStick et HAT pour Raspberry-Pi</small><br/><br />
+      <strong>Testé avec</strong> : PYBSTICK<br />
+      <strong>Fabricant</strong> : GARATRONIC<br />
+<ul>
+<li>Voir <a href="https://shop.mchobby.be/fr/nouveaute/1935-interface-pybstick-vers-raspberry-pi-3232100019355.html">PYBStick Hat Face @ MCHobby</a></li>
+</ul>
+      </td>
+  </tr>
   <tr><td><a href="../../../../tree/master/UNO-R3">UNO-R3</a></td>
       <td><strong>Composants</strong> : OLED, SSD1306<br />
       <strong>Interfaces</strong> : UNO-R3<br />
