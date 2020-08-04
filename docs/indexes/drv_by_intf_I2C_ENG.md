@@ -32,6 +32,18 @@ I2C bus
 </ul>
       </td>
   </tr>
+  <tr><td><a href="../../../../tree/master/ctrl-panel">ctrl-panel</a></td>
+      <td><strong>Components</strong> : MCP23017, OLED, SSD1306<br />
+      <strong>Interfaces</strong> : I2C, HAT<br />
+<small>Control panel at HAT FormFactor for MicroPython applications or Raspberry-Pi.</small><br/><br />
+      <strong>Tested with</strong> : PYBSTICK<br />
+      <strong>Manufacturer</strong> : GARATRONIC<br />
+<ul>
+<li>See <a href="https://shop.mchobby.be/fr/nouveaute/1934-hat-panneau-de-controle-oled-joystick-bouton-led-3232100019348.html">Hat / Panneau de controle OLED + Joystick + bouton + LEDs</a></li>
+<li>See <a href="https://shop.mchobby.be/fr/nouveaute/1935-interface-pybstick-vers-raspberry-pi-3232100019355.html">PYBStick Hat Face @ MCHobby</a></li>
+</ul>
+      </td>
+  </tr>
   <tr><td><a href="../../../../tree/master/mma7660">mma7660</a></td>
       <td><strong>Components</strong> : MMA7660<br />
       <strong>Interfaces</strong> : I2C<br />

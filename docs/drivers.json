@@ -11,6 +11,20 @@
 								 "ENG": "ADC converter (Analog to Digital) 4 channel allowing analog reading and differential reading.<br \/>L'ADS1115 have a internal amplifier (programmable) that can be used to read very small voltage."
 								}
 		},
+		{	"folder"        : "ctrl-panel",
+			"components"    : ["MCP23017","OLED","SSD1306"],
+			"interfaces"    : ["I2C","HAT"],
+			"manufacturers" : ["GARATRONIC"],
+			"plateforms"    : ["PYBSTICK"],
+			"ressources"    : [ { "label" :  "Hat / Panneau de controle OLED + Joystick + bouton + LEDs",
+														"url"   : "https:\/\/shop.mchobby.be\/fr\/nouveaute\/1934-hat-panneau-de-controle-oled-joystick-bouton-led-3232100019348.html" },
+													{ "label" : "PYBStick Hat Face @ MCHobby",
+ 													  "url"   : "https:\/\/shop.mchobby.be\/fr\/nouveaute\/1935-interface-pybstick-vers-raspberry-pi-3232100019355.html" }
+												],
+			"descr"	: {"FR" : "Panneau de contrôle en format HAT pour application MicroPython ou Raspberry-Pi.",
+								 "ENG": "Control panel at HAT FormFactor for MicroPython applications or Raspberry-Pi."
+								}
+		},
 		{	"folder"        : "ressource",
 			"components"    : [],
 			"interfaces"    : [],
@@ -160,9 +174,9 @@
 								 "ENG": "Create a 4 paws servo-motor walking robot with a PCA9685 PWM controler." }
 		},
 		{	"folder"        : "UNO-R3",
-			"components"    : [],
+			"components"    : ["OLED","SSD1306"],
 			"interfaces"    : ["UNO-R3"],
-			"manufacturers" : [],
+			"manufacturers" : ["GARATRONIC"],
 			"plateforms"    : ["PYBOARD"],
 			"ressources"    : [ ],
 			"descr"	: {"FR" : "Arduino UNO R3 compatible interface for Pyboard",
@@ -176,6 +190,16 @@
 			"ressources"    : [ ],
 			"descr"	: {"FR" : "PYBStick: une carte MicroPython abordable pour tous projets",
 								 "ENG": "PYBStick: an affordable MicroPython board for all projects" }
+		},
+		{	"folder"        : "PYBStick-hat-face",
+			"components"    : [],
+			"interfaces"    : ["PYBSTICK","HAT"],
+			"manufacturers" : [],
+			"plateforms"    : ["PYBSTICK"],
+			"ressources"    : [ { "label" : "PYBStick Hat Face @ MCHobby",
+														           "url"   : "https:\/\/shop.mchobby.be\/fr\/nouveaute\/1935-interface-pybstick-vers-raspberry-pi-3232100019355.html" } ],
+			"descr"	: {"FR" : "Carte d'interface entre PYBStick et HAT pour Raspberry-Pi",
+								 "ENG": "Interface board between PYBStick and HAT for Raspberry-Pi" }
 		},
 		{	"folder"        : "usbhid",
 			"components"    : [],
@@ -214,9 +238,9 @@
 			"components"    : [],
 			"interfaces"    : ["I2C"],
 			"manufacturers" : [],
-			"plateforms"    : ["PYBSTICK"], 
+			"plateforms"    : ["PYBSTICK"],
 			"ressources"    : [ { "label" : "UniPiFace for PYBStick",
-														           "url"   : "https:\/\/shop.mchobby.be/fr/nouveaute/1891-carte-interface-unipi-pro-et-lite-pour-pybstick-3232100018914.html" },  
+														           "url"   : "https:\/\/shop.mchobby.be/fr/nouveaute/1891-carte-interface-unipi-pro-et-lite-pour-pybstick-3232100018914.html" },
                        { "label" : "UniPi V1.1",
 														           "url"   : "https:\/\/shop.mchobby.be\/fr\/tactile-flex-pot-softpad\/83-clavier-16-touches-souple-3232100000834.html" },
                        { "label" : "UniPi Lite",

@@ -9,11 +9,11 @@ Connecteur compatible Arduino UNO R3 pour la Pyboard
 </thead>
 <tbody>
   <tr><td><a href="../../../../tree/master/UNO-R3">UNO-R3</a></td>
-      <td><strong>Composants</strong> : <br />
+      <td><strong>Composants</strong> : OLED, SSD1306<br />
       <strong>Interfaces</strong> : UNO-R3<br />
 <small>Arduino UNO R3 compatible interface for Pyboard</small><br/><br />
       <strong>Testé avec</strong> : PYBOARD<br />
-      <strong>Fabricant</strong> : <br />
+      <strong>Fabricant</strong> : GARATRONIC<br />
       </td>
   </tr>
   <tr><td><a href="../../../../tree/master/zumo-robot">zumo-robot</a></td>
