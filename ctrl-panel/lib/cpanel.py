@@ -28,7 +28,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>
 __version__ = '0.0.1'
 
 from machine import Pin
-from SSD1306 import SSD1306_I2C
+from ssd1306 import SSD1306_I2C
 from mcp230xx import MCP23017
 import time
 
