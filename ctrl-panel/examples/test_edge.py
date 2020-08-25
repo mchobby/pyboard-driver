@@ -6,7 +6,7 @@ from machine import I2C
 from cpanel import *
 import time
 
-i2c = I2C( 1, freq=2000000 )
+i2c = I2C( 1, freq=400000 )
 p = CtrlPanel( i2c )
 
 # Oled is FrameBuffer based

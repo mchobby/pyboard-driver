@@ -8,8 +8,8 @@ import ssd1306
 from time import sleep, sleep_ms
 
 
-# init bus i2c a 2MHz
-i2c=I2C(1, freq=2000000)
+# init bus i2c a 400KHz
+i2c=I2C(1, freq=400000)
 
 
 
@@ -53,4 +53,4 @@ while loopnb :
 	i2c.writeto_mem(0x21, 0x12, b'\xFF')	# led D2 and D1 ON
 	sleep(1)	# sleep for 1 second
 	i2c.writeto_mem(0x21, 0x12, b'\xCF')	# leds off
-	loopnb = loopnb -1/home/domeu>
+	loopnb = loopnb -1
