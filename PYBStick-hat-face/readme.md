@@ -40,7 +40,31 @@ Pour résumer, avec R3, R6, R7, R8 montées, vous avez une configuration droite 
 
 # Tester
 
-Still to do.
+## Sense-Hat
+En guise de test, je vous propose de tester le [Sense-Hat](https://shop.mchobby.be/fr/pi-hats/687-sense-hat-pour-raspberry-pi-3232100006874.html) avec la carte PYBStick-Hat-Face
+
+![Sense-Hat with PYBStick](docs/_static/pybstick-sense-hat.jpg)
+
+La __bibliothèque et exemples__ du Sense-Hat sous MicroPython sont accessibles sur dans notre dépot [esp8266-upy/hat-sense](https://github.com/mchobby/esp8266-upy/tree/master/hat-sense) . Le développement fut completement conduit en utilisant le Hat-Face.
+
+## Adafruit Motor-Hat
+
+La bibliothèque [adfmotors](https://github.com/mchobby/esp8266-upy/tree/master/adfmotors) fonctionne déjà avec Pyboard et la Pyboard-Uno-R3.
+
+Pour utiliser le [Motor-Hat](https://shop.mchobby.be/fr/pi-hats/596-hat-controle-moteur-et-moteur-pas-a-pas-3232100005969-adafruit.html) avec la carte PYBStick-HAT-Face, il suffira d'utiliser le bus `I2C(1)` .
+
+![](docs/_static/motor-hat.jpg)
+
+## PiFace Digital 2
+
+Utiliser la carte [PiFace Digital 2](https://shop.mchobby.be/fr/pi-hats/221-piface-digital-2-pour-raspberry-pi-3232100002210.html) avec la carte PYBStick-HAT-Face est une application très intéressante.
+
+![PiFace digital](docs/_static/piface-digital.jpg)
+
+MCHobby dispose d'une [page wiki dédiée au PiFace Digital](https://wiki.mchobby.be/index.php?title=PiFace2-Manuel) et ses applications.
+
+Son utilisation sous MicroPython nécessite un pilote encore en cours de développement.
+
 
 # Où acheter
 
