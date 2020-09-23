@@ -51,9 +51,9 @@ La __bibliothèque et exemples__ du Sense-Hat sous MicroPython sont accessibles 
 
 La bibliothèque [adfmotors](https://github.com/mchobby/esp8266-upy/tree/master/adfmotors) fonctionne déjà avec Pyboard et la Pyboard-Uno-R3.
 
-Pour utiliser le [Motor-Hat](https://shop.mchobby.be/fr/pi-hats/596-hat-controle-moteur-et-moteur-pas-a-pas-3232100005969-adafruit.html) avec la carte PYBStick-HAT-Face, il suffira d'utiliser le bus `I2C(1)` .
+Pour utiliser le [Motor-Hat](https://shop.mchobby.be/fr/pi-hats/596-hat-controle-moteur-et-moteur-pas-a-pas-3232100005969-adafruit.html) avec la carte PYBStick-HAT-Face, il suffira d'utiliser le bus `I2C(1)` dans les exemples de la bibliothèque [adfmotors](https://github.com/mchobby/esp8266-upy/tree/master/adfmotors).
 
-![](docs/_static/motor-hat.jpg)
+![Hat Moteur avec PYBStick](docs/_static/motor-hat.jpg)
 
 ## PiFace Digital 2
 
@@ -61,10 +61,7 @@ Utiliser la carte [PiFace Digital 2](https://shop.mchobby.be/fr/pi-hats/221-pifa
 
 ![PiFace digital](docs/_static/piface-digital.jpg)
 
-MCHobby dispose d'une [page wiki dédiée au PiFace Digital](https://wiki.mchobby.be/index.php?title=PiFace2-Manuel) et ses applications.
-
-Son utilisation sous MicroPython nécessite un pilote encore en cours de développement.
-
+La __bibliothèque PiFace__ pour MicroPython est disponible sur le dépôt GitHub [esp8266-upy/hat-piface](https://github.com/mchobby/esp8266-upy/tree/master/hat-piface).
 
 # Où acheter
 
