@@ -14,10 +14,13 @@ La carte "Panneau de contrôle" dispose des fonctionnalités suivantes:
 * GPIO compatible Raspberry-Pi
 * __Large__ écran OLED 128x64 (compatible SSD1306).
 * Joystick 4 positions + bouton poussoir
-* 4 boutons de fonction
+* 3 boutons de fonction + 1 bouton OFF
 * Une LED Verte (D2, en haut) + LED rouge (D1, en bas)
 * Pilotes MicroPython disponibles
 
+__A propos du bouton OFF:__
+
+Le bouton SW2 sert de bouton OFF. Son état peut être lu à l'aide de la propriété `request_off` qui retourne True lorsque le bouton est activé pendant plus de 4 secondes (voir propriété `request_off_delay` en secondes).
 # Brancher
 
 ## PYBStick + PYBStick-Hat-Face

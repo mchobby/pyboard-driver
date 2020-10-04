@@ -1,4 +1,6 @@
-# advanced example utisng  Initialization test for NADHAT-CONTROL-PANEL
+# advanced example utisng:
+#   Initialization test for NADHAT-CONTROL-PANEL
+#   Utilisation des bouton-On/OFF (SW4)
 #
 # See: https://github.com/mchobby/pyboard-driver/tree/master/ctrl-panel
 #

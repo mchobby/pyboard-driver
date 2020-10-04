@@ -2,7 +2,7 @@
 #
 # See: https://github.com/mchobby/pyboard-driver/tree/master/ctrl-panel
 #
-from machine import I2C
+from machine import I2C, Pin
 from cpanel import *
 import time
 

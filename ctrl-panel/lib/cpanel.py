@@ -35,6 +35,7 @@ import time
 
 # Button_name = MCP_GPIO_nr
 SW1  = 14
+#SW2  = 3
 SW3  = 8
 SW4  = 15
 UP   = 11
@@ -102,6 +103,8 @@ class MCPEdge( MCP23017 ):
 class CtrlPanel:
 	def __init__( self, i2c ):
 		self.i2c = i2c
+		self.rq_off_stime = None   # start time when OFF button where pressed
+		self.request_off_delay = 4 # time to activate the request off (in second)
 
 		self._mcp = MCPEdge( i2c, address=0x21, falling_edge=True )
 		# Configure PinOut
@@ -134,6 +137,14 @@ class CtrlPanel:
 		self._mcp.read_gpio() # Just read all the GPIOs (2 bytes)
 		self._mcp.update() # Update edges counters
 
+		# Apply a trigger of X sec to activate Request_off output
+		if self._mcp.input(3, read=False) == False:
+			self.rq_off_stime = None
+		else: # Someone is pressing the Off Button
+			# Init start time
+			if self.rq_off_stime == None:
+				self.rq_off_stime = time.time()
+
 	def is_down( self, btn_gpio ):
 		# check if the button is down
 		return self._mcp.input(btn_gpio, read=False)==False # Low when pressed, Do not reread
@@ -143,7 +154,7 @@ class CtrlPanel:
 
 	@property
 	def request_off( self ):
-		return self._mcp.input(3, read=False) == False
+		return (self.rq_off_stime != None) and ((time.time() - self.rq_off_stime) > self.request_off_delay )
 
 	@property
 	def green( self ):
