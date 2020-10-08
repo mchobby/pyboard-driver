@@ -1,0 +1,134 @@
+CMS ERROR
+=========
+
++CMS ERROR:<err>
+
+Code <space> Meaning
+
+1 Unassigned(unallocated) number
+3 No route to destination
+6 Channel unacceptable
+8 Operator determined barring
+10 Call barred
+11 Reserved
+16 Normal call clearing
+17 User busy
+18 No user responding
+19 User alerting, no answer
+21 Short message transfer rejected
+22 Number changed
+25 Pre-emption
+26 Non-selected user clearing
+27 Destination out of service
+28 Invalid number format (incomplete number)
+29 Facility rejected
+30 Response to STATUS ENQUIRY
+32 Normal, unspecified
+34 No circuit/channel available
+38 Network out of order
+41 Temporary failure
+42 Switching equipment Congestion
+43 Access information discarded
+44 Requested circuit/channel not available
+47 Resources unavailable, unspecified
+49 Quality of service unavailable
+50 Requested facility not subscribed
+55 Requested facility not subscribed
+57 Bearer capability not authorized
+58 Bearer capability not presently available
+63 Service or option not available, unspecified
+65 Bearer service not implemented
+68 ACM equal or greater than ACM maximum
+69 Requested facility not implemented
+70 Only restricted digital information bearer capability is available
+79 Service or option not implemented, unspecified
+81 Invalid transaction identifier value
+87 User not member of CUG
+88 Incompatible destination
+91 Invalid transit network selection
+95 Semantically incorrect message
+96 Invalid mandatory information
+97 Message type non-existent or not implemented
+98 Message type not compatible with protocol state
+99 Information element non-existent or not implemented
+100 Conditional information element error
+101 Message not compatible with protocol
+102 Recovery on timer expiry
+111 Protocol error, unspecified
+127 Interworking, unspecified
+128 Telematic interworking not supported
+129 Short message Type 0 not supported
+130 Cannot replace short message
+143 Unspecified TP-PID error
+144 Data coding scheme (alphabet) not supported
+145 Message class not supported
+159 Unspecified TP-DCS error
+160 Command cannot be acted
+161 Command unsupported
+175 Unspecified TP-Command error
+176 TPDU not supported
+192 SC busy
+193 No SC subscription
+194 SC system failure
+195 Invalid SME address
+196 Destination SME barred
+197 SM Rejected-Duplicate SM
+198 TP-VPF not supported
+199 TP-VP not supported
+208 SIM SMS storage full
+209 No SMS storage capability in SIM
+210 Error in MS
+211 Memory Capacity Exceeded
+212 SIM Application Toolkit Busy
+213 SIM data download error
+224 CP retry exceed
+225 RP trim timeout
+226 SMS connection broken
+255 Unspecified error cause
+300 ME failure
+301 SMS reserved
+302 operation not allowed
+303 operation not supported
+304 invalid PDU mode
+305 invalid text mode
+310 SIM not inserted
+311 SIM pin necessary
+312 PH SIM pin necessary
+313 SIM failure
+314 SIM busy
+315 SIM wrong
+316 SIM PUK required
+317 SIM PIN2 required
+318 SIM PUK2 required
+320 memory failure
+321 invalid memory index
+322 memory full
+323 invalid input parameter
+324 invalid input format
+325 invalid input value
+330 SMSC address unknown
+331 no network
+332 network timeout
+340 no cnma ack
+500 Unknown
+512 SMS no error
+513 Message length exceeds maximum length
+514 Invalid request parameters
+515 ME storage failure
+516 Invalid bearer service
+517 Invalid service mode
+518 Invalid storage type
+519 Invalid message format
+520 Too many MO concatenated messages
+521 SMSAL not ready
+522 SMSAL no more service
+523 Not support TP-Status-Report & TP-Command in storage
+524 Reserved MTI
+525 No free entity in RL layer
+526 The port number is already registerred
+527 There is no free entity for port number
+528 More Message to Send state error
+529 MO SMS is not allow
+530 GPRS is suspended
+531 ME storage full
+532 Doing SIM refresh

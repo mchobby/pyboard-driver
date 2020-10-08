@@ -1,0 +1,16 @@
+AT+CMGD Delete SMS message
+AT+CMGF Select SMS message format
+AT+CMGL List SMS messages from preferred store
+AT+CMGR Read SMS message
+AT+CMGS Send SMS message
+AT+CMGW Write SMS message to memory
+AT+CMSS Send SMS message from storage
+AT+CNMI New SMS message indications
+AT+CPMS Preferred SMS message storage
+AT+CRES Restore SMS settings
+AT+CSAS Save SMS settings
+AT+CSCA SMS service center address
+AT+CSCB Select cell broadcast SMS messages
+AT+CSDH Show SMS text mode parameters
+AT+CSMP Set SMS text mode parameters
+AT+CSMS Select message service

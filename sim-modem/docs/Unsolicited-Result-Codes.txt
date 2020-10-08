@@ -1,0 +1,34 @@
+Unsolicited Result Codes
+========================
+
+RING 
+  An incoming call signal from network is detected.
+
++CMTI: <mem3>,<index> 
+  Indicates that new message has been received.
+  AT+CNMI <mt>=1
+
+CMTI: <mem3>,<index>,"MMS PUSH"
+  Indicates that new MMS message has been received.
+  AT+CNMI <mt>=1
+
++CMT: <length><CR><LF><pdu>
+  Indicates that new message has been received.
+
+NORMAL POWER DOWN
+  SIM800 is powered down by the PWRKEY pin or AT command "AT+CPOWD=1".
+
+RDY
+  Power on procedure is completed, and the module is ready to operate at fixed
+  baud rate. (This URC does not appear when auto-bauding function is active).
+
+Call Ready
+  self explaining
+
+SMS Ready
+  self explaining
+
++CGREG: <stat>[,<lac>,<ci>]
+  Network Registration Status
+  AT+CGREG=<n>
+
