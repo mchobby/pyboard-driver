@@ -8,6 +8,18 @@ This board is fitted with a SIM800 module from SIMCOM.
 
 ![NADHAT GSM board with SIM800 module](docs/_static/nadhat-gsm.jpg)
 
+Supported feature:
+* Make/Receive/Hangup calls
+* Send/Receive text SMS
+* Network scan
+* Read imei, sim_serial
+* Status: connection, RSSI,
+
+Not developed yet:
+* GPRS/Data
+* DTMF (tone identification)
+* MMS
+
 ## Consumption
 
 Some GSM operations does imply impressive current peak (EG: register the module on the mobile network). Les efficient PSU may temporarily under 5V which would cause the SIM module to reboot (even by using distinct power supply for the GSM board).

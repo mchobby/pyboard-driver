@@ -8,6 +8,18 @@ Celle-ci est équipée d'un module SIM800 de SIMCOM.
 
 ![Carte NADHAT GSM avec module SIM800](docs/_static/nadhat-gsm.jpg)
 
+Fonctionnalité supportées:
+* Appels: faire/recevoir/raccrocer
+* SMS: envoyer/recevoir
+* Scan réseai
+* Lecture: imei, sim_serial
+* Statut: connexion, RSSI
+
+Pas encore supporté:
+* GPRS/Data
+* DTMF (identification tonalité)
+* MMS
+
 ## Consommation
 
 Certaines opérations GSM provoque d'importantes pointes de courants (par exemple l'enregistrement sur le réseau GSM). Des alimentations 5V moins performantes risqueraient de présenter une chute de tension lors d'un brusque appel de courant, ce qui provoquera un redémarrage du module SIM.
