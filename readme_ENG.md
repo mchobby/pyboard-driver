@@ -220,12 +220,23 @@ Explore it by:
   <tr><td><a href="../../tree/master/servorobot">servorobot</a></td>
       <td><strong>Components</strong> : PCA9685<br />
       <strong>Interfaces</strong> : I2C<br />
-<small>Create a 4 paws servo-motor walking robot with a PCA9685 PWM controler.</small><br/><br />
+<small>Make or receives call as well as SMS messages with MicroPython.</small><br/><br />
       <strong>Tested with</strong> : PYBOARD<br />
       <strong>Manufacturer</strong> : ADAFRUIT<br />
 <ul>
 <li>See <a href="https://shop.mchobby.be/fr/moteur/913-allbot-patte-2-servo-vr012-3232100009134-velleman.html">AllBot Patte 2 Servo @ MCHobby</a></li>
-<li>See <a href="https://shop.mchobby.be/fr/breakout/89-adafruit-controleur-pwm-servo-16-canaux-12-bits-i2c-interface-pca9685-3232100000896-adafruit.html">PWM Driver (PCA9685) @ MCHobby</a></li>
+<li>See <a href="https://shop.mchobby.be/en/search?controller=search&orderby=position&orderway=desc&search_query=nadhat-gsm&submit_search=">PWM Driver (PCA9685) @ MCHobby</a></li>
+</ul>
+      </td>
+  </tr>
+  <tr><td><a href="../../tree/master/sim-modem">sim-modem</a></td>
+      <td><strong>Components</strong> : SIM800, HAT-NADHAT-GSM<br />
+      <strong>Interfaces</strong> : UART<br />
+<small>Use a 4x4 keypad with a MicroPython Pyboard microcontroler</small><br/><br />
+      <strong>Tested with</strong> : PYBOARD, PYBSTICK<br />
+      <strong>Manufacturer</strong> : GARATRONIC<br />
+<ul>
+<li>See <a href="https://shop.mchobby.be/fr/tactile-flex-pot-softpad/83-clavier-16-touches-souple-3232100000834.html">NADHAT-GSM @ MCHobby</a></li>
 </ul>
       </td>
   </tr>

@@ -68,12 +68,12 @@ voir
   <tr><td><a href="../../../../tree/master/servorobot">servorobot</a></td>
       <td><strong>Composants</strong> : PCA9685<br />
       <strong>Interfaces</strong> : I2C<br />
-<small>Créer un robot à 4 pattes avec des servo-moteurs et un contrôleur PWM PCA9685.</small><br/><br />
+<small>Faire des appels ou envoyer/recevoir des SMS avec une carte MicroPython.</small><br/><br />
       <strong>Testé avec</strong> : PYBOARD<br />
       <strong>Fabricant</strong> : ADAFRUIT<br />
 <ul>
 <li>Voir <a href="https://shop.mchobby.be/fr/moteur/913-allbot-patte-2-servo-vr012-3232100009134-velleman.html">AllBot Patte 2 Servo @ MCHobby</a></li>
-<li>Voir <a href="https://shop.mchobby.be/fr/breakout/89-adafruit-controleur-pwm-servo-16-canaux-12-bits-i2c-interface-pca9685-3232100000896-adafruit.html">PWM Driver (PCA9685) @ MCHobby</a></li>
+<li>Voir <a href="https://shop.mchobby.be/en/search?controller=search&orderby=position&orderway=desc&search_query=nadhat-gsm&submit_search=">PWM Driver (PCA9685) @ MCHobby</a></li>
 </ul>
       </td>
   </tr>

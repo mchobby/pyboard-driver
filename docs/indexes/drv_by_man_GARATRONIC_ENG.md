@@ -41,5 +41,16 @@ See
 </ul>
       </td>
   </tr>
+  <tr><td><a href="../../../../tree/master/sim-modem">sim-modem</a></td>
+      <td><strong>Components</strong> : SIM800, HAT-NADHAT-GSM<br />
+      <strong>Interfaces</strong> : UART<br />
+<small>Use a 4x4 keypad with a MicroPython Pyboard microcontroler</small><br/><br />
+      <strong>Tested with</strong> : PYBOARD, PYBSTICK<br />
+      <strong>Manufacturer</strong> : GARATRONIC<br />
+<ul>
+<li>See <a href="https://shop.mchobby.be/fr/tactile-flex-pot-softpad/83-clavier-16-touches-souple-3232100000834.html">NADHAT-GSM @ MCHobby</a></li>
+</ul>
+      </td>
+  </tr>
 </tbody>
 </table>

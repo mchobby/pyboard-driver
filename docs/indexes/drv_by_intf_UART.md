@@ -20,5 +20,16 @@ UART (série)
 </ul>
       </td>
   </tr>
+  <tr><td><a href="../../../../tree/master/sim-modem">sim-modem</a></td>
+      <td><strong>Composants</strong> : SIM800, HAT-NADHAT-GSM<br />
+      <strong>Interfaces</strong> : UART<br />
+<small>Utiliser un keypad 4x4 avec un microcontroleur MicroPython Pyboard</small><br/><br />
+      <strong>Testé avec</strong> : PYBOARD, PYBSTICK<br />
+      <strong>Fabricant</strong> : GARATRONIC<br />
+<ul>
+<li>Voir <a href="https://shop.mchobby.be/fr/tactile-flex-pot-softpad/83-clavier-16-touches-souple-3232100000834.html">NADHAT-GSM @ MCHobby</a></li>
+</ul>
+      </td>
+  </tr>
 </tbody>
 </table>
