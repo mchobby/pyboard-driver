@@ -5,6 +5,8 @@ unoextra.py - Pyboard-UNO-R3 extra miscellaneous features like OLED and charger.
 
 See project source @ https://github.com/mchobby/pyboard-driver/tree/master/UNO-R3
 
+  0.0.1 : initial code
+  0.0.2 : disable watchdog
 """
 #
 # The MIT License (MIT)
@@ -29,7 +31,7 @@ See project source @ https://github.com/mchobby/pyboard-driver/tree/master/UNO-R
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 
 from machine import I2C, Pin
 from ssd1306 import SSD1306_I2C
@@ -119,6 +121,7 @@ class Unoled( SSD1306_I2C ):
 
 # --- CHARGER ------------------------------------------------------------------
 REG_CONF  = 0x02
+REG_WD    = 0x07 # Watchdog, FastCharger Timer, etc
 REG_STAT  = 0x0B
 REG_FAULT = 0x0C
 REG_BATV  = 0x0E
@@ -144,6 +147,11 @@ VBUS_USB_DCP_MAX = 0b100 # Adjustable High Voltage DCP (MaxCharge) (1.5A)
 VBUS_USB_UNKNOW  = 0b101 # Unknown Adapter (500mA)
 VBUS_NOT_STD     = 0b110 # Non-Standard Adapter (1A/2A/2.1A/2.4A)
 VBUS_OTG         = 0b111 # USB OTG
+# For REG_WD
+WD_DISABLE = 0b00
+WD_40SEC   = 0b01 # Default
+WD_80SEC   = 0b10
+WD_160SEC  = 0b11
 
 # For REG_FAULT
 CHARGING_FAULT_NORMAL = 0b00
@@ -173,6 +181,8 @@ class QB25895(object):
 	def __init__( self, i2c ):
 		self._i2c = i2c
 		self._address = 0x6A
+		self.watchdog( WD_DISABLE )
+
 
 		# see update_status()
 		self.vsys_stat = None # VSYS Regulation Status. False:BAT > VSYSMIN, True:BAT < VSYSMIN
@@ -242,6 +252,15 @@ class QB25895(object):
 		self._chrg_fault      = (val & 0b110000)>>4
 		self._bat_fault       = (val & 0b1000)>0
 		self._ntc_fault       = (val & 0b111)
+
+	def watchdog( self, value ):
+		""" Configure the watchdog with WD_xxx value """
+		assert value in (WD_DISABLE, WD_40SEC, WD_80SEC, WD_160SEC), "WD_xxx constant required"
+		val = self._read_u8(REG_WD)
+		# Watchdog stored @ bits 5 and 4
+		val = val & 0b11001111
+		val = val | (value << 4 )
+		self._write_u8(REG_WD, bytes([val]) )
 
 	@property
 	def vsys_regulation( self ):
