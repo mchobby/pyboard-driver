@@ -19,8 +19,8 @@ Le projet __UniPi-MicroPython-Automation__ est né.
 * __1 x breakout I2C :__ sur la carte. pour y connecter vos propres extensions I2C.
 * __1 x sortie 12v :__ alimentation 12v 200mA à utiliser avec les entrée digitales de l'UniPi.
 
-## Carte UniPiFace
-La carte [UniPiFace](https://shop.mchobby.be/product.php?id_product=1850) permet d'interfacer une carte [PYbStick Standard](https://shop.mchobby.be/product.php?id_product=1844) ou [PYbStick PRO](https://shop.mchobby.be/product.php?id_product=1844) sur la carte UniPi V1.1 (ou UniPi Lite).
+## Carte PYBStick-UniPi-Face
+La carte [UniPi-Face](https://shop.mchobby.be/product.php?id_product=1891) permet d'interfacer une carte [PYbStick Standard](https://shop.mchobby.be/product.php?id_product=1844) ou [PYbStick PRO](https://shop.mchobby.be/product.php?id_product=1844) sur la carte UniPi V1.1 (ou UniPi Lite).
 
 ![Carte d'interface UniPiFace](docs/_static/unipiface.jpg)
 
@@ -276,6 +276,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 # Où acheter
 * [PYbStick STD](https://shop.mchobby.be/product.php?id_product=1844) ou [PYbStick PRO](https://shop.mchobby.be/product.php?id_product=1844)  @ MCHobby
-* [Carte d'interface UniPi-PYBStick (UniPiFace)](https://shop.mchobby.be/product.php?id_product=1850) @ MCHobby
+* [Carte d'interface PYBStick-UniPi-Face (UniPi-Face)](https://shop.mchobby.be/product.php?id_product=1891) @ MCHobby
 * [Carte UniPi](https://shop.mchobby.be/product.php?id_product=1171) @ MCHobby
 * [Carte UniPi Lite](https://shop.mchobby.be/product.php?id_product=1196) @ MCHobby
