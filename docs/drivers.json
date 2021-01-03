@@ -143,6 +143,16 @@
 			"descr"	: {"FR" : "Carte d'interface entre PYBStick et HAT pour Raspberry-Pi",
 								 "ENG": "Interface board between PYBStick and HAT for Raspberry-Pi" }
 		},
+		{	"folder"        : "PYBStick-Feather-face",
+			"components"    : [],
+			"interfaces"    : ["PYBSTICK","FEATHERWING","UEXT"],
+			"manufacturers" : ["GARATRONIC","ADAFRUIT"],
+			"plateforms"    : ["PYBSTICK"],
+			"ressources"    : [ { "label" : "PYBStick Feather Face @ MCHobby",
+														           "url"   : "https:\/\/shop.mchobby.be\/fr\/pybstick\/1996-carte-d-interface-feather-et-uext-pour-pybstick-3232100019966.html" } ],
+			"descr"	: {"FR" : "Carte d'interface entre PYBStick et extensions FeatherWing d Adafruit Industries",
+								 "ENG": "Interface board between PYBStick and FeatherWing expansion board (from Adafruit Industries)" }
+		},
 		{	"folder"        : "QWIIC",
 			"components"    : [],
 			"interfaces"    : ["QWIIC","STEMMA"],

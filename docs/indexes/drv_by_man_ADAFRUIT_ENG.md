@@ -22,6 +22,17 @@ See
 </ul>
       </td>
   </tr>
+  <tr><td><a href="../../../../tree/master/PYBStick-Feather-face">PYBStick-Feather-face</a></td>
+      <td><strong>Components</strong> : <br />
+      <strong>Interfaces</strong> : PYBSTICK, FEATHERWING, UEXT<br />
+<small>Interface board between PYBStick and FeatherWing expansion board (from Adafruit Industries)</small><br/><br />
+      <strong>Tested with</strong> : PYBSTICK<br />
+      <strong>Manufacturer</strong> : GARATRONIC, ADAFRUIT<br />
+<ul>
+<li>See <a href="https://shop.mchobby.be/fr/pybstick/1996-carte-d-interface-feather-et-uext-pour-pybstick-3232100019966.html">PYBStick Feather Face @ MCHobby</a></li>
+</ul>
+      </td>
+  </tr>
   <tr><td><a href="../../../../tree/master/QWIIC">QWIIC</a></td>
       <td><strong>Components</strong> : <br />
       <strong>Interfaces</strong> : QWIIC, STEMMA<br />

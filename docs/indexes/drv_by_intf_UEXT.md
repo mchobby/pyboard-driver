@@ -8,6 +8,17 @@ Connecteur UEXT en logique 5V de Olimex Ltd (Olimex.com) transportant I2C, SPI, 
   <th>Répertoire</th><th>Description</th>
 </thead>
 <tbody>
+  <tr><td><a href="../../../../tree/master/PYBStick-Feather-face">PYBStick-Feather-face</a></td>
+      <td><strong>Composants</strong> : <br />
+      <strong>Interfaces</strong> : PYBSTICK, FEATHERWING, UEXT<br />
+<small>Carte d'interface entre PYBStick et extensions FeatherWing d Adafruit Industries</small><br/><br />
+      <strong>Testé avec</strong> : PYBSTICK<br />
+      <strong>Fabricant</strong> : GARATRONIC, ADAFRUIT<br />
+<ul>
+<li>Voir <a href="https://shop.mchobby.be/fr/pybstick/1996-carte-d-interface-feather-et-uext-pour-pybstick-3232100019966.html">PYBStick Feather Face @ MCHobby</a></li>
+</ul>
+      </td>
+  </tr>
   <tr><td><a href="../../../../tree/master/UEXT">UEXT</a></td>
       <td><strong>Composants</strong> : <br />
       <strong>Interfaces</strong> : UEXT<br />
