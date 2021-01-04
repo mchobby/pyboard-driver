@@ -143,7 +143,7 @@
 			"descr"	: {"FR" : "Carte d'interface entre PYBStick et HAT pour Raspberry-Pi",
 								 "ENG": "Interface board between PYBStick and HAT for Raspberry-Pi" }
 		},
-		{	"folder"        : "PYBStick-Feather-face",
+		{	"folder"        : "PYBStick-feather-face",
 			"components"    : [],
 			"interfaces"    : ["PYBSTICK","FEATHERWING","UEXT"],
 			"manufacturers" : ["GARATRONIC","ADAFRUIT"],

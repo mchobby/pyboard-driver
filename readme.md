@@ -59,7 +59,7 @@ Explorer par:
       <strong>Fabricant</strong> : <br />
       </td>
   </tr>
-  <tr><td><a href="../../tree/master/PYBStick-Feather-face">PYBStick-Feather-face</a></td>
+  <tr><td><a href="../../tree/master/PYBStick-feather-face">PYBStick-feather-face</a></td>
       <td><strong>Composants</strong> : <br />
       <strong>Interfaces</strong> : PYBSTICK, FEATHERWING, UEXT<br />
 <small>Carte d'interface entre PYBStick et extensions FeatherWing d Adafruit Industries</small><br/><br />

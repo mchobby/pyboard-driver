@@ -16,7 +16,7 @@ PYBStick MicroPython board connector
       <strong>Manufacturer</strong> : <br />
       </td>
   </tr>
-  <tr><td><a href="../../../../tree/master/PYBStick-Feather-face">PYBStick-Feather-face</a></td>
+  <tr><td><a href="../../../../tree/master/PYBStick-feather-face">PYBStick-feather-face</a></td>
       <td><strong>Components</strong> : <br />
       <strong>Interfaces</strong> : PYBSTICK, FEATHERWING, UEXT<br />
 <small>Interface board between PYBStick and FeatherWing expansion board (from Adafruit Industries)</small><br/><br />
