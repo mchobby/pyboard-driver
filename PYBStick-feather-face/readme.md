@@ -10,6 +10,9 @@ La sérigraphie reprend également toute l'information nécessaire à l'exploita
 
 Il est maintenant possible de brancher une carte d'extension Feather (ex: Motor FeatherWing) sur la PYBStick puis simplement utiliser les bibliothèques existantes (en adaptant le nom des broches) pour controler la dite carte moteur depuis votre la carte PYBStick. Cool n'est ce pas?
 
+![Feather-Face schematic](docs/_static/feather-face-schematic.png) <br />[Schéma du PYBStick-Feather-Face](docs/_static/pybstick-feather-face0.jpg)
+
+
 # Exemple avec OLED FeatherWing
 
 Attention à bien désactiver la broche #6 du FeatherWing (ouvrir le cavalier) car la Pull-Up présente sur le bouton B du FeatherWing active le mode DFU de la PYBStick.

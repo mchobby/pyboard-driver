@@ -10,6 +10,8 @@ The silkscreen does contains all the required information to use this interface 
 
 It is now possible to use a Feather extension board on the (ex: Motor FeatherWing) with the PYBStick then use the existing library (and adapt pinout definition) to take the controle over the target FeatherWing extension with the PYBStick. That's great!
 
+![Feather-Face schematic](docs/_static/feather-face-schematic.png) <br />[PYBStick-Feather-Face schematic](docs/_static/pybstick-feather-face0.jpg)
+
 # OLED FeatherWing example
 
 Do not forget to remove the jumper to deactivate the FeatherWing's #6 pin otherwise, the B button on the Featherwing will active the DFU mode of the PYBStick.
