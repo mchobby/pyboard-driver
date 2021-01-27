@@ -15,6 +15,8 @@ Schéma du brochage pour le Pico destiné à une utilisation avec MicroPython.
 * [Pico Brochage FR](docs/_static/Pico_FR.jpg)  format jpg, voir aussi [PNG haute resolution](docs/_static/Pico_FR.png)
 * [Pico PinOut](docs/_static/Pico.jpg) format jpg, voir [PNG haute resolution](docs/_static/Pico.png)
 
+![Pico buses](docs/_static/buses.jpg)
+
 # Pico Annoté
 Simple et efficace, avec n° de broche, n° de GPIO et informations utiles.
 

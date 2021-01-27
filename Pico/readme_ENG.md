@@ -15,6 +15,8 @@ Here is the Pinout of Pico when used under MicroPython MicroPython.
 * [Pico PinOut](docs/_static/Pico.jpg) jpg format, see also [HighRes PNG](docs/_static/Pico.png)
 * [Pico Pinout FR](docs/_static/Pico_FR.jpg)  jpg format, see also [HighRes png](docs/_static/Pico_FR.png)
 
+![Pico buses](docs/_static/buses.jpg)
+
 # Annoted Pico
 Simple & efficient, with Pin number, GPIO number and some useful information.
 
