@@ -1,3 +1,5 @@
+[This ReadMe also exists in ENGLISH](readme_ENG.md)
+
 # UniPi-MicroPython-Automation: Utiliser une carte UniPi Pour réaliser une automate programmable sous MicroPython
 
 Réaliser un automate programmable MicroPython c'est une beau projet par contre, une interface automation, cela ne se conçoit pas à la légère. Cela tombe bien, la société [UniPi Technologie à créé l'UniPi V1.1](https://shop.mchobby.be/product.php?id_product=1171), une carte de qualité professionnelle prévue pour Raspberry-Pi.
@@ -13,24 +15,42 @@ Le projet __UniPi-MicroPython-Automation__ est né.
 * __2 × entrée analogique :__ pour lire le signal analogique de périphériques externes. Entre 0-10 V continu.
 * __1 × sortie analogique :__ pour réaliser une sortie de contrôle proportionnel. Entre 0-10 V continu.
 * __1 × port 1-Wire :__ (RJ45) pour connecter des périphériques 1-Wire comme sonde de température, senseur d'humidité.
-* __1 × port I2C :__ (RJ11) pour de connecter des modules d'extension comme des relay, entrée analogique, sortie digitale.
+* __1 × port I2C :__ (RJ11) pour de connecter des modules d'extension comme des relais, entrée analogique, sortie digitale.
 * __1 × port UART :__ (RJ11) pour connecter un périphérique série (lecteur NFC, lecteur code-barre) ou un câble console série.
 * __1 × Horloge temps réel :__ avec boîtier pour la pile (aussi appelée RTC pour Real Time Clock)
 * __1 x breakout I2C :__ sur la carte. pour y connecter vos propres extensions I2C.
 * __1 x sortie 12v :__ alimentation 12v 200mA à utiliser avec les entrée digitales de l'UniPi.
 
 ## Carte PYBStick-UniPi-Face
-La carte [UniPi-Face](https://shop.mchobby.be/product.php?id_product=1891) permet d'interfacer une carte [PYbStick Standard](https://shop.mchobby.be/product.php?id_product=1844) ou [PYbStick PRO](https://shop.mchobby.be/product.php?id_product=1844) sur la carte UniPi V1.1 (ou UniPi Lite).
+La carte [PYBStick-UniPi-Face](https://shop.mchobby.be/product.php?id_product=1891) permet d'interfacer une carte [PYbStick Standard](https://shop.mchobby.be/product.php?id_product=1844) ou [PYbStick PRO](https://shop.mchobby.be/product.php?id_product=1844) sur la carte UniPi V1.1 (ou UniPi Lite).
 
-![Carte d'interface UniPiFace](docs/_static/unipiface.jpg)
+![Carte d'interface PYBStick-UniPi-Face](docs/_static/unipiface-final.jpg)
 
-__Version BETA de la carte UniPiFace__
+Le connecteur J2 dois aussi être branché (avec des connecteurs Dupont) pour pouvoir utiliser les entrées I13 & I14.
+
+![Brancher connecteur J2](docs/_static/unipi-face-j2.jpg)
+
+Le schéma de la carte d'interface est le suivant:
+
+![PYBStick-UniPi-Face schema](docs/_static/unipiface-schematic.jpg)
+
+Certaines broches GPIO de la PYBStick sont encore disponibles:
+* __S7__ libre mais aussi la broche Boot0 (doit etre au niveau haut au démarrage).
+* __S10 & S15__ sauf si vous avez ponter les cavalier d'interruption du MCP23017.
+* __S3 & S5__ sauf si vous utilisez le bus I2C sur connecteur UEXT.
+* __S16 & S18__ sauf si vous utilisez l'UART sur le connecteur UEXT.
+* __S19, S21, S23, S26__ sauf si vous utilisez le bus SPI sur le connecteur UEXT.
+
+De nombreux signaux du PYBStick arrivent sur le connecteur UEXT. Si vous n'employez pas ce connecteur avec d'autres interfaces alors vous pouvez facilement récupérer les signaux de la PYBStick sur celui-ci.
+
+![Connecteur UEXT sur PYBStick UniPi Face](docs/_static/unipiface-UEXT.jpg)
+
 
 # Installer
 Il est nécessaire de copier les bibliothèques suivantes sur la carte MicroPython avant de pouvoir utiliser la carte UniPiFace + UniPi.
 
 * `unipi.py` : bibliothèque principale pour accéder à la carte UniPi
-* `ds2482.py` : 1Wire bus master
+* `ds2482.py` : 1Wire bus master (still under development)
 * `mcp342x.py` : ADC conversion
 * `mcp2300xx.py` : GPIO extender
 * `mcp24Cxx.py` : EEPROM access
@@ -129,7 +149,7 @@ La tension d'entrée est mesurée entre AI1- et AI1+, sachant que AI1- est conne
 
 Le schéma de raccordement ci-dessous utilise un potentiomètre pour fixer la tension analogique, entre 0 et 10V, sur l'entrée AI2+.
 
-![Sortie analogique](docs/_static/analog_input.jpg)
+![Entrée analogique](docs/_static/analog_input.jpg)
 
 Le script permettant de lire la tension analogique est simple
 
@@ -160,9 +180,9 @@ La tension de MAX de sortie de la sortie analogique est fixée à l'aide du pote
 
 Il faut donc fournir une tension d'alimentation au circuit de la sortie analogique. Cela peut se faire à partir de l'alimentation 12V de l'UniPi ou une alimentation externe.
 
-![Alimentation de la sortie analogique 1](docs/_static/analog_output2.jpg)
+![Alimentation de la sortie analogique 1](docs/_static/analog_output.jpg)
 
-![Alimentation de la sortie analogique 1](docs/_static/analog_output2.jpg)
+![Alimentation de la sortie analogique 2](docs/_static/analog_output2.jpg)
 
 La tension de sortie est commandée entre 0 et 100% à l'aide du cycle utile d'un signal PWM.
 
@@ -173,7 +193,7 @@ from unipi import unipi
 
 # AOUT (AO)
 print( "--- Fixer la tension à 33% of Max AO ---")
-unipi.analog_out =33 # 33% de 10V = 3.3
+unipi.analog_out =33 # 33% de 10V = 3.3V
 ```
 
 # Fonctionnalités avancées
@@ -277,5 +297,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>
 # Où acheter
 * [PYbStick STD](https://shop.mchobby.be/product.php?id_product=1844) ou [PYbStick PRO](https://shop.mchobby.be/product.php?id_product=1844)  @ MCHobby
 * [Carte d'interface PYBStick-UniPi-Face (UniPi-Face)](https://shop.mchobby.be/product.php?id_product=1891) @ MCHobby
+* [Carte d'interface GRL-Pyboard-UniPi](https://shop.mchobby.be/product.php?id_product=2055) @ MCHobby)
 * [Carte UniPi](https://shop.mchobby.be/product.php?id_product=1171) @ MCHobby
 * [Carte UniPi Lite](https://shop.mchobby.be/product.php?id_product=1196) @ MCHobby
+* [Cartes MicroPython Pyboard](https://shop.mchobby.be/fr/56-micropython) @ MCHobby

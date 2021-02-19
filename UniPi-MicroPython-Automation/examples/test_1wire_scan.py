@@ -31,45 +31,10 @@
 #from unipi import unipi
 from machine import I2C
 i2c = I2C(2)
-import time
 
-from ds2482 import DS2482
-oneWire = DS2482( i2c )
+# OneWireFacade expose a OneWire API over the DS2482 driver (1Wire Master over I2C)
+from ds2482 import OneWireFacade
+oneWire = OneWireFacade( i2c )
 
-print( "Checking for I2C devices...:" )
-oneWire.check_presence()
-
-def printAddress( deviceAddress ): # uint8_t deviceAddress[8]
-	print( "print address... ")
-	#Serial.print("{ ");
-	#for (uint8_t i = 0; i < 8; i++)
-	#{
-	#	// zero pad the address if necessary
-	#	Serial.print("0x");
-	#	if (deviceAddress[i] < 16) Serial.print("0");
-	#	Serial.print(deviceAddress[i], HEX);
-	#	if (i<7) Serial.print(", ");
-	#}
-	#Serial.print(" }");
-
-while True:
-	oneWire.device_reset() # Reset the ds2482
-
-	print( "Checking for 1-Wire devices..." )
-	if oneWire.wire_reset():
-		print( "Devices present on 1-Wire bus" )
-
-		#uint8_t currAddress[8];
-
-		print( "Searching 1-Wire bus..." )
-
-		currAddress = oneWire.wire_search( currAddress )
-		while currAddress:
-			print( "Found device: " )
-			printAddress( currAddress )
-
-		oneWire.wire_reset_search()
-	else:
-		print( "No devices on 1-Wire bus" )
-
-	time.sleep(5)
+roms = oneWire.scan()
+print( "found devices:", roms )
