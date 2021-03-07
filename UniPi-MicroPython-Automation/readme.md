@@ -26,7 +26,7 @@ La carte [PYBStick-UniPi-Face](https://shop.mchobby.be/product.php?id_product=18
 
 ![Carte d'interface PYBStick-UniPi-Face](docs/_static/unipiface-final.jpg)
 
-Le connecteur J2 dois aussi être branché (avec des connecteurs Dupont) pour pouvoir utiliser les entrées I13 & I14.
+Le connecteur J2 doit aussi être branché (avec des connecteurs Dupont) pour pouvoir utiliser les entrées I13 & I14.
 
 ![Brancher connecteur J2](docs/_static/unipi-face-j2.jpg)
 
@@ -45,6 +45,29 @@ De nombreux signaux du PYBStick arrivent sur le connecteur UEXT. Si vous n'emplo
 
 ![Connecteur UEXT sur PYBStick UniPi Face](docs/_static/unipiface-UEXT.jpg)
 
+## Carte GRL-Pyboard-UniPi
+La carte [GRL-Pyboard-UniPi](https://shop.mchobby.be/product.php?id_product=2055) permet d'interfacer une carte [Pyboard](https://shop.mchobby.be/product.php?id_product=570) sur la carte UniPi V1.1 (ou UniPi Lite).
+
+![Carte d'interface GRL-Pyboard-UniPi](docs/_static/pyboardface-final.jpg)
+
+Le connecteur J2 doit aussi être branché (avec des connecteurs Dupont) pour pouvoir utiliser les entrées I13 & I14 (le raccordement est identique à la PYBStick)
+
+![Brancher connecteur J2](docs/_static/unipi-face-j2.jpg)
+
+Le schéma de la carte d'interface avec MicroPython Pyboard est le suivant:
+
+![PYBStick-UniPi-Face schema](docs/_static/pyboardface-schematic.jpg)
+
+De nombreuses broches GPIO de la Pyboard sont encore disponibles:
+* __Y3 & Y4__ sauf si vous avez ponter les cavalier d'interruption du MCP23017.
+* __Y5 à Y8, Y11, Y12__
+* __X3, X11, X12__
+* __X17 à X24__
+
+Plusieurs signaux de la Pyboard arrivent sur le connecteur UEXT. Si vous n'employez pas ce connecteur avec d'autres interfaces alors vous pouvez facilement récupérer les signaux de la Pyboard sur celui-ci.
+
+![Connecteur UEXT sur GRL Pyboard UniPi](docs/_static/pyboardface-UEXT.jpg)
+
 
 # Installer
 Il est nécessaire de copier les bibliothèques suivantes sur la carte MicroPython avant de pouvoir utiliser la carte UniPiFace + UniPi.
@@ -53,7 +76,8 @@ Il est nécessaire de copier les bibliothèques suivantes sur la carte MicroPyth
 * `ds2482.py` : 1Wire bus master (still under development)
 * `mcp342x.py` : ADC conversion
 * `mcp2300xx.py` : GPIO extender
-* `mcp24Cxx.py` : EEPROM access
+* `eeprom24Cxx.py` : EEPROM access
+
 # Tester
 
 ## Sorties relais
@@ -295,9 +319,12 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 # Où acheter
-* [PYbStick STD](https://shop.mchobby.be/product.php?id_product=1844) ou [PYbStick PRO](https://shop.mchobby.be/product.php?id_product=1844)  @ MCHobby
-* [Carte d'interface PYBStick-UniPi-Face (UniPi-Face)](https://shop.mchobby.be/product.php?id_product=1891) @ MCHobby
-* [Carte d'interface GRL-Pyboard-UniPi](https://shop.mchobby.be/product.php?id_product=2055) @ MCHobby)
+* With PYBStick
+ * [PYbStick STD](https://shop.mchobby.be/product.php?id_product=1844) or [PYbStick PRO](https://shop.mchobby.be/product.php?id_product=1844)  @ MCHobby
+ * [Carte d'interface PYBStick-UniPi-Face (UniPi-Face)](https://shop.mchobby.be/product.php?id_product=1891) @ MCHobby
+* With MicroPython Pyboard
+ * [MicroPython Pyboard](https://shop.mchobby.be/product.php?id_product=570)
+ * [Carte d'interface GRL-Pyboard-UniPi](https://shop.mchobby.be/product.php?id_product=2055) @ MCHobby
 * [Carte UniPi](https://shop.mchobby.be/product.php?id_product=1171) @ MCHobby
 * [Carte UniPi Lite](https://shop.mchobby.be/product.php?id_product=1196) @ MCHobby
 * [Cartes MicroPython Pyboard](https://shop.mchobby.be/fr/56-micropython) @ MCHobby

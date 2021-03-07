@@ -33,8 +33,11 @@ __version__ = '0.0.1'
 from machine import I2C, SPI, UART, Pin
 from pyb import Timer
 from mcp230xx import MCP23017, MCP23008
-from mcp24cxx import Eeprom_24C02C
+from eeprom24Cxx import Eeprom_24C02C
 import struct
+
+BOARD_PYBSTICK = 0
+BOARD_PYBOARD  = 1
 
 DEFAULT_ADC_FACTOR = 5.54 # ADC have voltage Divider 10K + 2K. More precise value is stored into the EEPROM
 
@@ -51,8 +54,9 @@ class UniPiError( Exception ):
 	pass
 
 class UniPi:
-	def __init__( self, i2c ):
+	def __init__( self, i2c, board ):
 		self.i2c = i2c # main bus for controling the UniPi interface
+		self.board = board # Type of the board BOARD_PYBOARD
 
 		# --- Relays ---
 		try:
@@ -95,10 +99,18 @@ class UniPi:
 
 		# Analog 0 (controled via PWM)
 		self._A0_percent = 0
-		self._pin_A0 = Pin( 'S12' )
-		self._tim2 = Timer(2, freq=500 ) # 500 Hz like Arduino
-		self._ch_A0 = self._tim2.channel( 1, Timer.PWM, pin=self._pin_A0 ) # Channel 1
-		self._ch_A0.pulse_width_percent( self._A0_percent )
+		if self.board == BOARD_PYBSTICK:
+			self._pin_A0 = Pin( 'S12' )
+			self._tim2 = Timer(2, freq=500 ) # 500 Hz like Arduino
+			self._ch_A0 = self._tim2.channel( 1, Timer.PWM, pin=self._pin_A0 ) # Channel 1
+			self._ch_A0.pulse_width_percent( self._A0_percent )
+		elif self.board == BOARD_PYBOARD:
+			self._pin_A0 = Pin( 'X4' )
+			self._tim2 = Timer(2, freq=500 ) # 500 Hz like Arduino
+			self._ch_A0 = self._tim2.channel( 4, Timer.PWM, pin=self._pin_A0 ) # Channel 1
+			self._ch_A0.pulse_width_percent( self._A0_percent )
+		else:
+			raise UniPiError( 'Board type %s not implemented' % self.board )
 
 	@property
 	def analog_out( self ):
@@ -114,7 +126,7 @@ class UniPi:
 		if value >= 100:
 			value = 100
 		self._A0_percent = value
-		print( "set A0 PC to %s" % self._A0_percent )
+		# print( "set A0 PC to %s" % self._A0_percent )
 		self._ch_A0.pulse_width_percent( self._A0_percent )
 
 class UExtFacade:
@@ -122,14 +134,16 @@ class UExtFacade:
 		self.owner = owner
 
 	def i2c( self, **kwargs ):
+		# I2C(1) for PYBStick & Pyboard
 		return I2C(1, **kwargs)
 
 	def spi( self, **kwargs ):
+		# SPI(1) for PYBStick & Pyboard
 		return SPI(1, **kwargs )
 
 	def uart( self, baudrate, **kwargs ):
-		return UART( 1, baudrate, **kwargs )
-
+		# UART(6) for PYBStick & Pyboard
+		return UART( 6, baudrate, **kwargs )
 
 class UniPiEeprom( Eeprom_24C02C ):
 	""" Access the EEPROM on UniPi board """
@@ -199,7 +213,7 @@ class InputFacade:
 		""" Last know state of input stored in the object """
 		index = input_to_gp( key )
 		# Input are low when activated --> Invert the logic
-		return not( self._input.input_pins( [index], read=False )  )# reused stored value
+		return not( self._input.input_pins( [index], read=False )[0]  )# reused stored value
 
 	def read_all( self, read=False ):
 		""" returns a dictionnary with all entries """
@@ -209,8 +223,31 @@ class InputFacade:
 			r[self._list[i][0]] = not(values[i])
 		return r
 
-# I2C bus for PYBStick
-i2c = I2C( 2 ) # S11=sda, S13=scl
+# Detect board type
+board_type = None
+try:
+	Pin(S12)
+	board_type = BOARD_PYBSTICK
+	print('PYBSTICK detected')
+except:
+	pass
+
+if not(board_type):
+	try:
+		Pin('X4')
+		board_type = BOARD_PYBOARD
+		print('PYBOARD detected')
+	except:
+		pass
+
+
+# Must have a board type
+if not(board_type):
+	raise UniPiError( 'Unknown MicroPython board type!' )
+
+# I2C bus for PYBStick (S11=sda, S13=scl)
+# I2C bus for Pyboard  (Y10=sda, Y9=scl)
+i2c = I2C( 2 )
 
 # Instanciate the UniPi
-unipi = UniPi( i2c )
+unipi = UniPi( i2c, board_type )

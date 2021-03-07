@@ -2,9 +2,7 @@
 
 # UniPi-MicroPython-Automation: use an UniPi to creates a MicroPython PLC (Programmable Logic Controler)
 
-*** TRADUCTION ***
-
-Building a MicroPython programmable logic controller (PLC) is a great project. However, an automation interface should not be haphazardly designed. The [UniPi Technologie à créé l'UniPi V1.1](https://shop.mchobby.be/product.php?id_product=1171), a professional quality card designed for Raspberry-Pi.
+Building a MicroPython programmable logic controller (PLC) is a great project. However, an automation interface should not be haphazardly designed. The [UniPi Technologie created the UniPi V1.1](https://shop.mchobby.be/product.php?id_product=1171), a professional quality card designed for Raspberry-Pi.
 
 Why not using it with a MicroPython microcontroleur? We would have the __very first PLC running under Python__!
 
@@ -47,6 +45,29 @@ Many of the PYBStick signals are available on the UEXT connector. If you are not
 
 ![UEXT connector on the PYBStick UniPi Face](docs/_static/unipiface-UEXT.jpg)
 
+## GRL-Pyboard-UniPi board
+
+The [GRL-Pyboard-UniPi](https://shop.mchobby.be/product.php?id_product=2055) board allows to interface the [MicroPython Pyboard](https://shop.mchobby.be/product.php?id_product=570) on the UniPi V1.1 (or UniPi Lite).
+
+![GRL-Pyboard-UniPi interface board](docs/_static/pyboardface-final.jpg)
+
+The J2 connector must be wired (with Dupont wire) to use the I13 & I14 (the wiring is identical for the PYBStick interface)
+
+![Wire the J2 connector](docs/_static/unipi-face-j2.jpg)
+
+The MicroPython Pyboard interface schematic is the following:
+
+![PYBStick-UniPi-Face schematic](docs/_static/pyboardface-schematic.jpg)
+
+Many Pyboard GPIO are still available:
+* __Y3 & Y4__ except if you did solder the interrupt jumper for the MCP23017.
+* __Y5 à Y8, Y11, Y12__
+* __X3, X11, X12__
+* __X17 à X24__
+
+Several Pyboard signals does ends on the UEXT connector. If you do not use this interface then you can grab Pyboard sugnals onto it.
+
+![UEXT connector on the GRL Pyboard UniPi](docs/_static/pyboardface-UEXT.jpg)
 
 # Install
 You will need to copy the following libraries on your MicroPython board to use the UniPiFace + UniPi.
@@ -55,7 +76,7 @@ You will need to copy the following libraries on your MicroPython board to use t
 * `ds2482.py` : 1Wire bus master over I2C (still under development)
 * `mcp342x.py` : ADC conversion
 * `mcp2300xx.py` : GPIO extender
-* `mcp24Cxx.py` : EEPROM access
+* `eeprom24Cxx.py` : EEPROM access
 # Test
 
 ## Relays
@@ -300,8 +321,11 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 # Shopping list
-* [PYbStick STD](https://shop.mchobby.be/product.php?id_product=1844) or [PYbStick PRO](https://shop.mchobby.be/product.php?id_product=1844)  @ MCHobby
-* [PYBStick-UniPi-Face interface board (UniPi-Face)](https://shop.mchobby.be/product.php?id_product=1891) @ MCHobby
-* [GRL-Pyboard-UniPi interface](https://shop.mchobby.be/product.php?id_product=2055) @ MCHobby)
+* Avec la PYBStick
+ * [PYbStick STD](https://shop.mchobby.be/product.php?id_product=1844) or [PYbStick PRO](https://shop.mchobby.be/product.php?id_product=1844)  @ MCHobby
+ * [PYBStick-UniPi-Face interface board (UniPi-Face)](https://shop.mchobby.be/product.php?id_product=1891) @ MCHobby
+* Avec MicroPython Pyboard
+ * [MicroPython Pyboard](https://shop.mchobby.be/product.php?id_product=570)
+ * [GRL-Pyboard-UniPi interface](https://shop.mchobby.be/product.php?id_product=2055) @ MCHobby
 * [UniPi board](https://shop.mchobby.be/product.php?id_product=1171) @ MCHobby
 * [MicroPython Pyboard board](https://shop.mchobby.be/fr/56-micropython) @ MCHobby
