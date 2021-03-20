@@ -17,6 +17,17 @@ Here is the Pinout of Pico when used under MicroPython MicroPython.
 
 ![Pico buses](docs/_static/buses.jpg)
 
+# Pico overlay
+[Pico overlay is a PDF document](docs/_static/Pico-overlay.pdf) to print and to cut. L'overlay foresee precision cuts for the USB port, the Boot button (and additionnal Reset button).
+
+![Pico overlay capture image](docs/_static/Pico-overlay.png)
+
+Once fixed on the Pico with double side tape, you can quickly and easily find pins on your Pico. It is really great!
+
+![Pico overlay in practice](docs/_static/Pico-overlay-example.png)
+
+The overlay does also identifies some buses and functions (see the détails on the PDF).
+
 # Annoted Pico
 Simple & efficient, with Pin number, GPIO number and some useful information.
 

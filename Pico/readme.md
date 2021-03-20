@@ -17,6 +17,17 @@ Schéma du brochage pour le Pico destiné à une utilisation avec MicroPython.
 
 ![Pico buses](docs/_static/buses.jpg)
 
+# Pico overlay
+[Pico overlay est un document pdf](docs/_static/Pico-overlay.pdf) à imprimer et à découper. L'overlay prévoit des découpes de précision pour le port USB, bouton Boot (et éventuel Reset).
+
+![Contenu de l'overlay pour Pico](docs/_static/Pico-overlay.png)
+
+Une fois fixé sur le Pico avec du double face, il permet de repérer précisément les broches du Pico et c'est vraiment pratique!
+
+![Pico overlay sur un Pico](docs/_static/Pico-overlay-example.png)
+
+L'overlay reprend également l'identification synthétique de bus et fonctions (voir le PDF pour les explications).
+
 # Pico Annoté
 Simple et efficace, avec n° de broche, n° de GPIO et informations utiles.
 
