@@ -8,7 +8,7 @@ Le Zumo robot est composé d'un châssis, deux moteurs, un shield pour Arduino, 
 
 Vous pouvez consulter les liens suivants pour plus de détails à propos du robot Zumo: [Robot Zumo @ MCHOBBY](https://shop.mchobby.be/fr/prototypage-robotique-roue/448-robot-zumo-pour-arduino-assemble-moteurs-3232100004481-pololu.html) ou [Robot Zumo @ Pololu](https://www.pololu.com/product/2510)
 
-![ROBOT ZUMO](docs/_static/robotzumo.jpg)
+![ROBOT ZUMO](docs/_static/robotzumo2.jpg)
 
 Ce robot Zumo est initialement programmé à l'aide d'un Arduino Uno ou d'un Arduino Leonardo.
 Dans ce projet le robot Zumo est programmé grâce à un [adaptateur Pyboard vers UNO-R3](https://github.com/mchobby/pyboard-driver/tree/master/UNO-R3).
@@ -17,22 +17,232 @@ Toutes les bibliothèques et exemples en Arduino fournis par [Pololu](https://ww
 
 # Brancher
 
-## Adaptateur Pyboard-UNO-R3
+## Adaptateur Pyboard vers Zumo
 
-Brancher l'adaptateur [PYBOARD-UNO-R3](https://shop.mchobby.be/fr/nouveaute/1745-adaptateur-pyboard-vers-uno-r3-extra-3232100017450.html) avec la Pyboard sur le Robot Zumo pour Arduino. Utiliser des stacking header facilitera le branchement.
+TODO TODO TODO TODO TODO TODO
 
-![ROBOT ZUMO](docs/_static/UNO-R3-description.jpg)
-
-Cet adaptateur est documenté dans le projet [PYBOARD-UNO-R3](https://github.com/mchobby/pyboard-driver/tree/master/UNO-R3). Les bibliothèque PYBOARD-UNO-R3 ne sont pas nécessaires pour ce projet.
+Le [schéma de l'adaptateur est disponible ici](docs/_static/schematic.jpg)
 
 ## Connexion DIY
 Vous pouvez aussi réaliser les connexions Pyboard --> UNO-R3 comme visible en début de cette documentation. Ce n'est pas très beau mais pleinement fonctionnel.
+
+![ROBOT ZUMO](docs/_static/robotzumo.jpg)
 
 Avec raccordement DIY, vous aurez besoin d'utiliser un [régulateur 5V S7V7F5 de Pololu](https://www.pololu.com/product/2119) pour générer 5V à partir de la tension VIN obtenue depuis les piles du shield Zumo robot. Suivez ce [schéma de distribution d'alimentation](https://github.com/mchobby/pyboard-driver/blob/master/UNO-R3/docs/_static/power-distribution.jpg) repris du projet PYBOARD-UNO-R3. La carte PYBOARD-UNO-R3 dispose, elle, de son propre convertisseur de type buck.
 
 Voyez les schémas DIY du projet [PYBOARD-UNO-R3](https://github.com/mchobby/pyboard-driver/tree/master/UNO-R3) pour les raccordements broches-pyboard vers broches-arduino.
 
 # Tester
+
+Avant de tester l'adapteur Pyboard-Zumo (ou votre propre adaptateur), il est nécessaire de copier les bibliothèques nécessaires sur votre carte MicroPython.
+
+Les bibliothèques ont été portées depuis le code source Arduino produit par Pololu. __Les fonctions/méthodes ont conservés les convention de nommage C pour faciliter la transition des utilisateurs d'Arduino vers MicroPython__.
+
+* [zumoshield.py](lib/zumoshield.py) : commande moteur et suiveur de ligne du Zumo
+* [pushbutton.py](lib/pushbutton.py) : outil de manipulation de bouton
+* [zumobuzzer.py](lib/zumobuzzer.py) : Support du Zumo buzzer
+* [lsm303.py](lib/lsm303.py) : Support de l'accéléromètre/magnétomètre 3 axes
+* [L3G.py](lib/L3G.py) : Support Gyroscope
+* [qtrsensors.py](lib/qtrsensors.py) : support général des suiveurs de ligne de Pololu
+
+## Etat par défaut
+
+Lors de la mise en route de la Pyboard, les broches sont configurées en entrées, ce qui a pour effet de faire tourner le deux moteurs.
+
+Cas qui risque de se présenter lorsque l'on branche la Pyboard sur un ordinateur puis que l'on mette le Zumo sous tension.
+
+Il faut donc initialiser les sorties de Pyboard le plus vite possible pour éviter aux moteurs de se mettre en route. Cela peu se faire à l'aide des deux lignes suivantes saisie sur le session REPL (ou placée au début du fichier `main.py`).
+
+``` python
+>>> from zumoshield import ZumoMotor
+>>> zumo = ZumoMotor()
+```
+
+Voyez le script [examples/main.py](examples/main.py) qui contient le code minimaliste pour initialiser rapidement le Zumo.
+
+## Piloter les moteurs
+
+Placer des piles dans le Zumo puis placer le commutateur en position "ON".
+
+Les LEDs a l'arrière du Zumo doivent s'allumer.
+
+![Moteurs du Zumo](docs/_static/motors.jpg)
+
+Saisir le code suivant dans une session REPL:
+
+``` python
+>>> from zumoshield import ZumoMotor
+>>> motors=ZumoMotor()
+>>> # Marche avant
+>>> motors.setSpeeds( 200, 200 ) # -400..0..400
+>>> # Stop
+>>> motors.setSpeeds( 0, 0 ) # -400..0..400
+>>> # Marche arrière
+>>> motors.setSpeeds( -100, -100 ) # -400..0..400
+>>> motors.setSpeeds( 0, 0 ) # -400..0..400
+```
+
+L'exemple suivant montre comment inverser le sens de rotation du moteur droit pour faire tourner le Zumo à droite.
+
+``` python
+>>> from zumoshield import ZumoMotor
+>>> from time import sleep
+>>> motors=ZumoMotor()
+>>> # Marche avant
+>>> motors.setSpeeds( 100, 100 ) # -400..0..400
+>>> # Tourner à droite
+>>> motors.flipRightMotor( True )
+>>> motors.setSpeeds( 100, 100 ) # Indiquer la vitesse de rotation
+>>> # Attendre une seconde
+>>> sleep( 1 )
+>>> # Reprendre la marche avant (en indiquer la vitesse)
+>>> motors.flipRightMotor( False )
+>>> motors.setSpeeds( 100, 100 )
+>>> sleep( 1 )
+>>> # Stop
+>>> motors.setSpeeds( 0, 0 ) # -400..0..400
+```
+
+## Buzzer
+
+Voici quelques exemples extraient de [mazesolver.py](examples/mazesolver.py) pour jouer une suite de notes.
+
+La syntaxe est décrite dans document de Pololu pour la méthode [Zumo32U4Buzzer::play()](https://pololu.github.io/zumo-32u4-arduino-library/class_zumo32_u4_buzzer.html)
+
+``` python
+from zumobuzzer import PololuBuzzer
+from time import sleep
+
+buzzer=PololuBuzzer()
+buzzer.play("c8")
+sleep(2)
+buzzer.play(">g32>>c32")
+sleep(2)
+buzzer.play("l16 cdegreg4")
+sleep(2)
+buzzer.play(">>a32")
+sleep(2)
+buzzer.play(">>a32")
+```
+Il est également possible de jouer directement de notes avec `playNote()` en précisant la Note, sa durée en ms et le volume (0-15) de celle-ci.
+
+Exemple issus de [borderdetect.py](examples/borderdetect.py) .
+
+``` python
+from zumobuzzer import PololuBuzzer, NOTE_G
+buzzer = PololuBuzzer()
+
+for x in range(3):
+		time.sleep(1)
+		# Note(octave), Durée, Volume
+		buzzer.playNote(NOTE_G(3),200,15)
+time.sleep(1)
+buzzer.playNote(NOTE_G(4),500,15)
+time.sleep(1)
+```
+
+## LEDs du Zumo
+
+Le Zumo est équipé d'une LED utilisateur orange marquée "LED 13".
+
+![LED du Zumo](docs/_static/LEDs.jpg)
+
+Cette LED est visible sur le côté droit du Zumo.
+
+``` python
+from machine import Pin
+from time import sleep
+
+led = Pin("Y6", Pin.OUT)
+
+# Allume la LED sur le côté droit du Zumo
+led.value(1)
+sleep(2)
+led.value(0)
+```
+
+## Bouton poussoir 1
+
+La carte Pyboard-to-Zumo dispose d'un bouton utilisateur qui est monté en parallèle sur le bouton utilisateur de la pyboard.
+
+``` python
+import pyb
+sw = pyb.Switch()
+while True:
+	if sw.value():
+		print( "Pressed" )
+	else:
+		print( "..." )
+```
+
+pour plus d'information sur la classe `Switch`, référez vous à la [documentation MicroPython officielle](https://docs.micropython.org/en/latest/pyboard/tutorial/switch.html) .
+
+## Bouton poussoir 2
+
+Le bouton poussoir du Zumo (à côté de l'interrupteur On/OFF) est raccordé sur la broche "Y7" de la Pyboard. L'entrée est branchée à la masse lorsque ce bouton est pressé.
+
+![Zumo button](docs/_static/zumo_button.jpg)
+
+Le bouton poussoir peut être lu directement avec l'aide des classes `Pin` et `Signal`.
+
+La classe `Signal` sert a inverser la logique du signal.
+
+``` python
+from machine import Pin, Signal
+pin = Pin( "Y7", Pin.IN, Pin.PULL_UP )
+btn = Signal( pin, invert=True )
+while True:
+	if btn.value():
+		print( "Pressed" )
+	else:
+		print( "..." )
+```
+
+La bibliothèque [pushbutton](lib/pushbutton.py) propose des outils pour faciliter l'usage
+
+## Suiveur de ligne
+
+Le suiveur de ligne présent à l'avant du Zumo permet de détecter la présente d'une ligne noir (largeur de 15mm).
+
+Le script suivant active les LEDs infrarouges puis effectue une lecture récurrente des récepteurs Infrarouge.
+
+![position de la ligne](docs/_static/readLine.jpg)
+
+``` python
+# Arrêter les moteurs
+from zumoshield import ZumoMotor
+mot = ZumoMotor()
+
+# Tester le capteur infrarouge
+#
+import time
+from zumoshield import ZumoReflectanceSensorArray
+r = ZumoReflectanceSensorArray()
+
+# déplacer le zumo au dessus de la ligne durant
+# cette calibration en 10 étapes. Permet d'évaluer le
+# contraste noir/blanc.
+#
+for i in range(10):
+    print( "Calibrate %i / 10" % i+1 )
+    r.calibrate()
+    time.sleep(0.5)
+
+# Lecture de la position de la ligne
+#
+while True:
+    sensors = [0 for i in range(6)]
+    # Avec le Zumo dirigé vers l'avant
+    #   Valeur de 500 à 4500 : ligne de gauche à droite.
+    #   valeur 2500 : ligne pile au centre
+    #   valeur 0 : ligne hors capteur à gauche
+    #   valeur 5000 : ligne hors capteur à droite
+    position = r.readLine( sensors )
+    print( 'Line position: ', position )
+    time.sleep( 1 )
+```
+
+# Scripts d'exemples
 
 ## BorderDetect
 

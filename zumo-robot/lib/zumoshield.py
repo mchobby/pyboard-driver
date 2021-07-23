@@ -61,17 +61,18 @@ class ZumoMotor( object ):
 
         initialized = True # This class is always initialised and doens't need to initialised before
                            # every change of speed
+
     def flipLeftMotor(self,flip):
-        self.flipleft = flip
+        self.flipleft = flip # True/False
 
     def flipRightMotor(self,flip):
         self.flipRight = flip
 
     def setLeftSpeed(self,speed):
-        reverse=0
+        reverse=False
         if (speed<0):                                   #if speed is negatif we make tha value positif again
             speed = -speed                              #but put the reverse value to 1 so we know we need to go backwars
-            reverse = 1
+            reverse = True
         if(speed > 400):                                #speed can be maximum 400
             speed = 400
 
@@ -83,15 +84,15 @@ class ZumoMotor( object ):
             self.dir_l.value(0)
 
     def setRightSpeed(self,speed):
-        reverse=0
+        reverse=False
         if (speed<0):
             speed = -speed
-            reverse = 1
+            reverse = True
         if(speed > 400):
             speed = 400
 
         self.ch_r.pulse_width_percent(int(speed/4))
-        if (reverse ^ self.flipLeft):
+        if (reverse ^ self.flipRight):
             self.dir_r.value(1)
         else:
             self.dir_r.value(0)
