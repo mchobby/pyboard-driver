@@ -31,18 +31,25 @@ See example line_follower.py in the project source
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __repo__ = "https://github.com/mchobby/pyboard-driver.git"
 
-from pyb import Timer, Pin
+from machine import Pin
+from pyb import Timer
 from qtrsensors import QTRSensors
+from pushbutton import Pushbutton
+from zumobuzzer import PololuBuzzer
 import time
+
+BUTTON_PIN = "Y7"
+LED_PIN = "Y6"
 
 ZUMO_SENSOR_ARRAY_DEFAULT_EMITTER_PIN = "X7"
 PWM_L="X8"
 PWM_R="X10"
 DIR_L="X9"
 DIR_R="Y5"
+
 class ZumoMotor( object ):
 
     def __init__(self,use_20khz_pwm=False):
@@ -98,9 +105,11 @@ class ZumoMotor( object ):
             self.dir_r.value(0)
 
     def setSpeeds(self,leftSpeed,rightSpeed):
-
         self.setLeftSpeed(leftSpeed)
         self.setRightSpeed(rightSpeed)
+
+    def stop( self ):
+        self.setSpeeds(0, 0)
 
 
 class ZumoReflectanceSensorArray( QTRSensors ):
@@ -116,5 +125,11 @@ class ZumoReflectanceSensorArray( QTRSensors ):
         super().__init__( [self.pin1,self.pin2,self.pin3,self.pin4,self.pin5,self.pin6],self.emitterPin, timeout=2000)
 
 
-
-#car=Zumo()
+class ZumoShield():
+	""" Create all in one class to control the Zumo """
+	def __init__( self ):
+		self.motors = ZumoMotor()
+		self.ir = ZumoReflectanceSensorArray()
+		self.led = Pin( LED_PIN, Pin.OUT )
+		self.button = Pushbutton( BUTTON_PIN )
+		self.buzzer = PololuBuzzer()

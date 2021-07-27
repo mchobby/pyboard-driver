@@ -41,7 +41,7 @@ from zumobuzzer import PololuBuzzer, NOTE_G
 from pushbutton import PushbuttonStateMachine, Pushbutton, PushbuttonBase
 from pyb import Timer, Pin
 import time
-ZUMO_BUTTON=Pin("Y7",Pin.IN)
+ZUMO_BUTTON=Pin("Y7",Pin.IN, Pin.PULL_UP )
 led = Pin("Y6", Pin.OUT)
 buzzer=PololuBuzzer()
 reflectanceSensors=ZumoReflectanceSensorArray()
@@ -365,4 +365,3 @@ while(True):
         button.waitForButton()
         goToFinishLine()
         buzzer.play("l16 cdegreg4")
-		

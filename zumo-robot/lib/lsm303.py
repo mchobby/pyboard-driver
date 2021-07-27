@@ -1,5 +1,5 @@
 """
-LSM303 - LSM303 Compass + accelerometer I2C - MicroPython library 
+LSM303 - LSM303 Compass + accelerometer I2C - MicroPython library
 
 Made to be compatible with Zumo Robot from Pololu
 * Author(s): Braccio Martin for MCHobby.be - backport to MicroPython
@@ -62,7 +62,7 @@ OUT_Y_H_M       = const(0x0B)
 OUT_Z_L_M       = const(0x0C)
 OUT_Z_H_M       = const(0x0D)
 
-WHO_AM_I        = const(0x0F)
+#WHO_AM_I        = const(0x0F)
 
 INT_CTRL_M      = const(0x12)
 INT_SRC_M       = const(0x13)
@@ -150,7 +150,7 @@ ACCGAIN_8       = const(0x03)
 ACCGAIN_16      = const(0x04)
 
 # Conversion constants
-_LSM303ACCEL_MG_LSB        = 16704.0
+_LSM303ACCEL_MG_LSB        = 0.001
 _GRAVITY_STANDARD          = 9.80665      # Earth's gravity in m/s^2
 _GAUSS_TO_MICROTESLA       = 100.0        # Gauss to micro-Tesla multiplier
 
@@ -166,14 +166,14 @@ class Vector( object ):
     def __init__( self, x=None, y=None, z=None):
         """" Create and init the vector with x,y,z parameters.
         x can also be a tuple with (x,y,z) values."""
-		# Feeded with a tuple of 3 parameter (x,y,z)
+        # Feeded with a tuple of 3 parameter (x,y,z)
         if type(x)==tuple:
             assert len(x)==3, "3 position required in tuple!"
             self.x = x[0]
             self.y = x[1]
             self.z = x[2]
         else:
-			# Feeded with 3 NAMED parameter
+            # Feeded with 3 NAMED parameter
             self.x=x
             self.y=y
             self.z=z
@@ -184,14 +184,14 @@ class Vector( object ):
     def set( self, x=None, y=None, z=None ):
         """ Update the values which are not None in one operation.
         x can also be a tuple with (x,y,z) values."""
-		# Feeded with a tuple of 3 parameter (x,y,z)
+        # Feeded with a tuple of 3 parameter (x,y,z)
         if type(x)==tuple:
             assert len(x)==3, "3 position required in tuple!"
             if x[0]: self.x = x[0]
             if x[1]: self.y = x[1]
             if x[2]: self.z = x[2]
         else:
-			# Feeded with 3 NAMED parameter
+            # Feeded with 3 NAMED parameter
             if x: self.x = x
             if y: self.y = y
             if z: self.z = z
@@ -214,7 +214,7 @@ class Vector( object ):
 
     def normalize( self ):
         """ Normalize the vector and update its x,y,z values """
-		# static void vector_normalize(vector<float> *a);
+        # static void vector_normalize(vector<float> *a);
         mag = sqrt(self.dot(self)) # produce a float
         self.x /= mag
         self.y /= mag
@@ -244,71 +244,56 @@ class LSM303(object):
         self.m = Vector()
         #self._write_u8( CTRL5, 0x60)
         #self._write_u8( CTRL6, 0x20)
-    def enableDefault(self):
 
-        #accelerometer
-            #0x00 = 0b00000000
-            #AFS = 0 (+/- 2 g full scale)
-        self._write_u8( CTRL2, 0x00)
-            #0x57 = 0b01010111
-            #AODR = 0101 (50 Hz ODR); AZEN = AYEN = AXEN = 1 (all axes enabled)
-        self._write_u8( CTRL1, 0x57)   #101 0111   3 acc-axis enable and data rate a 50Hz
-        #megnetometer
-            #0x64 = 0b01100100
-            #M_RES = 11 (high resolution mode); M_ODR = 001 (6.25 Hz ODR)
-        self._write_u8( CTRL5,0x64)
-            #0x20 = 0b00100000
-            #MFS = 01 (+/- 4 gauss full scale)
-        self._write_u8( CTRL6,0x20)
-            #0x00 = 0b00000000
-            #MLP = 0 (low power mode off); MD = 00 (continuous-conversion mode)
-        self._write_u8( CTRL7,0x00)
+    def enableDefault(self):
+        # accelerometer
+        self._write_u8( CTRL2, 0x00) # AFS = 0 (+/- 2G full scale)
+        self._write_u8( CTRL1, 0x57) # 3 acc-axis enable and data rate a 50Hz
+        # magnetometer
+        self._write_u8( CTRL5,0x64) # M_RES = 11 (high resolution mode); M_ODR = 001 (6.25 Hz ODR)
+        self._write_u8( CTRL6,0x20) # MFS = 01 (+/- 4 gauss full scale)
+        self._write_u8( CTRL7,0x00) # MLP = 0 (low power mode off); MD = 00 (continuous-conversion mode)
+
     @property
     def raw_acceleration(self):
-        """The raw accelerometer sensor values.
-        A 3-tuple of X, Y, Z axis values that are 16-bit signed integers.
-        """
-
-        self._read_bytes(OUT_X_L_A, 6, self._BUFFER)
-
-        return struct.unpack_from('>hhh', self._BUFFER[0:6])
+        """ RAW accelerometer sensor values.
+            Returns (X, Y, Z) as 16-bit signed integers """
+        self._read_bytes(OUT_X_L_A | 0x80, 6, self._BUFFER) # OUT_X_L_A
+        vals = struct.unpack_from('<hhh', self._BUFFER[0:6])
+        #raw_x = ( self._BUFFER[0] | (self._BUFFER[1]<<8) ) >> 4
+        #raw_y = ( self._BUFFER[2] | (self._BUFFER[3]<<8) ) >> 4
+        #raw_z = ( self._BUFFER[4] | (self._BUFFER[5]<<8) ) >> 4
+        return (vals[0]>>4, vals[1]>>4, vals[2]>>4)
 
     @property
     def acceleration(self):
-        """The processed accelerometer sensor values.
-        A 3-tuple of X, Y, Z axis values in meters per second squared that are signed floats.
-        """
+        """ Accelerometer sensor values.
+            Returns (X, Y, Z) axis values (M/s^2) as signed floats """
         raw_accel_data = self.raw_acceleration
-
-        return tuple([n / _LSM303ACCEL_MG_LSB * _GRAVITY_STANDARD for n in raw_accel_data])
+        return tuple([ n * _LSM303ACCEL_MG_LSB * _GRAVITY_STANDARD for n in raw_accel_data])
 
     @property
     def raw_magnetic(self):
-        """The raw magnetometer sensor values.
-        A 3-tuple of X, Y, Z axis values that are 16-bit signed integers.
-        """
+        """ RAW magnetometer sensor values.
+        	Returns (X, Y, Z) axis as 16-bit signed integers """
         self._read_bytes(OUT_X_H_M, 6, self._BUFFER)
         raw_values = struct.unpack_from('>hhh', self._BUFFER[0:6])
-
         return (raw_values[0], raw_values[1], raw_values[2])
 
 
     @property
     def magnetic(self):
-        """The processed magnetometer sensor values.
-        A 3-tuple of X, Y, Z axis values in microteslas that are signed floats.
-        """
+        """ Magnetometer sensor values.
+            Returns (X, Y, Z) in microteslas as signed floats """
         mag_x, mag_y, mag_z = self.raw_magnetic
 
         return (mag_x / self._lsm303mag_gauss_lsb_xy * _GAUSS_TO_MICROTESLA,
                 mag_y / self._lsm303mag_gauss_lsb_xy * _GAUSS_TO_MICROTESLA,
                 mag_z / self._lsm303mag_gauss_lsb_z * _GAUSS_TO_MICROTESLA)
 
-
     @property
     def mag_rate(self):
-        """The magnetometer update rate."""
-
+        """ magnetometer update rate"""
         return self._mag_rate
 
     @mag_rate.setter
@@ -316,65 +301,45 @@ class LSM303(object):
         assert value in (MAGRATE_3_1, MAGRATE_6_2, MAGRATE_12_5, MAGRATE_25, MAGRATE_50, MAGRATE_100)
 
         self._mag_rate = value
-        reg_m = (((value & 0x07) << 2)| 0x60) & 0xFF
-
+        # reg_m = (((value & 0x07) << 2) | 0x60) & 0xFF # can be OBVIOUSLY SIMPLIFIED
+        reg_m = (value << 2) | 0x60
         self._write_u8( CTRL5, reg_m)
-
-
 
     @property
     def mag_gain(self):
-        """The magnetometer's gain."""
-
+        """ Magnetometer gain """
         return self._mag_gain
-
 
     @mag_gain.setter
     def mag_gain(self, value):
         assert value in (MAGGAIN_2, MAGGAIN_4, MAGGAIN_8, MAGGAIN_12)
-
         self._mag_gain = value
-        reg_g = ((value & 0x01)<<5) & 0xFF      #(0x20) dans le registre
+        #reg_g = ((value & 0x01)<<5) & 0xFF  # OBVIOUSLY BUGGY!!
+        reg_g = value <<5
         self._write_u8( CTRL6, reg_g)
 
-
-
     def _read_u8(self, register):
-        #Lecture de 8bits (non signé) depuis l'adresse mentionnée.
-
         self._BUFFER[0] = (register & 0xFF)
         data = bytes([self._BUFFER[0]])
-        self._device.writeto(self._address,data)           #self.address = CAPTEUR | data = REGISTRE qu'on veut lire
+        self._device.writeto(self._address,data)
 
-        #lecture 1 octet
         data = bytearray(1)
-        self._device.readfrom_into(self._address,data)      #self.address = CAPTEUR | data = DONNEES qui se trouve dans le REGISTRE demandé
+        self._device.readfrom_into(self._address,data)
         return data[0]#retour du 1ier octet
 
     def _write_u8(self, register, val):
-        #Ecrire de 8 bits (non-signé) à l'adresse indiqué
-
         buffer= bytearray(2)
-
         buffer[0]= register & 0xFF
         buffer[1] = val & 0xFF
-
-        self._device.writeto(self._address, buffer)   #vers self.address = CAPTEUR on envoie buffer[1:0].
-                                                    #composé du REGISTRE au quel on veut ecrire une VAL
+        self._device.writeto(self._address, buffer)
 
     #@staticmethod
     def _read_bytes(self,address, count, buf):
-        #Lecture de 16-bits non signés
         data=bytes([address & 0xFF])
-        #Ecriture de 1 octet
-
         self._device.writeto(self._address,data)
-
-        #lecture de 2 octets
         self._device.readfrom_into(self._address, self._BUFFER)
+        # return (self._BUFFER[1]<<8 | self._BUFFER[0])
 
-        #composer un entier 16Bite
-        return (self._BUFFER[1]<<8 | self._BUFFER[0])
     def read(self):
         self.readAcc()
         self.readMag()

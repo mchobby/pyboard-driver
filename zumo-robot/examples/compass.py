@@ -30,7 +30,7 @@ REQUIRES Library LSM303.py in the project source
 # OUT OF OR IN
 
 from zumoshield import ZumoReflectanceSensorArray, ZumoMotor
-from pushbutton import PushbuttonStateMachine, Pushbutton, PushbuttonBase
+from pushbutton import Pushbutton
 from zumobuzzer import PololuBuzzer
 from lsm303 import LSM303,Vector
 
@@ -41,7 +41,8 @@ from machine import I2C
 import time
 import struct
 import math
-ZUMO_BUTTON=Pin("Y7",Pin.IN)
+
+ZUMO_BUTTON=Pin("Y7",Pin.IN, Pin.PULL_UP)
 #Magnetometer gauss avec high resolution
 MAGGAIN_2       =const(0x00)
 MAGGAIN_4       =const(0x01)
@@ -59,8 +60,8 @@ MAGRATE_100     = const(0x74)
 
 #I2C Initiation
 i2c = I2C(2)
-i2c.scan()
-print(i2c.scan())
+# i2c.scan()
+# print(i2c.scan())
 
 #Initiation
 compass = LSM303(i2c)
@@ -92,8 +93,8 @@ def averageHeading():
     rep=heading()
 
     return(rep) #retourn un angle en degrées
-def relativeHeading(heading_from,heading_to):
 
+def relativeHeading(heading_from,heading_to):
     relative_heading=float(heading_to) - float(heading_from)
 
     if (relative_heading > 180):
@@ -102,10 +103,8 @@ def relativeHeading(heading_from,heading_to):
         relative_heading +=360
 
     return (relative_heading)
+
 def heading():
-
-
-
     x_scaled = 2.0*(avg.x-compass.m_min.x)/(compass.m_max.x - compass.m_min.x) - 1.0
     y_scaled = 2.0*(avg.y-compass.m_min.y)/(compass.m_max.y - compass.m_min.y) - 1.0
 
@@ -116,9 +115,6 @@ def heading():
 
 
 #---------- SETUP CODE ----------
-
-
-
 
 running_min = Vector(32767,32767,32767)
 running_max = Vector(-32767,-32767,-32767)

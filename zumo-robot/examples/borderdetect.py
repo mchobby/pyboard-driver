@@ -42,13 +42,14 @@ FORWARD_SPEED =200
 REVERSE_DURATION=400
 TURN_DURATION=400
 NUM_SENSORS = 6
-ZUMO_BUTTON=Pin("Y7",Pin.IN)
 left_count=0
 right_count=0
+
 motors=ZumoMotor()
 buzzer = PololuBuzzer()
-button = Pushbutton(ZUMO_BUTTON)
-led = Pin("Y6", Pin.OUT)
+btn_pin = Pin( BUTTON_PIN, Pin.IN, Pin.PULL_UP ) # Y7
+button = Pushbutton( btn_pin )
+led = Pin( LED_PIN, Pin.OUT) # Y6
 
 sensor_values=[0 for i in range(NUM_SENSORS)]
 sensors=ZumoReflectanceSensorArray()

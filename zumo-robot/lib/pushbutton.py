@@ -1,12 +1,13 @@
 """
 pushbutton.py - easy Button library for MicroPython Pyboard Original.
+                See example line_follower.py in the project source
 
 * Author(s):    Braccio M.  from MCHobby (shop.mchobby.be).
                 Meurisse D. from MCHobby (shop.mchobby.be).
 
 See project source @ https://github.com/mchobby/pyboard-driver/tree/master/zumo-robot
 
-See example line_follower.py in the project source
+  23 jul 2021 - domeu - code cleaning
 """
 #
 # The MIT License (MIT)
@@ -32,17 +33,17 @@ See example line_follower.py in the project source
 # THE SOFTWARE.
 
 
-__version__ = "0.0.1"
+__version__ = "0.0.3"
 __repo__ = "https://github.com/mchobby/pyboard-driver.git"
 
 from pyb import Timer, Pin
 import time
 
-ZUMO_BUTTON = Pin("Y7",Pin.IN)
 PULL_UP_DISABLED = 0
 PULL_UP_ENABLED =1
 DEFAULT_STATE_LOW = 0
 DEFAULT_STATE_HIGH = 1
+
 class PushbuttonStateMachine (object):
     def __init__(self):
 
@@ -77,32 +78,26 @@ class PushbuttonStateMachine (object):
             return(False)
         return (False)
 
-
-
 class PushbuttonBase(object):
     def __init__(self):
         self.pressState=PushbuttonStateMachine()
         self.releaseState=PushbuttonStateMachine()
+
     def waitForPress(self):
         while(True):
             while(self.isPressed()==True):
                 time.sleep(0.01)
-
                 return
-
 
     def waitForRelease(self):
         while(True):
             while(self.isPressed()==False):
-
                 time.sleep(0.01)
-
                 return
+
     def waitForButton(self):
-        print("Waiting For Button...")
         self.waitForPress()
         self.waitForRelease()
-
 
     def getSingleDebouncedPress(self):
         return(self.pressState.getSingleDebouncedRisingEdge(Pushbutton.isPressed()))
@@ -111,23 +106,19 @@ class PushbuttonBase(object):
         return(self.releaseState.getSingleDebouncedRisingEdge(Pushbutton.isPressed()))
 
 class Pushbutton(PushbuttonBase):
-    def __init__(self,pin,pullup=PULL_UP_ENABLED,defaultState=DEFAULT_STATE_HIGH):
-        #self._pin = pin
-        self._pin=Pin("Y7",Pin.IN)
+    def __init__(self, pin_name , pullup=PULL_UP_ENABLED, defaultState=DEFAULT_STATE_HIGH):
+        super().__init__()
+        self.pin = Pin( pin_name, Pin.IN )
         self._pullup=pullup
         self._defaultstate=defaultState
         initialized = True # This class is always initialised and doens't need to initialised before
                            # button
 
         if(self._pullup == PULL_UP_ENABLED):
-            self._pin.init(Pin.IN, Pin.PULL_UP)
+            self.pin.init(Pin.IN, Pin.PULL_UP)
         else:
-            self._pin.init(Pin.IN, Pin.PULL_NONE)
+            self.pin.init(Pin.IN, Pin.PULL_NONE)
         time.sleep_us(5)
 
-
     def isPressed(self):
-
-        return(self._pin.value()!= self._defaultstate)
-button=Pushbutton(ZUMO_BUTTON)
-but=PushbuttonBase()
+        return(self.pin.value()!= self._defaultstate)

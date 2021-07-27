@@ -33,7 +33,7 @@ from pushbutton import PushbuttonStateMachine, Pushbutton, PushbuttonBase
 from pyb import Timer, Pin
 import time
 from zumobuzzer import PololuBuzzer
-ZUMO_BUTTON=Pin("Y7",Pin.IN)
+ZUMO_BUTTON=Pin("Y7",Pin.IN, Pin.PULL_UP)
 
 reflectanceSensors = ZumoReflectanceSensorArray()
 motors = ZumoMotor()
