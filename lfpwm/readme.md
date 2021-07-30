@@ -2,8 +2,6 @@
 
 # Low Frequency PWM - simuler un signal PWM sur un signal très basse fréquence (ou grande période)
 
---- En cours de traduction ---
-
 Lorque l'on pilote un périphérique avec forte inertie comme un Fer à repasser, un chauffage, une plaque chauffante alors il est assez usuel d'utiliser un relais/contacteur/SSR (Solid State Relay).
 
 De telles interfaces ne peuvent pas être pilotés avec un signal PWM habituels parce que cela détruirait le relais/SSR à cause de la haute fréquence du signal (500 Hz).
