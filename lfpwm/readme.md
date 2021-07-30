@@ -4,45 +4,79 @@
 
 --- En cours de traduction ---
 
-When driving devices with high inertia like Iron, Heater, Boiler Plate you are using relay/contactor/SSR (Solid State Relay).
+Lorque l'on pilote un périphérique avec forte inertie comme un Fer à repasser, un chauffage, une plaque chauffante alors il est assez usuel d'utiliser un relais/contacteur/SSR (Solid State Relay).
 
-Such interface cannot be driven with Usual PWM signal because it will destroy the relay/SSR due the high switching frequency (500 Hz).
+De telles interfaces ne peuvent pas être pilotés avec un signal PWM habituels parce que cela détruirait le relais/SSR à cause de la haute fréquence du signal (500 Hz).
 
-Anything with a frequency higher than 1 Hertz freq is not recommanded in such case.
+N'importe quel fréquence de signal supérieur à 1 Hertz n'est pas recommandé dans un tel cas.
 
-Because of the High inertia of the controled device, using very low PWM frequency (< 1 Hertz, so a period > 1 sec) doesn't matter and is compatible with Solid State Relay usage.
+Grâce à la grande inertie du périphérique contrôlé, utiliser une très basse fréquence PWM (< 1 Hertz, donc période > 1 sec) n'a pas d'effet négatif sur le la stabilisation de la température et reste compatible avec l'usage de relais statique (Solid State Relay).
 
-However, microcontoler PWM routine doesn't accept low frequencies (eg: lower than 7 Hertz for RaspberryPi Pico) so we will have to hack!
+Malheureusement, les routines de contrôle PWM n'acceptent aps de basse frequence (ex: inférieur à 7 Hertz pour le RaspberryPi Pico). Nous allons donc devoir faire preuve d'imagination!
 
-# UseCase
+# Cas pratique
 
-For the [plancha-cms project](https://arduino103.blogspot.com/search?q=plancha) (Hot Plate for reflow soldering), we did use an Iron as heater.
+Pour le [projet plancha-cms](https://arduino103.blogspot.com/search?q=plancha) (plaque de soudure par refusion), un fer à repasser est utilisé comme élément chauffant.
 
 ![Plancha CMS](docs/_static/usecase.jpg)
 
-Planning a 2 seconds period time as base to control the Iron heater is a raisonnable choice.
+Prévoir une période de 2 secondes pour le contrôle du fer a repasser est un choix raisonnable.
 
-This looks appropriate for the following reasons:
-* the thermal inertia: the iron metal base takes time to propagate the heat.
-* the Solid State Relay: having a switch on/off every 2 seconds is acceptable according the SSR specs.
-* We can have a duty cycle from 0 to 100% during that period of 2 seconds... which should offer a great control over the Iron heater)
+Ce choix semble raisonnable pour les raisons suivantes:
+* L'inertie thermique: la base en alliage/métal a besoin d'un certain temps pour propager la chaleur.
+* Le relais statique: ayant une activation/désativation toutes les deux secondes est acceptable (en fonction des specs SSR).
+* Il est possible de fixer librement un cycle utile de 0 à 100% durant une période de 2 secondes... ce qui devrait permettre un bon contrôle sur de la chaleur du fer)
 
-# How Low Frequency PWM works
+# Comment fonctionne le PWM basse fréquence?
 
-The [lfpwm.py](lib/lfpwm.py) library and `LowFreqPWM` do use a timer @ 10 Hertz to generate a low frequency PWM with an extra counter managed in python by the callback routine of the time.
+La bibliothèque [lfpwm.py](lib/lfpwm.py) et la classe `LowFreqPWM` utilisent un Timer à 100 Hertz pour générer le PWM basse fréquence avec une routine de gestion de compteur en python, routine appelées à intervalle régulier.
 
-The `LowFreqPWM` class can handle PWM periods of several seconds (<1 Hz) with a duty cycle from 0 to 100% (see `duty_u16()` ).
+La classe `LowFreqPWM` peut gérer un PWM ayant une période de plusieurs secondes (donc <1 Hz) avec un cycle utile de 0 à 100% (voir `duty_u16()` ).
 
-The period of severals seconds (converted in milliseconds) is used to instead of frequency because it will offer more readable value (than extra small frequency values).
+Le paramètre de configuration est la __période__ en secondes (converti en millisecondes) en lieu et place de la __fréquence__ . La période offre une valeur plus facile à lire qu'une petite valeur de fréquence.
 
 ![PWM vs SSR](docs/_static/pwm-vs-ssr.png)
 
-In real world conditions, the transitions are not instantaneous. The SSR (Solid State Relay) do need 8.3ms to switch on (`ton_ms=9` ms) and 10 ms to switch off (`toff_ms=10` ms). We have to keep this in account to avoids excessive switching stress. High inertia devices often consume lot of power, which will stress the the high power swicher (the SSR relay in this case). It is recommended to take it into account.
+Dans le monde réel, les transistions ne sont pas instantanées. Un SSR (_Solid State Relay_ = Relais Statique) à besoin de 8.3ms pour s'activer (`ton_ms=9` ms) et de 10 ms pour s'éteindre (`toff_ms=10` ms). Nous devons garder cela en compte pour éviter un stress excessif de l'élément commutateur. Les périphériques à forte inertie consomme généralement beaucoup de puissance, ce qui représente un stress non négligeable pour le relais statique (le relais SSR). Il est donc recommandé d'en tenir compte.
 
-This bring on two additionnals running conditions:
+Ce qui amène à la considération de deux conditions complémentaires:
 
-__Case 1:__ Keeps ON if PWM switching off too close from the end of period
-* IF `duty_ms` >= `period_ms - toff_ms` THEN `duty_ms = period_ms` # Keeps ON
+__Case 1:__ Garder le signal à HAUT si le PWM doit passer au niveau bas trop près de la fin de période
+* IF `duty_ms` >= `period_ms - toff_ms` THEN `duty_ms = period_ms` # Garder actif (ON)
 
-__Case 2:__ Keeps OFF if PWM switch on + off too close from the begin of the period
-* IF `duty_ms` < `ton_ms + toff_ms` then `duty_ms = 0` # Keeps OFF
+__Case 2:__ Garder le signal à BAS si le PWM s'active + désactive trop vite en début de période
+* IF `duty_ms` < `ton_ms + toff_ms` THEN `duty_ms = 0` # Garder éteint (Keeps )OFF)
+
+# Brancher
+Pas besoin de réaliser des branchement, c'est la LED utilisateur interne de la plateforme qui sera utilisée comme broche de sortie de `LowFreqPWM`.
+
+* Sur Raspberry-Pi Pico la LED utilisateur est raccordée sur la broche 25.
+
+# Test
+
+Avant d'exploiter les scripts de test, il est nécessaire de copier la bibliothèque [lfpwm.py](lib/lfpwm.py) sur votre carte MicroPython.
+
+L'exemple [test.py](examples/test.py), visible ci-dessous, définit un signal PWM avec une période de 2.5 secondes (soit 0.4 Hertz) et un cycle utile de 50%.
+
+Comme le cycle utile est fixé avec la méthode `duty_u16(valeur)`, la valeur est comprise entre 0..65535. La valeur 65535/2 = 32767 (arrondi à l'entier) correspond au cycle utile de 50%.
+
+``` python
+from lfpwm import LowFreqPWM
+from machine import Pin
+from os import uname
+
+# LED utilisateur sur le Pico
+led = Pin( 25 )
+
+# Activer le PWM
+pwm = LowFreqPWM( pin=led, period=2.5 ) # 2.5s
+
+pwm.duty_u16( 65535 / 2 ) # 50% de cycle utile
+# pwm.duty_u16( 0 )     # désactiver la broche
+# pwm.duty_u16( 65535 ) # activer la broche
+# pwm.deinit()          # désactive le Timer
+```
+
+Prenez le temps de vérifier les exemples suivants:
+* [test_ton.py](examples/test_ton.py) - gère le temps d'activation et désactivation du périphérique
+* [test_ratio.py](examples/test_ratio.py) - contrôle du cycle utile avec une valeur entre 0 et 100

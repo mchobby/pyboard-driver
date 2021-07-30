@@ -27,7 +27,7 @@ This looks appropriate for the following reasons:
 
 # How Low Frequency PWM works
 
-The [lfpwm.py](lib/lfpwm.py) library and `LowFreqPWM` do use a timer @ 10 Hertz to generate a low frequency PWM with an extra counter managed in python by the callback routine of the time.
+The [lfpwm.py](lib/lfpwm.py) library and `LowFreqPWM` do use a timer @ 100 Hertz to generate a low frequency PWM with an extra counter managed in python by the callback routine of the time.
 
 The `LowFreqPWM` class can handle PWM periods of several seconds (<1 Hz) with a duty cycle from 0 to 100% (see `duty_u16()` ).
 
@@ -54,6 +54,27 @@ We will not use any wiring here, just using the internal user LED of the platefo
 
 Before using the testing script, we must copy the [lfpwm.py](lib/lfpwm.py) to your micropython board.
 
-The exemple [test.py](examples/test.py), visible here below, just defined a PWM signal with a period of 2.5 seconds (so 0.4 Hertz) and a duty cycle of 50%.
+The example [test.py](examples/test.py), visible here below, just defined a PWM signal with a period of 2.5 seconds (so 0.4 Hertz) and a duty cycle of 50%.
 
 As the duty cycle is set with the method `duty_u16(value)` with value in the range 0..65535, 50% of duty cycle match 65535/2 = 32767 (value must be rounded to integer).
+
+``` python
+from lfpwm import LowFreqPWM
+from machine import Pin
+from os import uname
+
+# User LED on Pico
+led = Pin( 25 )
+
+# Setup pwm
+pwm = LowFreqPWM( pin=led, period=2.5 ) # 2.5s
+
+pwm.duty_u16( 65535 / 2 ) # 50% duty cycle
+# pwm.duty_u16( 0 ) # always Off
+# pwm.duty_u16( 65535 ) # always On
+# pwm.deinit() # stop everything
+```
+
+Take some time to check the other examples:
+* [test_ton.py](examples/test_ton.py) - keeps activation time & deactivation time into account
+* [test_ratio.py](examples/test_ratio.py) - control the duty cycle with a value between 0 and 100
