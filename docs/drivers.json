@@ -62,6 +62,17 @@
 			"descr"	: {"FR" : "Utiliser un keypad 4x4 avec un microcontroleur MicroPython Pyboard",
 								 "ENG": "Use a 4x4 keypad with a MicroPython Pyboard microcontroler" }
 		},
+		{	"folder"       : "lfpwm",
+			"components"    : [],
+			"interfaces"    : ["GPIO"],
+			"manufacturers" : [],
+			"plateforms"    : ["PICO"],
+			"ressources"    : [ { "label" : "Raspberry-Pi PICO @ MCHobby",
+														           "url"   : "https:\/\/shop.mchobby.be\/fr\/pico-rp2040\/2025-pico-rp2040-microcontroleur-2-coeurs-raspberry-pi-3232100020252.html" }
+                     ],
+			"descr"	: {"FR" : "PWM basse fréquence (pour les périphériques à haute inertie)",
+								 "ENG": "Low frequency PWM (for high inertia devices)" }
+		},
 		{	"folder"        : "mma7660",
 			"components"    : ["MMA7660"],
 			"interfaces"    : ["I2C"],

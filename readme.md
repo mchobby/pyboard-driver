@@ -180,6 +180,17 @@ Explorer par:
 </ul>
       </td>
   </tr>
+  <tr><td><a href="../../tree/master/lfpwm">lfpwm</a></td>
+      <td><strong>Composants</strong> : <br />
+      <strong>Interfaces</strong> : GPIO<br />
+<small>PWM basse fréquence (pour les périphériques à haute inertie)</small><br/><br />
+      <strong>Testé avec</strong> : PICO<br />
+      <strong>Fabricant</strong> : <br />
+<ul>
+<li>Voir <a href="https://shop.mchobby.be/fr/pico-rp2040/2025-pico-rp2040-microcontroleur-2-coeurs-raspberry-pi-3232100020252.html">Raspberry-Pi PICO @ MCHobby</a></li>
+</ul>
+      </td>
+  </tr>
   <tr><td><a href="../../tree/master/mma7660">mma7660</a></td>
       <td><strong>Composants</strong> : MMA7660<br />
       <strong>Interfaces</strong> : I2C<br />

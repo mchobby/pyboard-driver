@@ -19,6 +19,17 @@ Generic GPIO, PWM, Interrupt, etc interface. Do not use a BUS or specific connec
 </ul>
       </td>
   </tr>
+  <tr><td><a href="../../../../tree/master/lfpwm">lfpwm</a></td>
+      <td><strong>Components</strong> : <br />
+      <strong>Interfaces</strong> : GPIO<br />
+<small>Low frequency PWM (for high inertia devices)</small><br/><br />
+      <strong>Tested with</strong> : PICO<br />
+      <strong>Manufacturer</strong> : <br />
+<ul>
+<li>See <a href="https://shop.mchobby.be/fr/pico-rp2040/2025-pico-rp2040-microcontroleur-2-coeurs-raspberry-pi-3232100020252.html">Raspberry-Pi PICO @ MCHobby</a></li>
+</ul>
+      </td>
+  </tr>
   <tr><td><a href="../../../../tree/master/motorskin">motorskin</a></td>
       <td><strong>Components</strong> : L293D, HC-SR04<br />
       <strong>Interfaces</strong> : GPIO<br />
