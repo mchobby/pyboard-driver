@@ -17,5 +17,10 @@
 			{ "descr" : { "FR" : "MicroPython NadHat PYB405",
 				            "ENG" : "MicroPython NadHat PYB405" },
 			  "url" : "https:\/\/shop.mchobby.be\/fr\/56-micropython"
+			},
+	"PICO" :
+			{ "descr" : { "FR" : "Raspberry-Pi PICO",
+				            "ENG" : "Raspberry-Pi PICO" },
+			  "url" : "https:\/\/shop.mchobby.be\/fr\/pico-rp2040\/2025-pico-rp2040-microcontroleur-2-coeurs-raspberry-pi-3232100020252.html"
 			}
 }
