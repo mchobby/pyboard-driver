@@ -79,37 +79,252 @@ Le régulateur de tension présent sur la carte (ME6215C33) est capable de produ
 
 # Prise en main
 
+Cette section reprend l'utilisation des différents éléments de la carte.
+
 ## Bouton utilisateur (B)
 
-TODO
+Le bouton B correspond au bouton utilisateur. Il est facile de lire l'état de ce bouton en utilisant la classe `Pin`.
+
+__Presser le bouton pendant 4 secondes redémarre la carte (Reset)__
+
+Le lecteur attentif notera que l'état du bouton est inversé!
+
+``` python
+>>> from machine import Pin
+>>> usr = Pin( 4, Pin.IN )
+>>>
+>>> # Bouton non pressé --> Valeur = 1 !!
+>>> usr.value()
+1
+>>> usr.value()
+1
+>>>
+>>> # Bouton pressé --> Valeur = 0 !!
+>>> usr.value()
+0
+>>> usr.value()
+0
+```
+
+A noter que l'usage de la classe `Signal` permet d'inverser la valeur du signal très simplement pour revenir vers une logique positive.
+
+``` python
+>>> from machine import Pin, Signal
+>>> usr = Pin( 4, Pin.IN )
+>>> btn = Signal( usr, invert=True )
+>>>
+>>> # Revenir en logique positive
+>>> # Bouton non pressé --> Valeur = 0
+>>> btn.value()
+0
+>>>
+>>> # Bouton pressé --> Valeur = 1
+>>> btn.value()
+1
+```
 
 ## Bouton Boot0 (A)
 
-TODO
+L'état de ce bouton ne peut pas être consulté par un script utilisateur.
+
+Lorsque le bouton est pressé à la mise sous tension du microcontrôleur (ou Reset), celui-ci passe en _mode bootloader_ afin d'effectuer une mose-à-jour du firmware (MicroPython dans ce cas).
 
 ## LEDs utilisateurs
 
-TODO
+La PYBStick-RP2040 dispose de 4 LEDs de couleurs qui peuvent être contrôlées depuis le script utilisateur.
+
+Sur la PYBStick-RP2040, il est possible de contrôler l'intensité des 4 LEDs.
+
+![PYBStick-RP2040 - boutons utilisateurs](docs/_static/pybstick-rp2040-user-button.jpg)
+
+Si la méthode `value()` est probablement l'approche recommandée pour modifier l'état d'une broche (donc éteindre ou allumé une LED), il existe également d'autres approches.
+
+Le script ci-dessous manipule l'état des LEDs avec les différentes méthodes utilisables.
+
+``` python
+>>> from machine import Pin
+>>> lblue = Pin( 15, Pin.OUT ) # Led BLEUE  (blue)
+>>> lora = Pin( 14, Pin.OUT )  # Led ORANGE (orange)
+>>> lgre = Pin( 25, Pin.OUT )  # Led VERTE  (green)
+>>> lred = Pin( 23, Pin.OUT )  # Led ROUGE  (red)
+>>>
+>>> # Manipuler les LEDs
+>>> lblue.on()     # Allumer Led Bleue
+>>> lblue.off()    # Eteindre
+>>>
+>>> # Utiliser value() pour changer l'état de la broche
+>>> lora.value(1)  # Allumer led ORANGE
+>>> lora.value(0)
+>>>
+>>> # Utiliser high() et low()
+>>> #    à la place de on() et off()
+>>> lgre.high()
+>>> lgre.low()
+>>>
+>>> # La méthode
+>>> lred.on()
+>>> lred.toggle()
+```
 
 ## Broche Numérique - en entrée
 
-TODO
+La lecture de l'état d'une entrée se fait à l'aide de la classe `Pin` configurée en entrée.
+
+![PybStick-RP2040 Entrée](docs/_static/pybstick-RP2040-input.jpg)
+
+* Lorsque le bouton est pressé, le potentiel de la broche IO6 est placé/connecté à la masse.
+* Lorsque le bouton est relâché, la broche IO6 est rappelée à +3.3V par la résistance de 10 KOhms.
+
+L'exemple ci-dessous permet de lire l'état de la broche d'entrée. A noter que la lecture de l'état retourne 0 (équivalent de `False`) lorsque le bouton est pressé. Nous sommes donc dans une logique inversée.
+
+``` python
+>>> from machine import Pin
+>>> p = Pin( 6, Pin.IN )
+>>> # Ne pas presser le bouton
+>>> p.value()
+1
+>>> # Presser le bouton
+>>> p.value()
+0
+```
+
+La microcontrôleur peut également activer une résistance pull-up interne, ce qui permet d'éviter le montage de la résistance de 10 KOhms.
+
+![PybStick-RP2040 Entrée](docs/_static/pybstick-RP2040-input-pullup.jpg)
+
+Le script suivant affiche l'état du bouton toutes les demi-secondes. Presser Ctrl+C pour stopper le script.
+
+``` python
+>>> from machine import Pin
+>>> from time import sleep
+>>> p = Pin( 6, Pin.IN, Pin.PULL_UP  )
+>>> while True:
+>>>     s = "..." if p.value() else "Pressé"
+>>>     print( s )
+>>>     sleep( 0.5 )
+>>>
+```
 
 ## Broche Numérique - en sortie
 
-TODO
+Une broche en sortie permet au script de contrôler l'état de la broche (niveau haut ou nouveau bas). Cela se fait également par l'intermédiaire de la classe `Pin`.
+
+La broche du microcontrôleur peut donc commander un périphérique externe uniquement si celui-ci consomme un faible courant (par exemple, une LED ou une carte breakout).
+
+__Attention:__ Pour commander un périphérique énergivore comme un moteur ou un relais, il est impératif de passer par une interface d'amplification appropriée.
+
+Le montage suivant permet de contrôler une LED par l'intermédiaire d'une résistance de 1K Ohms. __Cette résistance permet de limiter le courant__ lorsque la LED devient conductrice et émet de la lumière. Sans cette résistance, le courant tendra vers l'infini (ce qui détruira le microcontrôleur).
+
+![PybStick-RP2040 Entrée](docs/_static/pybstick-RP2040-output-led.jpg)
+
+``` python
+>>> from machine import Pin
+>>> p = Pin( 28, Pin.OUT )
+>>>
+>>> # Sortie au Niveau Haut (3.3V) -> Allume LED
+>>> p.value( 1 )
+>>>
+>>> # Sortie au Niveau Bas (0V) -> LED éteinte
+>>> p.value( 0 )
+```
+Le script suivant produit un effet de battement de coeur
+
+``` python
+>>> from time import sleep_ms
+>>> from machine import Pin
+>>> p = Pin( 28, Pin.OUT )
+>>> while True:
+>>>     sleep_ms( 1300 ) # Attendre 1100 millisecondes
+>>>     p.value( 1 ) # Allume LED
+>>>     sleep_ms( 80 )
+>>>     p.value( 0 ) # Eteindre LED
+>>>     sleep_ms( 80 )
+>>>     p.value( 1 ) # Allume LED
+>>>     sleep_ms( 80 )
+>>>     p.value( 0 ) # Eteindre LED
+>>>
+```
 
 ## Entrée analogique (3.3 V max)
 
-TODO
+La carte est équipée de de plusieurs entrée analogiques IO26 = adc0, IO27 = adc1, IO28 = adc2.
+
+Attention: en aucun cas la tension appliquée sur l'entrée analogique ne peut être supérieure à 3.3V au risque de détruire le microcontrôleur.
+
+Celle-cis peuvent être utilisés pour lire une tension entre 0 et 3.3V et retourne un entier 16 bits (0 à 65535)
+
+Le graphique suivant utilise un potentiomètre de 10 KOhms linéaire pour générer une tension entre 0 et 3.3V sur l'entrée 26.
+
+![PYBStick-RP2040 Analog Input](docs/_static/pybstick-RP2040-analog-input.jpg)
+
+En tournant le potentiomètre, la tension varie sur l'entrée analogique et le résultat est visible sur l'information retournée par le convertisseur analogique digital.
+
+Le script suivant affiche la valeur du convertisseur toutes les 300ms
+
+``` python
+>>> from pyb import ADC
+>>> from time import sleep
+>>> adc26 = ADC(26)
+>>> while True:
+>>>     print( 'Valeur ADC:', adc26.read_u16() )
+>>>     print( 'Volts:', 3.3*adc26.read_u16()/65535 )
+>>>     sleep( 0.3 )
+```
+
+__Attention: Résolution ADC et valeur 16 16bits__
+
+Le convertisseur analogique du RP2040 à résolution de 12 bits. Cela signifie que la valeur retournée par l'électronique varie entre 0 et 4095.
+
+La méthode `read_u16()` applique donc un coefficient multiplicateur pour pouvoir retourner une valeur entre 0 et 65535.
+
+La résolution maximale du convertisseur est limitée par sa résolution électronique (12 bits), celle-ci est de 3.3V / 4096 = 0.000805 Volts (soit 0.8 mV).
+
+__Parasites:__ un potentiomètre étant constitué d'un curseur se déplaçant le long d'une résistance, il n'est pas rare d'avoir des faux-contacts et effets transitoires. Si ceux-ci sont faible et très court, ils peuvent néanmoins planter un convertisseur ADC (démontré sur un ADC1115). Si vous expérimentez ce type de désagrément, placez alors une capacité de 10nF entre la sortie du signal et la masse :-)
 
 ##  Sortie Analogique (DAC)
 
-La PYBStick RP2040 ne dispose pas de sortie analogique (DAC).
+La PYBStick-RP2040 ne dispose pas de sortie analogique (DAC).
+
+Il est cependant possible de créer une [sortie analogique avec un MCP4725](https://github.com/mchobby/esp8266-upy/tree/master/mcp4725).
 
 ## Sortie PWM
 
-TODO
+Presque toutes les sorties du PYBStick-RP2040 sont capable de générer un signal PWM (aussi dit MLI en Français pour Modulation de Longueur d'Impulsion).
+
+![PybStick-RP2040 Entrée](docs/_static/pybstick-RP2040-output-led.jpg)
+
+``` python
+>>> from machine import PWM
+>>> p = PWM( Pin(28) )
+>>> # Verifier la Frequence PWM
+>>> p.freq()
+1907 # 1.9 KHz
+>>> p.duty_u16( 65534 ) # 99.99% cycle utile
+>>> p.duty_u16( 32768 ) # 50% cycle utile
+>>> p.duty_u16( 0 ) # 0% cycle utile
+```
+
+__Attention à la valeur 65535 !!!!__
+
+La valeur 65535 devrait être 100% de cycle utile. Celle-ci est théoriquement valide! (cas sous MicroPython v1.15, peut être corrigé dans la version v1.17).
+
+Cependant celle-ci produit un signal à 0 Volts. Il y a là une erreur à corriger dans le Firmware (qui le sera certainement prochainement).
+
+A défaut, il est possible d'utiliser la __valeur 65534__ qui est un __cycle utile à 99.99%__ comme l'indique la capture ci-dessous.
+
+Le temps d'arrêt étant de l'ordre 30ns pour une période de 524383.8ns (ou 0.5243838 ms)
+
+![PWM à 65535](/docs/_static/pybstick-RP2040-PWM-65535-01.jpg)
+
+![PWM à 65535](/docs/_static/pybstick-RP2040-PWM-65535-02.jpg)
+
+__deinit()__
+
+Si vous n'avez plus besoin d'utiliser du signal PWM sur la broche, vous pourrez utiliser la méthode `deinit()`.
+
+``` python
+ p.deinit()
+ ```
 
 ## Buzzer
 
