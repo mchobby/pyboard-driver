@@ -314,9 +314,9 @@ A défaut, il est possible d'utiliser la __valeur 65534__ qui est un __cycle uti
 
 Le temps d'arrêt étant de l'ordre 30ns pour une période de 524383.8ns (ou 0.5243838 ms)
 
-![PWM à 65535](/docs/_static/pybstick-RP2040-PWM-65535-01.jpg)
+![PWM à 65535](docs/_static/pybstick-RP2040-PWM-65535-01.jpg)
 
-![PWM à 65535](/docs/_static/pybstick-RP2040-PWM-65535-02.jpg)
+![PWM à 65535](docs/_static/pybstick-RP2040-PWM-65535-02.jpg)
 
 __deinit()__
 
