@@ -332,7 +332,147 @@ TODO
 
 ## NeoPixel
 
-TODO
+Controler des NeoPixels est assez facile comme le démontre les exemples [neopixel.py](examples/neopixel.py) et [neopixel2.py](examples/neopixel2.py) .
+
+![NeoPixel sous 3.3V](docs/_static/pybstick-rp2040-neopixel-3v.jpg)
+
+L'utilisation de Neopixels nécessite la présence de routines utilitaires dans le script. Ces routines sont reprises ci-dessous mais également disponible dans le script [neopixel.py](examples/neopixel.py)
+
+``` python
+import array
+from machine import Pin
+import rp2
+
+# WS2812 Configuration.
+NUM_LEDS = 8 # Nombre de LEDs
+PIN_NUM = 11 # Broche de sortie
+brightness = 0.2 # Luminosité (0 à 1, 0.2 est déjà très lumineux)
+
+######################## NEOPIXEL UTILITY ######################################
+@rp2.asm_pio(sideset_init=rp2.PIO.OUT_LOW, out_shiftdir=rp2.PIO.SHIFT_LEFT, autopull=True, pull_thresh=24)
+def ws2812():
+    T1 = 2
+    T2 = 5
+    T3 = 3
+    wrap_target()
+    label("bitloop")
+    out(x, 1)               .side(0)    [T3 - 1]
+    jmp(not_x, "do_zero")   .side(1)    [T1 - 1]
+    jmp("bitloop")          .side(1)    [T2 - 1]
+    label("do_zero")
+    nop()                   .side(0)    [T2 - 1]
+    wrap()
+
+
+# Create the StateMachine with the ws2812 program, outputting on pin
+sm = rp2.StateMachine(0, ws2812, freq=8_000_000, sideset_base=Pin(PIN_NUM))
+
+# Start the StateMachine, it will wait for data on its FIFO.
+sm.active(1)
+
+# Display a pattern on the LEDs via an array of LED RGB values.
+ar = array.array("I", [0 for _ in range(NUM_LEDS)])
+
+def pixels_show():
+    dimmer_ar = array.array("I", [0 for _ in range(NUM_LEDS)])
+    for i,c in enumerate(ar):
+        r = int(((c >> 8) & 0xFF) * brightness)
+        g = int(((c >> 16) & 0xFF) * brightness)
+        b = int((c & 0xFF) * brightness)
+        dimmer_ar[i] = (g<<16) + (r<<8) + b
+    sm.put(dimmer_ar, 8)
+    time.sleep_ms(10)
+
+def pixels_set(i, color):
+    """ Assigne une couleur (r,g,b) à un pixel numéroté de 0 à N-1 """
+    ar[i] = (color[1]<<16) + (color[0]<<8) + color[2]
+
+def pixels_fill(color):
+    """ Remplit le ruban avec une couleur donnée """
+    for i in range(len(ar)):
+        pixels_set(i, color)
+
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+YELLOW = (255, 150, 0)
+GREEN = (0, 255, 0)
+CYAN = (0, 255, 255)
+BLUE = (0, 0, 255)
+PURPLE = (180, 0, 255)
+WHITE = (255, 255, 255)
+COLORS = (BLACK, RED, YELLOW, GREEN, CYAN, BLUE, PURPLE, WHITE)
+
+##########################################################################
+```
+
+La mise en place de ces fonctions utilitaires est relativement simple (voir [examples/neopixel.py](examples/neopixel.py) )!
+
+``` python
+# Tous les pixels de la même couleur
+#
+pixels_fill( RED )   # Remplir en Rouge
+pixels_show()        # Envoi des données sur le Ruban
+time.sleep( 2 )      # Attendre 2 seconde
+pixels_fill( GREEN ) # en Vert
+pixels_show()
+time.sleep( 2 )
+pixels_fill( BLUE )  # en Bleu
+pixels_show()
+time.sleep( 2 )
+
+# Eteindre le ruban
+pixels_fill( BLACK ) # Remplir en noir
+pixels_show()
+time.sleep( 2 )
+
+# Assigner la couleur Pixel par Pixel
+#
+pixels_set( 0, RED )   # Pixel 0 en Rouge
+pixels_set( 1, GREEN ) # Pixel 1 en Vert
+pixels_set( 2, BLUE )  # Pixel 1 en Bleu
+pixels_set( 3, YELLOW )# ...
+pixels_set( 4, CYAN )
+pixels_set( 5, PURPLE )
+pixels_set( 6, WHITE )
+pixels_set( 7, RED )
+pixels_show()          # Envoi des données sur le Ruban
+time.sleep( 4 )        # Attendre 4 secondes
+
+# Eteindre le Ruban
+pixels_fill( BLACK )   
+pixels_show()
+time.sleep( 2 )
+```
+
+__Tester l'exemple:__
+
+Après avoir copié le fichier `neopixel.py` sur le système de fichier MicroPython, il
+est possible d'en exécuter le contenu depuis une session REPL en utilisant l'instruction suivante:
+
+``` python
+>>> import neopixel
+```
+
+Le second exemple [examples/neopixel2.py](neopixel2.py) présente des fonctions complémentaire comme:
+* `color_chase()` -
+* `wheel()` - roue des couleurs
+* `rainbow_cycle()` - cycle des couleurs stule "arc en ciel".
+
+
+## NeoPixel sous 5V
+
+Conformément aux spécifications WS2812, le signal de données doit être au même niveau logique que la tension d'alimentation des Pixels.
+
+Les montages mentionnant des Pixels alimentés sous 5V avec un signal de données en 3.3V sont malheureusement erronés. Il n'est pas assuré que cela soit fiable et assure une fonctionnement stable.
+
+Pourtant, alimenter les Pixels sous 5V offrent une meilleure luminosité et peut aussi assurer une meilleure alimentation de grandes quantités de pixels.
+
+Pour utiliser des Neopixels alimentés sous 5V, il est vivement recommandé d'utiliser un _Level Shifter_ 74AHCT125 sur la ligne de données.
+
+Voici comment réaliser ce montage.
+
+![Neopixel sous 5V](docs/_static/pybstick-rp2040-neopixel-5v.jpg)
+
 
 ## DotStar / APA102
 
