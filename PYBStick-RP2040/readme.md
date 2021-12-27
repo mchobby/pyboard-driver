@@ -75,7 +75,19 @@ Le régulateur de tension présent sur la carte (ME6215C33) est capable de produ
 
 # Bibliothèque
 
-=== TODO ===
+Les bibliothèques suivantes sont nécessaires pour exploiter toutes les fonctionnalités de la carte. Les bibliothèques doivent être accessibles dans le système de fichiers de la carte MicroPython (à la racine ou dans un sous-répertoire `lib`).
+
+## Bibliothèque "buzzer"
+La bibliothèque [`buzzer.py`](lib/buzzer.py) permet de contrôler un Piezo Buzzer branché sur la sortie IO7.
+
+Les méthodes disponibles permettent de jouer une tonalité arbitraire, des notes de musique et même de mini séquences musicales encodées dans une chaîne de caractères.
+
+L'utilisation de cette bibliothèque est décrite plus bas dans la section "Buzzer".
+
+## Bibliothèque "ws2812"
+La bibliothèque [`ws2812.py`](lib/ws2812.py) reprend le code nécessaire pour utiliser efficacement des LEDs WS2812 / NeoPixel sur la broche IO11.
+
+Cette bibliothèque n'est pas utilisée dans les exemples ci-dessous mais sera particulièrement utile dans vos propres développements.
 
 # Prise en main
 
@@ -328,7 +340,52 @@ Si vous n'avez plus besoin d'utiliser du signal PWM sur la broche, vous pourrez 
 
 ## Buzzer
 
-TODO
+L'utilisation d'un Buzzer sur PYBStick se fait à l'aide d'un signal PWM dont on modifie la fréquence.
+
+La bibliothèque `buzzer.py` propose la classe Buzzer qui permet de:
+
+* jouer une tonalité arbitraire
+* jouer une note de musique
+* Jouer une petite séquence musicale
+
+![PYBStick RP2040](docs/_static/pybstick-rp2040-buzzer.jpg)
+
+Une résistance de 330 Ohms est nécessaire pour limiter le courant. Il est aussi recommandé d'ajouter [une diode en roue libre comme décrit dans cet article](https:/arduino103.blogspot.com/2020/06/quelle-resistance-sur-un-piezo-buzzer.html).  
+
+
+L'exemple ci-dessous, issus du script ['test_buzzer.py'](examples/test_buzzer.py), indique comment produire une tonalité sur le buzzer.
+
+```
+from buzzer import Buzzer
+from time import sleep
+
+bz = Buzzer()
+# Jouer un Do @ 523 Hertz
+bz.tone( 523 )
+sleep( 1 )
+# Silence
+bz.tone()
+```
+
+Il est également possible de jouer des séquences musicales à l'aide de la méthode `tune()` comme le démontre l'exemple [`test_buzzer_tune.py`](examples/test_buzzer_tune.py) .
+
+```
+from buzzer import Buzzer
+from time import sleep
+
+bz = Buzzer()
+
+# Liste de notes + rythme (séparée par des virgules)
+#   1ier caractère = la note tels de définie dans le dictionnaire NOTES
+#   2ieme caractère = duree de la note (1 si manquant)
+tune1 = "c,c,g,g,a,a,g2,f,f,e,e,d,d,c2, 4"
+bz.tune( tune1, tempo=300 ) # plus lent
+sleep(1)
+tune2 = "c2,c,d3,c3,f3,e3,c2,c,d3,c3,g3,f3, 4"
+bz.tune( tune2, tempo=200 ) # plus rapide
+```
+
+Enfin l'exemple [`test_buzzer_notes.py`](examples/test_buzzer_notes.py) indique comment jouer une simple note.
 
 ## NeoPixel
 
@@ -453,11 +510,33 @@ est possible d'en exécuter le contenu depuis une session REPL en utilisant l'in
 >>> import neopixel
 ```
 
-Le second exemple [examples/neopixel2.py](neopixel2.py) présente des fonctions complémentaire comme:
+Le second exemple [examples/neopixel2.py](examples/neopixel2.py) présente des fonctions complémentaire comme:
 * `color_chase()` -
 * `wheel()` - roue des couleurs
-* `rainbow_cycle()` - cycle des couleurs stule "arc en ciel".
+* `rainbow_cycle()` - cycle des couleurs style "arc en ciel".
 
+## NeoPixel : bibliothèque et fxdemo
+
+Depuis l'écriture initiale de cette documentation, la bibliothèque [lib/ws2812.py](lib/ws2812.py) a été ajoutée dans le dépôt.
+
+La bibliothèque permet d'écrire un code beaucoup plus concis comme celui présenté dans l'exemple [neopixel3.py](examples/neopixel3.py) visible ci-dessous.
+
+``` python
+import ws2812 as ws
+import time
+
+leds = ws.WS2812( pin_num=11, num_leds=12, brightness=0.2 )
+for color in ws.COLORS:
+	leds.fill(color)
+	leds.write() # show() will also work
+	time.sleep(0.2)
+
+leds.clear()
+```
+
+Un dernier fichier d'exemple [fxdemo.py](examples/fxdemo.py) déclare et exploite une série de fonction permettant de réaliser des effets lumineux.
+
+Ces fonctions sont une copie exacte [des routines NeoPixels définies dans le dépôt esp8266-upy](https://github.com/mchobby/esp8266-upy/tree/master/neopixel).
 
 ## NeoPixel sous 5V
 
