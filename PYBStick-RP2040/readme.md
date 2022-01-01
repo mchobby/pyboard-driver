@@ -692,3 +692,5 @@ Envie de faire vos propres schéma à base de PYBStick? Pas de problème, nous a
 # Shopping List
 * [PYBStick RP2040](https://shop.mchobby.be/product.php?id_product=2331)
 * [PowerBoost 500 Charger](https://shop.mchobby.be/product.php?id_product=534)
+* [Micro moteur 75:1 Gravity avec contrôleur Servo de DFRobot](https://shop.mchobby.be/product.php?id_product=1811)
+* [Zumo Chassis (sans moteur)](https://shop.mchobby.be/product.php?id_product=447)
