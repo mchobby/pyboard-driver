@@ -77,6 +77,10 @@ Le régulateur de tension présent sur la carte (ME6215C33) est capable de produ
 
 Les bibliothèques suivantes sont nécessaires pour exploiter toutes les fonctionnalités de la carte. Les bibliothèques doivent être accessibles dans le système de fichiers de la carte MicroPython (à la racine ou dans un sous-répertoire `lib`).
 
+## Bibliothèque "servo"
+La bibliothèque [`servo.py`](lib/servo.py) expose la classe `Servo` qui permet de contrôler des servo-moteurs ainsi que des moteurs continus à contrôleur Servo (voir exemples plus bas).
+
+
 ## Bibliothèque "buzzer"
 La bibliothèque [`buzzer.py`](lib/buzzer.py) permet de contrôler un Piezo Buzzer branché sur la sortie IO7.
 
@@ -559,11 +563,91 @@ TODO
 
 ## Servo
 
-TODO
+Les servo-moteurs sont des moteurs dont il est possible de contrôler la position angulaire de l'axe. Ils permettent, par exemple, de contrôler la direction d'un véhicule ou d'un gouvernail, l'ouverture ou la fermeture/ouverture d'une trappe, contrôle d'un bras robotisé.
+
+Par défaut, la classe émet un signal entre 1.0 à 2.0ms (0 à 180°) avec un centrage à 1.5ms (90°).
+
+Le servo moteur se branche par l'intermédiaire d'un connecteur 3 pôles (6V max) respectant un ordre spécifique (mais parfois avec des couleurs différentes). En voici un petit récapitulatif.
+
+![Servo connection](docs/_static/motor-servo-connectors.jpg)
+
+Voici le raccordement d'un SG5010:
+
+![Servo sur PYBStick RP2040](docs/_static/pybstick-rp2040-servo.jpg)
+
+Après avoir copié la bibliothèque [lib/servo.py](lib/servo.py), il est possible d'utiliser de tester le servo-moteur.
+
+``` python
+>>> from servo import Servo
+>>> s = Servo(26)
+>>> s.angle(10)
+>>> s.angle(20)
+>>> s.angle(30)
+>>> s.angle(60)
+>>> s.angle(80)
+>>> s.angle(100)
+>>> s.angle(110)
+>>> s.angle(130)
+>>> s.angle(160)
+>>> s.angle(180)
+>>> s.detach()
+```
+
+la méthode `detach()` permet de relâcher le contrôle du servo-moteur. pour réactiver le contrôle, il suffit de refaire un nouvel appel à `angle()` .
+
+La classe `Servo` propose également une méthode `calibration()` permettant de fixer les données de pulsation pour des modèles moins standard.
+
+Voici un exemple correspondant au servo-moteur Parallax ou servo-moteur SG90 dont la pulsation s'étend de 500ms à 2500ms:
+
+![Parallax servo moteur](docs/_static/servo-parallax.jpg)
+
+``` python
+>>> from servo import Servo
+>>> s = Servo(26)
+>>> s.calibration( pulse_min=0.5, pulse_max=2.5, pulse_center=1.5 )
+>>> s.angle(0)
+>>> s.angle(90)
+>>> s.angle(180)
+>>> s.detach()
+```
+
+Pour utiliser plusieurs servo avec la carte PYBStick-RP2040, il est vivement recommandé d'utiliser une alimentation externe.
+
+![](docs/_static/pybstick-rp2040servo2.jpg)
+
+``` python
+>>> from servo import Servo
+>>> s1 = Servo(27)
+>>> s2 = Servo(28)
+>>> s1.angle(45)
+>>> s2.angle(105)
+```
 
 ## Moteur continu à commande Servo
 
-TODO
+Il existe également des moteurs continu que l'on peu commander à l'aide d'un signal de servo-moteur.
+
+C'est le cas de ce [Micro moteur 75:1 Gravity avec contrôleur Servo de DFRobot](https://shop.mchobby.be/product.php?id_product=1811) disponible chez MCHobby qui se couple parfaitement au [Zumo Chassis (sans moteur)](https://shop.mchobby.be/product.php?id_product=447).
+
+Grâce à un seul fils de commande transportant le signal Servo et au contrôleur équipant le moteur, il est possible de commander ce moteur:
+* En marche/l'arrêt
+* En vitesse
+* En sens de rotation
+
+Cela ravira les nouveaux venus car il n'y a pas à se compliquer la vie avec les raccordement d'un circuit de puissance moteur (L293/L298), etc tout est déjà présent sur le moteur.
+
+![Moteur continu à commande servo](docs/_static/pybstick-rp2040-dcmotor-servo.jpg)
+
+``` python
+>>> from servo import Servo
+>>> s = Servo( 26 )
+>>> s.calibration( pulse_min=0.5, pulse_max=2.5, pulse_center=1.5 )
+>>> s1.speed( +100 ) # sens anti-horlogique, vitesse 100%
+>>> s1.speed( -100 ) # Sens horlogique, vitesse 100%
+>>> s1.speed( -50 )  # Sens horlogique, vitesse 50%
+>>> s1.speed( -10 )  # Sens horlogique, vitesse 10%
+>>> s1.speed( 0 )    # Arrêt
+```
 
 ## Bus I2C
 
