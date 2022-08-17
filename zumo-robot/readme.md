@@ -2,6 +2,8 @@
 
 # ROBOT ZUMO v1.3 sous MicroPython 
 
+![Projet à déménagé](Project-Have-Moved.jpg)
+
 Rendez-vous sur le dépôt [micropython-zumo-robot](https://github.com/mchobby/micropython-zumo-robot)
 
 # ROBOT ZUMO V1.2 sous MicroPython avec la Pyboard originale
