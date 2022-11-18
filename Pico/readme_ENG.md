@@ -17,6 +17,8 @@ Here is the Pinout of Pico when used under MicroPython MicroPython.
 
 ![Pico buses](docs/_static/buses.jpg)
 
+![Pico Test Points](docs/_static/RASPBERRY-PICO-BOTTOM.jpg)
+
 # Pico overlay
 [Pico overlay is a PDF document](docs/_static/Pico-overlay.pdf) to print and to cut. L'overlay foresee precision cuts for the USB port, the Boot button (and additionnal Reset button).
 

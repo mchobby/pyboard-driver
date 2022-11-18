@@ -17,6 +17,8 @@ Schéma du brochage pour le Pico destiné à une utilisation avec MicroPython.
 
 ![Pico buses](docs/_static/buses.jpg)
 
+![Pico Test Points](docs/_static/RASPBERRY-PICO-BOTTOM.jpg)
+
 # Pico overlay
 [Pico overlay est un document pdf](docs/_static/Pico-overlay.pdf) à imprimer et à découper. L'overlay prévoit des découpes de précision pour le port USB, bouton Boot (et éventuel Reset).
 
