@@ -5,9 +5,9 @@ pour rendre l'accès à la programmation MicroPython et Arduino plus abordable,
 pratique et documenté en Français.
 
 Si la [PYBStick standard est basée sur le puissant STM32](https://github.com/mchobby/pyboard-driver/tree/master/PYBStick), ce modèle ci est
-basé sur le puissance microcontrôleur double coeur de la fondation Raspberry-pi : le [RP2040](https://shop.mchobby.be/fr/ic-cms/2146-microcontroleur-raspberry-pi-rp2040-double-coeur-cortex-m0-133mhz-3232100021464.html).
+basé sur un microcontrôleur de Espressif.
 
-L'ESP32-C3 est un microcontrôleur RISC-V WiFi qui s'est fait connaître pour son support USB natif.
+L'ESP32-C3 est un microcontrôleur mono coeur RISC-V WiFi et BLE qui s'est fait connaître pour son support USB natif.
 qui supporte MicroPython et d'autres environnements de développement... que demander de plus?
 
 ![PYBStick ESP32-C3](docs/_static/GAR-PYBSTICK26-C3-mUSB-00.JPG)
