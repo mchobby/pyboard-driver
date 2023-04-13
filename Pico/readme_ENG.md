@@ -51,3 +51,9 @@ Pico over a transparent background640px, 800px, 1024px height and also with High
 * [Pico 800px (png)](docs/_static/PICO-800px.png)
 * [Pico 1024px (png)](docs/_static/PICO-1024px.png)
 * [Pico hires (png)](docs/_static/PICO-high-res.png) 1700 x 3832px
+
+# Flash_Nuke
+
+The [flash_nuke.uf2](rp2-pico-flash_nuke.uf2) firmware can be used to overwrite the MicroPython file system of the RP2040 / Pico.
+
+This is quite handy if you had a script screwing up the board (not allowing any REPL session).

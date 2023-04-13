@@ -51,3 +51,9 @@ Pico sur fond transparent en 640px, 800px, 1024px de hauteur et en haute résolu
 * [Pico 800px (png)](docs/_static/PICO-800px.png)
 * [Pico 1024px (png)](docs/_static/PICO-1024px.png)
 * [Pico hires (png)](docs/_static/PICO-high-res.png) 1700 x 3832px
+
+# Flash_Nuke
+
+Le firmware [flash_nuke.uf2](rp2-pico-flash_nuke.uf2) permet d'effacer le système de fichier de MicroPython sur votre RP2040 / Pico.
+
+C'est très pratique si vous avez un script qui bloque complètement le système (et empêche d'établir une session REPL).
